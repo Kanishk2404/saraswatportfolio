@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #07090f;
+  --panel: #0e121b;
+  --muted: #a1a1aa;
+}
+
+@layer base {
+  html { scroll-behavior: smooth; }
+  body { 
+    background: var(--bg); 
+    color: #e5e7eb; 
+    font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji';
+    font-size: 16px;
+    line-height: 1.6;
+  }
+}
+
+@layer components {
+  .container { @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8; }
+  .card {
+    @apply bg-zinc-900 rounded-2xl shadow-2xl border border-cyan-700 transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl;
+    box-shadow: 0 8px 32px 0 rgba(14, 165, 233, 0.12), 0 1.5px 6px 0 rgba(139, 92, 246, 0.08);
+    backdrop-filter: blur(4px);
+  }
+  .btn-primary {
+    @apply px-7 py-3 bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-bold rounded-xl shadow-lg transition-all duration-300 hover:from-cyan-400 hover:to-blue-400 hover:scale-[1.04];
+  }
+  .btn-secondary {
+    @apply px-7 py-3 border-2 border-cyan-600 text-cyan-400 font-bold rounded-xl shadow-lg transition-all duration-300 hover:bg-cyan-600 hover:text-white hover:scale-[1.04];
+  }
+  .gradient-text {
+    @apply bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 bg-clip-text text-transparent font-extrabold;
+  }
+  .glass-effect { @apply backdrop-blur-md bg-white/10 dark:bg-zinc-900/10 border border-white/20 dark:border-cyan-700/20 rounded-2xl shadow-lg; }
+  .ai-badge { @apply inline-flex items-center gap-1 px-2.5 py-1 bg-gradient-to-r from-purple-600 to-pink-600 text-white text-xs font-medium rounded-full animate-pulse; }
+  .chip {
+    @apply inline-flex items-center px-4 py-2 rounded-full text-base bg-zinc-900/80 border border-cyan-700 text-cyan-300 font-semibold shadow-sm;
+  }
+  .neo {
+    @apply relative p-px rounded-2xl overflow-hidden shadow-xl;
+    background: linear-gradient(90deg, #0ea5e9 0%, #8b5cf6 100%);
+  }
+  .neo .inner {
+    @apply bg-zinc-950 rounded-[calc(1rem-1px)] h-full;
+  }
+  .section-title {
+    @apply text-4xl font-extrabold text-center mb-8 tracking-tight gradient-text;
+  }
+  .subtle { @apply text-zinc-400; }
+  .badge {
+    @apply inline-flex items-center gap-2 px-3 py-1 rounded-full text-base bg-zinc-900 border border-cyan-700 text-cyan-300 font-bold shadow-sm;
+  }
+  .hr {
+    @apply h-1 bg-gradient-to-r from-cyan-700 via-blue-500 to-purple-500 my-12 rounded-full;
+  }
+  .bg-grid {
+    background-image: linear-gradient(to right, #1f273a 1px, transparent 1px),
+                      linear-gradient(to bottom, #1f273a 1px, transparent 1px);
+    background-size: 20px 20px;
+    background-position: center center;
+    opacity: 0.98;
+  }
+  .reveal { opacity: 0; transform: translateY(8px); animation: reveal 0.6s ease forwards; }
+  @keyframes reveal { to { opacity: 1; transform: translateY(0); } }
+  .text-base { font-size: 1rem; line-height: 1.7; }
+  .text-sm { font-size: 0.95rem; line-height: 1.6; }
+  .text-xs { font-size: 0.875rem; line-height: 1.5; }
+  .text-zinc-400 { color: #a1a1aa; }
+  .text-zinc-300 { color: #d4d4d8; }
+  .text-zinc-200 { color: #e4e4e7; }
+  
+  /* Project Card Specific Styles */
+  .project-card {
+    @apply relative overflow-hidden;
+  }
+  
+  .project-card .inner {
+    @apply flex flex-col h-full;
+  }
+  
+  .project-card .content-section {
+    @apply flex-shrink-0;
+  }
+  
+  .project-card .flex-grow-section {
+    @apply flex-grow overflow-hidden;
+  }
+  
+  .project-card .footer-section {
+    @apply flex-shrink-0 mt-auto;
+  }
+  
+  /* Better overflow handling */
+  .overflow-safe {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  
+  .overflow-safe-multiline {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+  }
+  
+  /* Improved spacing */
+  .card-spacing {
+    @apply mb-6;
+  }
+  
+  .card-spacing:last-child {
+    @apply mb-0;
+  }
+}
