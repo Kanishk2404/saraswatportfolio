@@ -10,8 +10,7 @@ const PORT = process.env.PORT || 5000
 
 const allowedOrigins = [
   'https://kanishksaraswat.me',
-  'https://saraswatportfolio.vercel.app',
-  'http://localhost:3000',
+  'https://saraswatportfolio-production-ae98.up.railway.app',
   'http://localhost:5173',
   'https://kanishksaraswat.me/contact'
 ];
