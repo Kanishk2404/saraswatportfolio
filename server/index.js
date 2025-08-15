@@ -13,7 +13,7 @@ const allowedOrigins = [
   'https://saraswatportfolio.vercel.app',
   'http://localhost:3000',
   'http://localhost:5173',
-  'kanishksaraswat.me'
+  'https://kanishksaraswat.me/contact'
 ];
 app.use(cors({
   origin: function (origin, callback) {
