@@ -10,7 +10,7 @@ export default function Contact() {
     const message = formData.get('message');
     const subject = `Portfolio Contact - ${name}`;
     try {
-      const res = await fetch('http://localhost:5000/api/contact', {
+  const res = await fetch(`${import.meta.env.VITE_API_URL}/api/contact`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, email, subject, message })
@@ -83,7 +83,7 @@ export default function Contact() {
                     const message = `Request for intro call.\nPreferred time: ${preferredTime}\nCompany: ${company}\nLinkedIn: ${linkedin}\nWhy: ${why}`;
                     const subject = `Intro Call Request - ${name}`;
                     try {
-                      const res = await fetch('http://localhost:5000/api/contact', {
+                      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/contact`, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({ name, email, subject, message })
