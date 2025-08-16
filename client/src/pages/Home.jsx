@@ -52,7 +52,7 @@ export default function Home() {
               variants={itemVariants}
               className="text-lg subtle leading-relaxed"
             >
-              Nothing here was built for a resume—every project started from a real pain I faced or saw others struggle with, or simply for learning also. React/Node on apps; AWS/Docker/Jenkins on infra; security‑ and SEO‑aware.
+              Nothing here was built for a resume—every project started from a real pain I faced, one I saw others struggle with, or as focused learning. React/Node on apps; AWS/Docker/Jenkins on infra; security‑ and SEO‑aware.
             </motion.p>
             
             <motion.div 

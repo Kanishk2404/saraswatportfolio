@@ -32,7 +32,9 @@ app.get('/api/health', (req, res) => {
 
 app.post('/api/contact', async (req, res) => {
   const { name, email, subject, message } = req.body || {}
+  console.log('Contact form request received:', { name, email, subject, message })
   if (!name || !email || !subject || !message) {
+    console.log('Missing required fields:', { name, email, subject, message })
     return res.status(400).json({ error: 'Missing required fields' })
   }
   try {
@@ -43,17 +45,24 @@ app.post('/api/contact', async (req, res) => {
         pass: process.env.GMAIL_APP_PASSWORD
       }
     })
-    await transporter.sendMail({
+    console.log('Nodemailer transporter created.')
+    const mailOptions = {
       from: email,
       to: process.env.EMAIL_USER,
       subject: `Portfolio Contact Form: ${subject}`,
       text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
       replyTo: email
-    })
+    }
+    console.log('Mail options:', mailOptions)
+    const info = await transporter.sendMail(mailOptions)
+    console.log('Email sent:', info)
     res.json({ ok: true })
   } catch (error) {
     console.error('Error sending email:', error)
-    res.status(500).json({ error: 'Failed to send email' })
+    if (error.response) {
+      console.error('SMTP response:', error.response)
+    }
+    res.status(500).json({ error: 'Failed to send email', details: error.message })
   }
 })
 

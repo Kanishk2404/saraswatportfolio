@@ -14,7 +14,7 @@ export default function App() {
       <header className="sticky top-0 z-50 border-b border-zinc-800/80 bg-[#07090f]/60 backdrop-blur supports-[backdrop-filter]:bg-[#07090f]/40">
         <div className="container h-14 flex items-center justify-between">
           <Link to="/" className="font-extrabold text-lg tracking-tight">
-            <span className="gradient-text">KANISHK</span>
+            <span className="text-cyan-400 hover:text-cyan-300 transition-colors text-2xl font-black tracking-widest" style={{letterSpacing: '0.15em'}}>KS</span>
           </Link>
           <nav className="hidden md:flex items-center gap-4 text-sm">
             {[
