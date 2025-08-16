@@ -10,10 +10,8 @@ const PORT = process.env.PORT || 5000
 
 const allowedOrigins = [
   'https://kanishksaraswat.me',
-  'https://saraswatportfolio-production-ae98.up.railway.app',
-  'http://localhost:5173',
-  'https://kanishksaraswat.me/contact'
-];
+  'kanishksaraswat.me',
+  'http://localhost:5173'];
 app.use(cors({
   origin: function (origin, callback) {
     // allow requests with no origin (like mobile apps, curl, etc)
