@@ -33,7 +33,7 @@ export default function App() {
           </button>
           <div className="flex items-center gap-2">
             <a href="mailto:saraswatkanishk24@gmail.com" className="p-2 rounded-lg hover:bg-zinc-900 border border-zinc-800 transition-colors" aria-label="Email" title="Email"><Mail size={16} /></a>
-            <a href="https://github.com/kanishk-saraswat" target="_blank" rel="noopener noreferrer" className="p-2 rounded-lg hover:bg-zinc-900 border border-zinc-800 transition-colors" aria-label="GitHub" title="GitHub"><Github size={16} /></a>
+            <a href="https://github.com/Kanishk2404" target="_blank" rel="noopener noreferrer" className="p-2 rounded-lg hover:bg-zinc-900 border border-zinc-800 transition-colors" aria-label="GitHub" title="GitHub"><Github size={16} /></a>
             <a href="https://linkedin.com/in/kanishk-saraswat" target="_blank" rel="noopener noreferrer" className="p-2 rounded-lg hover:bg-zinc-900 border border-zinc-800 transition-colors" aria-label="LinkedIn" title="LinkedIn"><Linkedin size={16} /></a>
           </div>
         </div>

@@ -207,7 +207,7 @@ export const projects = {
     ],
     outcome: 'Successfully deployed from development to production-ready infrastructure with automated SSL, process management, and high availability.',
     tech: ['AWS EC2', 'Route53', 'Nginx', 'HTTPS', 'Certbot', 'PM2', 'systemd', 'React', 'Node.js', 'DevOps'],
-  images: ['/images/route53_deployment.jpeg'],
+  images: ['/images/route_53.png', '/images/route53_2.png'],
   github: null,
   live: null,
   },
