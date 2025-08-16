@@ -1,9 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { HelmetProvider } from 'react-helmet-async'
 import './index.css'
 import App from './App.jsx'
 import Home from './pages/Home.jsx'
+import About from './pages/About.jsx'
 import Projects from './pages/Projects.jsx'
 import Project from './pages/Project.jsx'
 import Ventures from './pages/Ventures.jsx'
@@ -19,6 +21,7 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       { path: '/', element: <Home /> },
+      { path: '/about', element: <About /> },
       { path: '/projects', element: <Projects /> },
       { path: '/projects/:slug', element: <Project /> },
       { path: '/ventures', element: <Ventures /> },
@@ -34,6 +37,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <HelmetProvider>
+      <RouterProvider router={router} />
+    </HelmetProvider>
   </React.StrictMode>
 )

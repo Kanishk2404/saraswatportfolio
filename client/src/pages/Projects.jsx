@@ -2,10 +2,53 @@ import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { ArrowRight, ExternalLink, Github, Calendar, User, Target, Code, BookOpen, Lightbulb, CheckCircle, ArrowUpRight, Shield, Globe, Server, Users } from 'lucide-react'
 import { projects, projectsIndexOrder } from '@/data/projects.js'
+import { useState, useMemo } from 'react'
+import SEO from '@/components/SEO.jsx'
 
 export default function Projects() {
+  const [activeFilter, setActiveFilter] = useState('all');
+
+  // Get all unique technologies from projects
+  const allTechnologies = useMemo(() => {
+    const techs = new Set();
+    Object.values(projects).forEach(project => {
+      if (project.tech) {
+        project.tech.forEach(tech => techs.add(tech));
+      }
+    });
+    return Array.from(techs).sort();
+  }, []);
+
+  // Filter projects based on selected technology
+  const filteredProjects = useMemo(() => {
+    if (activeFilter === 'all') {
+      return projectsIndexOrder.filter(s => !['anicafe', 'cloud-bouncer'].includes(s));
+    }
+    return projectsIndexOrder.filter(slug => {
+      const project = projects[slug];
+      return project.tech && project.tech.includes(activeFilter);
+    });
+  }, [activeFilter]);
+
   return (
-    <div className="bg-grid min-h-screen">
+    <>
+      <SEO 
+        title="Projects"
+        description="Explore my portfolio of web development projects, including full-stack applications, e-commerce platforms, and DevOps solutions. See real examples of my work."
+        keywords={[
+          'Web Development Projects',
+          'React Projects',
+          'Node.js Projects',
+          'Full Stack Projects',
+          'E-commerce Projects',
+          'DevOps Projects',
+          'Portfolio Projects',
+          'Web Applications',
+          'Project Showcase'
+        ]}
+        url="/projects"
+      />
+      <div className="bg-grid min-h-screen">
       <section className="container py-16">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -32,17 +75,62 @@ export default function Projects() {
         {/* Divider */}
         <div className="hr mb-20" />
 
-        {/* More Projects Section */}
-        <section>
-          <h2 className="text-2xl font-bold mb-10 text-center">More Projects</h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {projectsIndexOrder.filter(s => !['anicafe', 'cloud-bouncer'].includes(s)).map((slug, i) => (
-              <ProjectCard key={slug} slug={slug} featured={false} index={i} />
+        {/* Project Filters */}
+        <section className="mb-12">
+          <h2 className="text-2xl font-bold mb-8 text-center">More Projects</h2>
+          <div className="flex flex-wrap justify-center gap-3 mb-8">
+            <button
+              onClick={() => setActiveFilter('all')}
+              className={`chip transition-all duration-200 ${
+                activeFilter === 'all' 
+                  ? 'bg-cyan-600 text-white border-cyan-500' 
+                  : 'hover:bg-cyan-700/20'
+              }`}
+            >
+              All Projects
+            </button>
+            {allTechnologies.map(tech => (
+              <button
+                key={tech}
+                onClick={() => setActiveFilter(tech)}
+                className={`chip transition-all duration-200 ${
+                  activeFilter === tech 
+                    ? 'bg-cyan-600 text-white border-cyan-500' 
+                    : 'hover:bg-cyan-700/20'
+                }`}
+              >
+                {tech}
+              </button>
             ))}
           </div>
         </section>
+
+        {/* More Projects Section */}
+        <section>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredProjects.map((slug, i) => (
+              <ProjectCard key={slug} slug={slug} featured={false} index={i} />
+            ))}
+          </div>
+          {filteredProjects.length === 0 && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="text-center py-12"
+            >
+              <p className="text-zinc-400 text-lg">No projects found with the selected filter.</p>
+              <button
+                onClick={() => setActiveFilter('all')}
+                className="btn-secondary mt-4"
+              >
+                Show All Projects
+              </button>
+            </motion.div>
+          )}
+        </section>
       </section>
-    </div>
+      </div>
+    </>
   )
 }
 

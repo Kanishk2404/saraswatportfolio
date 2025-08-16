@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { Cloud, Shield, Layers, LineChart, Code, Database, Server, Zap } from 'lucide-react';
+import SEO from '@/components/SEO.jsx';
 
 const skillCategories = [
   {
@@ -111,7 +112,25 @@ const getLevelColor = (level) => {
 
 export default function Skills() {
   return (
-    <div className="bg-grid min-h-screen">
+    <>
+      <SEO 
+        title="Skills"
+        description="Explore Kanishk Saraswat's comprehensive technical skills including full-stack development, DevOps, cybersecurity, SEO, and AI tools. See expertise in React, Node.js, AWS, Docker, and more."
+        keywords={[
+          'Technical Skills',
+          'Full Stack Developer Skills',
+          'React Developer',
+          'Node.js Developer',
+          'DevOps Skills',
+          'AWS Developer',
+          'Cybersecurity Skills',
+          'SEO Expert',
+          'Docker Kubernetes',
+          'Web Development Skills'
+        ]}
+        url="/skills"
+      />
+      <div className="bg-grid min-h-screen">
       <section className="container py-16">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -180,6 +199,7 @@ export default function Skills() {
           </div>
         </motion.div>
       </section>
-    </div>
+      </div>
+    </>
   );
 }

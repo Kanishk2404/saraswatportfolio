@@ -1,33 +1,75 @@
 import { motion } from 'framer-motion';
-import { Mail, Github, Linkedin, MessageCircle, Download } from 'lucide-react';
+import ProfileCard from './ProfileCard';
+import { Mail, Github, Linkedin, MessageCircle, Download, Loader2, CheckCircle, AlertCircle } from 'lucide-react';
+import { useState } from 'react';
+import SEO from '@/components/SEO.jsx';
 
 export default function Contact() {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState(null); // 'success' | 'error' | null
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus(null);
+    
     const formData = new FormData(e.target);
     const name = formData.get('name');
     const email = formData.get('email');
+    const linkedin = formData.get('linkedin');
+    const company = formData.get('company');
     const message = formData.get('message');
     const subject = `Portfolio Contact - ${name}`;
+    
     try {
-  const res = await fetch(`${import.meta.env.VITE_API_URL}/api/contact`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/contact`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, subject, message })
+        body: JSON.stringify({ 
+          name, 
+          email, 
+          linkedin, 
+          company, 
+          subject, 
+          message 
+        })
       });
+      
       if (res.ok) {
-        alert('Message sent! I will get back to you soon.');
+        setSubmitStatus('success');
         e.target.reset();
       } else {
-        alert('Failed to send message. Please try again later.');
+        setSubmitStatus('error');
       }
     } catch (err) {
-      alert('Error sending message.');
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
+  const handleResumeDownload = () => {
+    // For now, show a message. You can replace this with actual resume download
+    alert('Resume download feature coming soon! In the meantime, feel free to reach out via email.');
+  };
+
   return (
-    <div className="bg-grid min-h-screen">
+    <>
+      <SEO 
+        title="Contact"
+        description="Get in touch with Kanishk Saraswat for web development projects, collaborations, or just to discuss technology. Let's build something amazing together."
+        keywords={[
+          'Contact Kanishk Saraswat',
+          'Web Developer Contact',
+          'Hire Developer',
+          'Project Collaboration',
+          'Web Development Services',
+          'Freelance Developer',
+          'Contact Form'
+        ]}
+        url="/contact"
+      />
+      <div className="bg-grid min-h-screen">
       <section className="container py-16">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -50,85 +92,6 @@ export default function Contact() {
             className="space-y-8"
           >
             <div>
-              <h2 className="text-2xl font-bold mb-6 text-zinc-100">Hire Me</h2>
-              <div className="space-y-4">
-                <div className="bg-zinc-800/50 p-6 rounded-lg">
-                  <h3 className="text-lg font-semibold text-zinc-200 mb-2">Roles I'm Looking For</h3>
-                  <ul className="text-zinc-300 space-y-1">
-                    <li>• Full-Stack Developer with DevOps responsibilities</li>
-                    <li>• Junior DevOps/SRE/Platform Engineer</li>
-                    <li>• Cloud Infrastructure Engineer</li>
-                    <li>• Security-focused Developer</li>
-                  </ul>
-                </div>
-                
-                <div className="bg-zinc-800/50 p-6 rounded-lg">
-                  <h3 className="text-lg font-semibold text-zinc-200 mb-2">Availability</h3>
-                  <p className="text-zinc-300">IST timezone • Full-time or contract positions</p>
-                  <p className="text-zinc-300 mt-2">Open to remote opportunities worldwide</p>
-                </div>
-
-                <div className="bg-zinc-800/70 p-12 rounded-3xl shadow-2xl min-h-[540px] flex flex-col justify-center w-full max-w-xl mx-auto border border-cyan-700">
-                  <h3 className="text-3xl font-extrabold text-cyan-300 mb-6 text-center tracking-tight">Get Started</h3>
-                  <p className="text-zinc-300 mb-8 text-lg text-center">Request a 15-minute introduction call to discuss how we can work together.</p>
-                  <form onSubmit={async (e) => {
-                    e.preventDefault();
-                    const formData = new FormData(e.target);
-                    const name = formData.get('name');
-                    const email = formData.get('email');
-                    const company = formData.get('company');
-                    const linkedin = formData.get('linkedin');
-                    const preferredTime = formData.get('preferredTime');
-                    const why = formData.get('why');
-                    const message = `Request for intro call.\nPreferred time: ${preferredTime}\nCompany: ${company}\nLinkedIn: ${linkedin}\nWhy: ${why}`;
-                    const subject = `Intro Call Request - ${name}`;
-                    try {
-                      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/contact`, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ name, email, subject, message })
-                      });
-                      if (res.ok) {
-                        alert('Request sent! I will get back to you soon.');
-                        e.target.reset();
-                      } else {
-                        alert('Failed to send request. Please try again later.');
-                      }
-                    } catch (err) {
-                      alert('Error sending request.');
-                    }
-                  }} className="space-y-6 mt-2">
-                    <input type="text" name="name" required placeholder="Your name" className="w-full px-5 py-4 bg-zinc-900 border border-cyan-600 rounded-2xl text-zinc-100 text-base focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent" />
-                    <input type="email" name="email" required placeholder="Your email" className="w-full px-5 py-4 bg-zinc-900 border border-cyan-600 rounded-2xl text-zinc-100 text-base focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent" />
-                    <input type="text" name="company" placeholder="Company name (optional)" className="w-full px-5 py-4 bg-zinc-900 border border-cyan-600 rounded-2xl text-zinc-100 text-base focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent" />
-                    <input type="url" name="linkedin" required placeholder="LinkedIn profile (required)" className="w-full px-5 py-4 bg-zinc-900 border border-cyan-600 rounded-2xl text-zinc-100 text-base focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent" />
-                    <input type="text" name="preferredTime" placeholder="Preferred time (optional)" className="w-full px-5 py-4 bg-zinc-900 border border-cyan-600 rounded-2xl text-zinc-100 text-base focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent" />
-                    <select name="why" required className="w-full px-5 py-4 bg-zinc-900 border border-cyan-600 rounded-2xl text-zinc-100 text-base focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent">
-                      <option value="" disabled selected>Why do you want to connect?</option>
-                      <option value="hire">Hire</option>
-                      <option value="discuss">Discuss Work</option>
-                      <option value="collaborate">Collaborate</option>
-                      <option value="network">Network</option>
-                      <option value="other">Other</option>
-                    </select>
-                    <button type="submit" className="btn-primary w-full flex items-center justify-center gap-2 py-4 text-xl rounded-2xl mt-2">
-                      <Mail size={24} />
-                      Start Conversation
-                    </button>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Contact Form & Social Links */}
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="space-y-8"
-          >
-            <div>
               <h2 className="text-2xl font-bold mb-6 text-zinc-100">Get In Touch</h2>
               
               {/* Contact Form */}
@@ -147,7 +110,6 @@ export default function Contact() {
                       placeholder="Your name"
                     />
                   </div>
-                  
                   <div>
                     <label htmlFor="email" className="block text-sm font-medium text-zinc-300 mb-2">
                       Email
@@ -161,7 +123,31 @@ export default function Contact() {
                       placeholder="your.email@example.com"
                     />
                   </div>
-                  
+                  <div>
+                    <label htmlFor="linkedin" className="block text-sm font-medium text-zinc-300 mb-2">
+                      LinkedIn Profile (required)
+                    </label>
+                    <input
+                      type="url"
+                      id="linkedin"
+                      name="linkedin"
+                      required
+                      className="w-full px-4 py-3 bg-zinc-900 border border-zinc-700 rounded-lg text-zinc-100 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
+                      placeholder="https://linkedin.com/in/your-profile"
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="company" className="block text-sm font-medium text-zinc-300 mb-2">
+                      Company Name (optional)
+                    </label>
+                    <input
+                      type="text"
+                      id="company"
+                      name="company"
+                      className="w-full px-4 py-3 bg-zinc-900 border border-zinc-700 rounded-lg text-zinc-100 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
+                      placeholder="Your company name (optional)"
+                    />
+                  </div>
                   <div>
                     <label htmlFor="message" className="block text-sm font-medium text-zinc-300 mb-2">
                       Message
@@ -175,16 +161,37 @@ export default function Contact() {
                       placeholder="Tell me about your project or opportunity..."
                     ></textarea>
                   </div>
-                  
                   <button
                     type="submit"
-                    className="w-full btn-primary"
+                    className="w-full btn-primary flex items-center justify-center gap-2"
+                    disabled={isSubmitting}
                   >
-                    Send Message
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 className="h-4 w-4 animate-spin" />
+                        Sending...
+                      </>
+                    ) : submitStatus === 'success' ? (
+                      <>
+                        <CheckCircle className="h-4 w-4" />
+                        Message Sent!
+                      </>
+                    ) : (
+                      <>
+                        <Mail className="h-4 w-4" />
+                        Send Message
+                      </>
+                    )}
                   </button>
                 </form>
-                {/* Message will be sent directly from the site. */}
-              </div>
+                {submitStatus && (
+                  <div className={`mt-4 p-3 rounded-lg text-center ${
+                    submitStatus === 'success' ? 'bg-green-500/20 text-green-200' : 'bg-red-500/20 text-red-200'
+                  }`}>
+                    {submitStatus === 'success' ? 'Message sent! I will get back to you soon.' : 'Failed to send message. Please try again later.'}
+                  </div>
+                )}
+              </div>        
 
               {/* Social Links */}
               <div className="bg-zinc-800/50 p-6 rounded-lg">
@@ -236,7 +243,7 @@ export default function Contact() {
               <div className="bg-zinc-800/50 p-6 rounded-lg mt-6">
                 <h3 className="text-lg font-semibold text-zinc-200 mb-3">Resume</h3>
                 <p className="text-zinc-300 mb-4">Download my latest resume to learn more about my experience and skills.</p>
-                <button className="btn-secondary inline-flex items-center gap-2" onClick={() => alert('Resume not added yet. Will be available soon.')}>
+                <button className="btn-secondary inline-flex items-center gap-2" onClick={handleResumeDownload}>
                   <Download size={18} />
                   Download Resume (PDF)
                 </button>
@@ -244,8 +251,32 @@ export default function Contact() {
               </div>
             </div>
           </motion.div>
+
+          {/* Profile Card */}
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="flex items-start justify-center lg:justify-start pt-16"
+          >
+            <ProfileCard
+              name="Kanishk Saraswat"
+              title="Full-Stack & DevOps"
+              handle="kanishk2404"
+              status="Online"
+              contactText="Contact Me"
+              avatarUrl="/images/profile_card.png"
+              iconUrl="data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg opacity='0.35'%3E%3Cpath d='M20 30 l10 10 l-10 10' stroke='%2300c1ff' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M60 30 l-10 10 l10 10' stroke='%2300c1ff' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/g%3E%3C/svg%3E"
+              showBehindGradient={true}
+              showUserInfo={true}
+              enableTilt={true}
+              enableMobileTilt={false}
+              onContactClick={() => window.open('mailto:saraswatkanishk24@gmail.com')}
+            />
+          </motion.div>
         </div>
       </section>
-    </div>
+      </div>
+    </>
   );
 }

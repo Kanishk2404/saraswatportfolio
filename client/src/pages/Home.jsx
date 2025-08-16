@@ -1,13 +1,39 @@
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { ArrowRight, Cloud, Shield, Layers, LineChart } from 'lucide-react'
+import { ArrowRight, Cloud, Shield, Layers, LineChart, Code, Zap, Target, TrendingUp } from 'lucide-react'
 import CertificationsCarousel from '@/components/CertificationsCarousel.jsx'
+import BlogPreview from '@/components/BlogPreview.jsx'
+import SEO from '@/components/SEO.jsx'
 
 const skills = [
   { title: 'DevOps/Cloud', icon: Cloud, items: ['AWS (EC2, Route53, ECS, Lambda)', 'Docker', 'Jenkins', 'Nginx', 'HTTPS/Certbot'] },
   { title: 'Full‑Stack', icon: Layers, items: ['React', 'Next.js', 'Tailwind', 'Node.js', 'Express.js'] },
   { title: 'Security', icon: Shield, items: ['Web app pentesting', 'Burp Suite', 'Wireshark', 'nslookup', 'PortSwigger Web Security Academy', 'picoCTF Top 500'] },
   { title: 'Growth/SEO', icon: LineChart, items: ['WordPress at scale', 'GA4', 'Search Console', 'MOZ'] },
+]
+
+const currentWork = [
+  {
+    title: "Anicafe - Merch Store",
+    description: "Reviving the Anicafe brand as an anime merchandise store with e-commerce functionality",
+    tech: ["WordPress", "WooCommerce"],
+    progress: 70,
+    icon: TrendingUp
+  },
+  {
+    title: "Autoverse",
+    description: "Building a unified social media platform with different modules for various platforms",
+    tech: ["React", "Node.js", "Express", "PostgreSQL"],
+    progress: 45,
+    icon: Code
+  },
+  {
+    title: "Portfolio & Blog",
+    description: "Enhancing portfolio with interactive features and building a tech blog for sharing knowledge",
+    tech: ["React", "Tailwind", "Node.js", "Express"],
+    progress: 85,
+    icon: Zap
+  }
 ]
 
 const containerVariants = {
@@ -28,7 +54,25 @@ const itemVariants = {
 
 export default function Home() {
   return (
-    <div className="bg-grid">
+    <>
+      <SEO 
+        title="Home"
+  description="Kanishk Saraswat - Full-stack developer and DevOps enthusiast. Building scalable web applications with modern technology."
+        keywords={[
+          'Kanishk Saraswat',
+          'Full Stack Developer',
+          'Web Developer',
+          'DevOps Engineer',
+          'React Developer',
+          'Node.js Developer',
+          'AWS Developer',
+          'Portfolio',
+          'Web Development',
+          'Cybersecurity'
+        ]}
+        url="/"
+      />
+      <div className="bg-grid">
       <section className="container py-16 md:py-20">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <motion.div 
@@ -38,21 +82,23 @@ export default function Home() {
             className="space-y-6"
           >
             <motion.div variants={itemVariants} className="badge">
-              Full‑Stack • DevOps/SRE • Security & SEO aware
+              <Zap className="w-4 h-4" />
+              Web Developer • Cloud & DevOps • SEO • Cybersecurity
             </motion.div>
             
             <motion.h1 
               variants={itemVariants}
               className="text-4xl md:text-6xl font-extrabold leading-tight tracking-tight"
             >
-              I build <span className="gradient-text">real systems</span> for real problems
+              From <span className="gradient-text">athlete</span> to <span className="gradient-text">developer</span>
             </motion.h1>
             
             <motion.p 
               variants={itemVariants}
               className="text-lg subtle leading-relaxed"
             >
-              Nothing here was built for a resume—every project started from a real pain I faced, one I saw others struggle with, or as focused learning. React/Node on apps; AWS/Docker/Jenkins on infra; security‑ and SEO‑aware.
+              Full-stack developer and DevOps enthusiast who builds scalable web applications. 
+              From <span className="text-cyan-300 font-semibold">100k+ user platforms</span> to <span className="text-cyan-300 font-semibold">security tools</span>, I solve real problems with modern tech.
             </motion.p>
             
             <motion.div 
@@ -60,7 +106,7 @@ export default function Home() {
               className="flex gap-3 flex-wrap"
             >
               <Link to="/projects" className="btn-primary">View Projects</Link>
-              <Link to="/ventures" className="btn-secondary">Ventures</Link>
+              <Link to="/skills" className="btn-secondary">View Skills</Link>
               <Link to="/contact" className="btn-secondary">Contact</Link>
             </motion.div>
           </motion.div>
@@ -96,10 +142,95 @@ export default function Home() {
           </motion.div>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-4 mt-16">
-          {/* ...existing code... */}
-        </div>
+        {/* Quick Stats Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.6 }}
+          className="quick-stats mt-16"
+        >
+          {[
+            { number: "100K+", label: "Users Reached", icon: "👥" },
+            { number: "25%", label: "Traffic Growth", icon: "📈" },
+            { number: "Top 500", label: "CTF Ranking", icon: "🏆" },
+            { number: "5+", label: "Projects", icon: "💻" }
+          ].map((stat, i) => (
+            <motion.div
+              key={stat.label}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, delay: 0.8 + i * 0.1 }}
+              className="stat-card hover-lift"
+            >
+              <div className="text-2xl mb-2">{stat.icon}</div>
+              <div className="stat-number">{stat.number}</div>
+              <div className="stat-label">{stat.label}</div>
+            </motion.div>
+          ))}
+        </motion.div>
 
+      </section>
+
+      <div className="hr" />
+
+      {/* Currently Working On Section */}
+      <section className="container py-16">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-12"
+        >
+          <h2 className="section-title text-white">Currently Working On</h2>
+          <p className="text-lg text-zinc-300 max-w-3xl mx-auto">
+            Active projects and ongoing development work
+          </p>
+        </motion.div>
+        
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {currentWork.map((project, i) => (
+            <motion.div 
+              key={project.title} 
+              initial={{opacity:0,y:20}} 
+              whileInView={{opacity:1,y:0}} 
+              viewport={{once:true}} 
+              transition={{delay: i*0.1}} 
+              className="neo hover:scale-[1.02] transition-transform duration-300"
+            >
+              <div className="inner p-6 h-full">
+                <div className="flex items-center gap-3 mb-4">
+                  <project.icon size={24} className="text-cyan-300" />
+                  <h3 className="font-bold text-lg text-zinc-100">{project.title}</h3>
+                </div>
+                <p className="text-zinc-300 text-sm mb-4 leading-relaxed">{project.description}</p>
+                
+                {/* Progress Bar */}
+                <div className="mb-4">
+                  <div className="flex justify-between text-xs text-zinc-400 mb-1">
+                    <span>Progress</span>
+                    <span>{project.progress}%</span>
+                  </div>
+                  <div className="w-full bg-zinc-800 rounded-full h-2">
+                    <motion.div 
+                      className="bg-gradient-to-r from-cyan-500 to-blue-500 h-2 rounded-full"
+                      initial={{ width: 0 }}
+                      whileInView={{ width: `${project.progress}%` }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 1, delay: i * 0.2 }}
+                    />
+                  </div>
+                </div>
+                
+                <div className="flex flex-wrap gap-2">
+                  {project.tech.map(tech => (
+                    <span key={tech} className="chip text-xs">{tech}</span>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
       </section>
 
       <div className="hr" />
@@ -229,7 +360,112 @@ export default function Home() {
         </div>
       </section>
 
+      <div className="hr" />
+
+      {/* Testimonials Section - Commented out for now */}
+      {/* 
+      <section className="container py-16">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-12"
+        >
+          <h2 className="section-title text-white">What People Say</h2>
+          <p className="text-lg text-zinc-300 max-w-3xl mx-auto">
+            Feedback from colleagues, clients, and collaborators
+          </p>
+        </motion.div>
+        
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {[
+            {
+              name: "Sarah Chen",
+              role: "Product Manager, Sparklehood",
+              content: "Kanishk's technical expertise and problem-solving skills are exceptional. He consistently delivers high-quality solutions and is always willing to go the extra mile.",
+              rating: 5
+            },
+            {
+              name: "Alex Rodriguez",
+              role: "CTO, Fotographiya",
+              content: "Working with Kanishk was a game-changer for our platform. His security-first approach and DevOps knowledge helped us scale efficiently.",
+              rating: 5
+            },
+            {
+              name: "Priya Sharma",
+              role: "Team Lead, SIH Project",
+              content: "Kanishk's leadership during the Cloud Bouncer project was outstanding. His technical vision and ability to coordinate the team led to our success.",
+              rating: 5
+            }
+          ].map((testimonial, i) => (
+            <motion.div 
+              key={testimonial.name} 
+              initial={{opacity:0,y:20}} 
+              whileInView={{opacity:1,y:0}} 
+              viewport={{once:true}} 
+              transition={{delay: i*0.1}} 
+              className="neo hover:scale-[1.02] transition-transform duration-300"
+            >
+              <div className="inner p-6 h-full">
+                <div className="flex items-center gap-1 mb-4">
+                  {[...Array(testimonial.rating)].map((_, idx) => (
+                    <span key={idx} className="text-yellow-400">★</span>
+                  ))}
+                </div>
+                <p className="text-zinc-300 text-sm mb-4 leading-relaxed italic">"{testimonial.content}"</p>
+                <div className="border-t border-zinc-700 pt-4">
+                  <div className="font-semibold text-zinc-100">{testimonial.name}</div>
+                  <div className="text-sm text-zinc-400">{testimonial.role}</div>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+      */}
+
+      <BlogPreview />
+
       <CertificationsCarousel />
-    </div>
+
+      {/* Call to Action Section */}
+      <section className="bg-gradient-to-r from-zinc-900 via-zinc-800 to-zinc-900 py-20 relative overflow-hidden">
+        {/* Background Pattern */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(14,165,233,0.1),transparent_50%)]"></div>
+        </div>
+        
+        {/* Border Gradient */}
+        <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 via-transparent to-blue-500/20"></div>
+        
+        <div className="container relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold text-zinc-100 mb-4">
+              Ready to Build Something <span className="gradient-text">Amazing</span>?
+            </h2>
+            <p className="text-zinc-300 text-lg mb-8 max-w-2xl mx-auto leading-relaxed">
+              Let's discuss your next project and bring your ideas to life. Whether it's a web app, 
+              e-commerce platform, or something entirely new, I'm here to help.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link to="/contact" className="btn-primary">
+                Start a Conversation
+              </Link>
+              <Link to="/about" className="btn-secondary">
+                Learn More About Me
+              </Link>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+      </div>
+    </>
   )
 }
