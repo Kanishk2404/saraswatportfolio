@@ -298,7 +298,7 @@ const ProfileCardComponent = ({
             <img
               className="avatar"
               src={avatarUrl}
-              alt={`${name || "User"} avatar`}
+              alt={`${name || "User"} avatar - Profile photo`}
               loading="lazy"
               onError={(e) => {
                 const target = e.target;
@@ -311,7 +311,7 @@ const ProfileCardComponent = ({
                   <div className="pc-mini-avatar">
                     <img
                       src={miniAvatarUrl || avatarUrl}
-                      alt={`${name || "User"} mini avatar`}
+                      alt={`${name || "User"} mini avatar - Small profile photo`}
                       loading="lazy"
                       onError={(e) => {
                         const target = e.target;

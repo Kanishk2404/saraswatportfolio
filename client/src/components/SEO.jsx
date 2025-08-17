@@ -1,51 +1,188 @@
 import { Helmet } from 'react-helmet-async';
 
+const siteName = 'Kanishk Saraswat';
+
 export default function SEO({ 
   title, 
   description, 
   keywords = [], 
-  image = '/images/profile.jpg',
-  url = '',
+  url, 
+  ogImage = '/images/profile.jpg',
   type = 'website',
   author = 'Kanishk Saraswat',
-  publishedTime = '',
-  modifiedTime = ''
+  publishedTime,
+  modifiedTime,
+  section,
+  tags = []
 }) {
-  const siteName = 'Kanishk Saraswat';
   const fullTitle = title ? `${title} | ${siteName}` : siteName;
-  const fullUrl = url ? `https://yourdomain.com${url}` : 'https://yourdomain.com';
-  const fullImage = image.startsWith('http') ? image : `https://yourdomain.com${image}`;
-  
-  const structuredData = {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Kanishk Saraswat",
-    "jobTitle": "Full-Stack Developer & DevOps Engineer",
-  "description": "Web developer passionate about building scalable web applications and solving real-world problems with modern technology.",
-    "url": "https://yourdomain.com",
-    "image": fullImage,
-    "sameAs": [
-      "https://github.com/Kanishk2404",
-      "https://linkedin.com/in/kanishk-saraswat"
-    ],
-    "knowsAbout": [
-      "Web Development",
-      "React",
-      "Node.js",
-      "DevOps",
-      "AWS",
-      "Docker",
-      "SEO",
-      "Cybersecurity"
-    ],
-    "alumniOf": {
-      "@type": "Organization",
-      "name": "Your University Name"
-    },
-    "worksFor": {
-      "@type": "Organization",
-      "name": "Freelance"
+  const fullUrl = `https://kanishksaraswat.me${url}`;
+
+  // Generate schema markup based on page type
+  const generateSchema = () => {
+    const baseSchema = {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Kanishk Saraswat",
+      "url": "https://kanishksaraswat.me",
+      "image": "https://kanishksaraswat.me/images/profile.jpg",
+      "sameAs": [
+        "https://github.com/kanishksaraswat",
+        "https://linkedin.com/in/kanishksaraswat"
+      ],
+      "jobTitle": "Full Stack Developer",
+      "worksFor": {
+        "@type": "Organization",
+        "name": "Freelance"
+      },
+      "description": "Full-stack developer and DevOps enthusiast who builds scalable web applications."
+    };
+
+    // Blog post specific schema
+    if (type === 'article' && publishedTime) {
+      return {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": title,
+        "description": description,
+        "image": ogImage.startsWith('http') ? ogImage : `https://kanishksaraswat.me${ogImage}`,
+        "author": {
+          "@type": "Person",
+          "name": author,
+          "url": "https://kanishksaraswat.me"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": siteName,
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://kanishksaraswat.me/images/profile.jpg"
+          }
+        },
+        "datePublished": publishedTime,
+        "dateModified": modifiedTime || publishedTime,
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": fullUrl
+        },
+        "articleSection": section,
+        "keywords": tags.join(', '),
+        "wordCount": description?.length || 0
+      };
     }
+
+    // Project page specific schema
+    if (url?.includes('/projects')) {
+      return {
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        "name": "Projects Portfolio",
+        "description": "Web development projects and portfolio showcase",
+        "url": fullUrl,
+        "author": {
+          "@type": "Person",
+          "name": author
+        }
+      };
+    }
+
+    // About page specific schema
+    if (url?.includes('/about')) {
+      return {
+        "@context": "https://schema.org",
+        "@type": "AboutPage",
+        "name": "About Kanishk Saraswat",
+        "description": description,
+        "url": fullUrl,
+        "mainEntity": {
+          "@type": "Person",
+          "name": "Kanishk Saraswat",
+          "description": description,
+          "jobTitle": "Full Stack Developer",
+          "knowsAbout": ["Web Development", "DevOps", "SEO", "React", "Node.js", "AWS"]
+        }
+      };
+    }
+
+    // Skills page specific schema
+    if (url?.includes('/skills')) {
+      return {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "Technical Skills",
+        "description": "Comprehensive technical skills and expertise",
+        "url": fullUrl,
+        "mainEntity": {
+          "@type": "ItemList",
+          "name": "Technical Skills",
+          "description": "Programming languages, frameworks, and technologies",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Frontend Development",
+              "description": "React, JavaScript, TypeScript, HTML, CSS"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Backend Development",
+              "description": "Node.js, Express, Python, PHP"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "DevOps & Cloud",
+              "description": "AWS, Docker, Kubernetes, CI/CD"
+            }
+          ]
+        }
+      };
+    }
+
+    // Contact page specific schema
+    if (url?.includes('/contact')) {
+      return {
+        "@context": "https://schema.org",
+        "@type": "ContactPage",
+        "name": "Contact",
+        "description": description,
+        "url": fullUrl,
+        "mainEntity": {
+          "@type": "Person",
+          "name": "Kanishk Saraswat",
+          "email": "contact@kanishksaraswat.me",
+          "url": "https://kanishksaraswat.me"
+        }
+      };
+    }
+
+    // Blog listing page specific schema
+    if (url?.includes('/blog') && !url.includes('/blog/')) {
+      return {
+        "@context": "https://schema.org",
+        "@type": "Blog",
+        "name": "Blog",
+        "description": "Web development, SEO, and technology blog",
+        "url": fullUrl,
+        "author": {
+          "@type": "Person",
+          "name": author,
+          "url": "https://kanishksaraswat.me"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": siteName,
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://kanishksaraswat.me/images/profile.jpg"
+          }
+        }
+      };
+    }
+
+    // Default to Person schema for homepage and other pages
+    return baseSchema;
   };
 
   return (
@@ -55,58 +192,54 @@ export default function SEO({
       <meta name="description" content={description} />
       <meta name="keywords" content={keywords.join(', ')} />
       <meta name="author" content={author} />
-      
-      {/* Open Graph / Facebook */}
+      <meta name="robots" content="index, follow" />
+      <link rel="canonical" href={fullUrl} />
+
+      {/* Open Graph Tags */}
       <meta property="og:type" content={type} />
       <meta property="og:url" content={fullUrl} />
-      <meta property="og:title" content={fullTitle} />
+      <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
-      <meta property="og:image" content={fullImage} />
+      <meta property="og:image" content={ogImage.startsWith('http') ? ogImage : `https://kanishksaraswat.me${ogImage}`} />
       <meta property="og:site_name" content={siteName} />
       <meta property="og:locale" content="en_US" />
-      
-      {/* Twitter */}
+
+      {/* Twitter Card Tags */}
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:url" content={fullUrl} />
-      <meta name="twitter:title" content={fullTitle} />
+      <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
-      <meta name="twitter:image" content={fullImage} />
-      <meta name="twitter:creator" content="@yourtwitterhandle" />
-      
-      {/* Additional Meta Tags */}
-      <meta name="robots" content="index, follow" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <meta name="theme-color" content="#0ea5e9" />
-      <meta name="msapplication-TileColor" content="#0ea5e9" />
-      
-      {/* Canonical URL */}
-      <link rel="canonical" href={fullUrl} />
-      
-      {/* Favicon */}
+      <meta name="twitter:image" content={ogImage.startsWith('http') ? ogImage : `https://kanishksaraswat.me${ogImage}`} />
+      <meta name="twitter:creator" content="@kanishksaraswat" />
+
+      {/* Additional Meta Tags for Articles */}
+      {type === 'article' && publishedTime && (
+        <>
+          <meta property="article:published_time" content={publishedTime} />
+          {modifiedTime && <meta property="article:modified_time" content={modifiedTime} />}
+          <meta property="article:author" content={author} />
+          <meta property="article:section" content={section} />
+          {tags.map(tag => (
+            <meta key={tag} property="article:tag" content={tag} />
+          ))}
+        </>
+      )}
+
+      {/* Favicon and Icons */}
       <link rel="icon" type="image/x-icon" href="/favicon.ico" />
       <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
       <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
       <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-      
-      {/* Manifest */}
       <link rel="manifest" href="/site.webmanifest" />
-      
-      {/* Preconnect to external domains */}
+
+      {/* Preconnect for Performance */}
       <link rel="preconnect" href="https://fonts.googleapis.com" />
       <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-      
+
       {/* Structured Data */}
       <script type="application/ld+json">
-        {JSON.stringify(structuredData)}
+        {JSON.stringify(generateSchema())}
       </script>
-      
-      {/* Article specific meta tags */}
-      {type === 'article' && publishedTime && (
-        <meta property="article:published_time" content={publishedTime} />
-      )}
-      {type === 'article' && modifiedTime && (
-        <meta property="article:modified_time" content={modifiedTime} />
-      )}
     </Helmet>
   );
 }

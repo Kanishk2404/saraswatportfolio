@@ -1,5 +1,6 @@
 User-agent: *
 Allow: /
+Sitemap: https://kanishksaraswat.com/sitemap.xml
 
 # Sitemap
 Sitemap: https://yourdomain.com/sitemap.xml

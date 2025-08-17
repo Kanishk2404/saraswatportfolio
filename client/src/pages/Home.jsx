@@ -73,6 +73,7 @@ export default function Home() {
         url="/"
       />
       <div className="bg-grid">
+       
       <section className="container py-16 md:py-20">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <motion.div 
@@ -131,7 +132,7 @@ export default function Home() {
             >
               <img 
                 src="/images/profile.jpg" 
-                alt="Kanishk Saraswat" 
+                alt="Kanishk Saraswat - Portfolio profile photo" 
                 loading="lazy" width="320" height="320"
                 className="w-full h-full object-cover rounded-full"
                 onError={(e) => {
@@ -315,7 +316,7 @@ export default function Home() {
                 <div className="mb-6 flex items-center justify-center">
                   <img 
                     src={card.images[0]}
-                    alt={card.title + ' thumbnail'}
+                    alt={card.title + ' - Card thumbnail'}
                     loading="lazy" width="256" height="176"
                     className="w-64 h-44 object-cover rounded-xl border border-zinc-700 bg-zinc-900/50 shadow-lg"
                     onError={(e) => {

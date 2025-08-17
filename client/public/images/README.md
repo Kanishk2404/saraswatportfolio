@@ -30,3 +30,4 @@ Add the following images to this folder for your portfolio:
 ## Fallback
 If an image is missing, the portfolio will automatically show a placeholder with the project name.
 
+

@@ -42,7 +42,7 @@ export default function Ventures(){
               </div>
               {v.image && (
                 <div className="flex-shrink-0">
-                  <img src={v.image} alt={v.title} loading="lazy" width="224" height="160" className="rounded-xl border-4 border-cyan-600 object-cover h-40 w-56 shadow-lg" />
+                  <img src={v.image} alt={v.title + ' - Venture logo or screenshot'} loading="lazy" width="224" height="160" className="rounded-xl border-4 border-cyan-600 object-cover h-40 w-56 shadow-lg" />
                 </div>
               )}
             </div>

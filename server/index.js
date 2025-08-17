@@ -1,4 +1,5 @@
 import express from 'express'
+import compression from 'compression'
 import cors from 'cors'
 import dotenv from 'dotenv'
 import nodemailer from 'nodemailer'
@@ -6,6 +7,7 @@ import nodemailer from 'nodemailer'
 dotenv.config()
 
 const app = express()
+app.use(compression())
 const PORT = process.env.PORT || 5000
 
 const allowedOrigins = [
@@ -25,6 +27,13 @@ app.use(cors({
   credentials: true
 }))
 app.use(express.json())
+// Set cache headers for static assets
+app.use((req, res, next) => {
+  if (req.url.match(/\.(js|css|png|jpg|jpeg|gif|svg|ico|webp|xml)$/)) {
+    res.setHeader('Cache-Control', 'public, max-age=604800, immutable')
+  }
+  next()
+})
 
 app.get('/api/health', (req, res) => {
   res.json({ status: 'ok' })
@@ -69,4 +78,5 @@ app.post('/api/contact', async (req, res) => {
 app.listen(PORT, () => {
   console.log(`API server running on http://localhost:${PORT}`)
 })
+
 
