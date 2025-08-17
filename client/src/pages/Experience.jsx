@@ -68,7 +68,7 @@ export default function Experience(){
            />
 
           <Exp
-            company={<a href="https://www.fotographiya.com/" target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:underline">Fotographiya</a>}
+            company="Fotographiya"
             role="Frontend + SEO + Security Research"
             date="Jun 2024 – Dec 2024"
             location="Remote"
