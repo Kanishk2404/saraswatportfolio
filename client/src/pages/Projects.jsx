@@ -59,17 +59,11 @@ export default function Projects() {
             {[projects['cloud-bouncer'], projects['anicafe']].map(project => (
               <article key={project.title} className="card bg-gradient-to-br from-cyan-900/60 to-zinc-900/80 p-8 rounded-3xl shadow-2xl border-2 border-cyan-700 hover:scale-[1.03] transition-all duration-300 hover:shadow-cyan-500/20">
                 <div className="overflow-hidden rounded-2xl mb-7">
-                  <div className="flex gap-4 overflow-x-auto pb-2">
-                    {(project.images && project.images.length > 0 ? project.images : [project.image]).map((imgSrc, idx) => (
-                      <img
-                        key={imgSrc || idx}
-                        src={imgSrc || 'https://via.placeholder.com/320x200/0ea5e9/FFFFFF?text=No+Image'}
-                        alt={project.title + ' image ' + (idx + 1)}
-                        className="object-cover rounded-2xl shadow-lg w-56 h-40 flex-shrink-0"
-                        loading="lazy"
-                      />
-                    ))}
-                  </div>
+                  <img
+                    src={project.images?.[0] || project.image}
+                    alt={project.title}
+                    className="object-cover w-full h-56 md:h-64 lg:h-72 shadow-lg"
+                  />
                 </div>
                 <h3 className="font-bold text-2xl mb-3 gradient-text">{project.title}</h3>
                 <p className="text-zinc-300 mb-5 text-lg leading-relaxed">{project.oneLiner || project.description}</p>
@@ -161,17 +155,11 @@ export default function Projects() {
               <div key={key} className="card p-6 flex flex-col group hover:scale-105 transition-transform duration-300">
                 {/* Project Image */}
                 <div className="mb-4 overflow-hidden rounded-lg">
-                  <div className="flex gap-3 overflow-x-auto pb-2">
-                    {(project.images && project.images.length > 0 ? project.images : [project.image]).map((imgSrc, idx) => (
-                      <img
-                        key={imgSrc || idx}
-                        src={imgSrc || 'https://via.placeholder.com/320x200/0ea5e9/FFFFFF?text=No+Image'}
-                        alt={project.title + ' image ' + (idx + 1)}
-                        className="rounded-lg w-40 h-28 object-cover group-hover:scale-110 transition-transform duration-300 flex-shrink-0"
-                        loading="lazy"
-                      />
-                    ))}
-                  </div>
+                  <img 
+                    src={project.image || project.images?.[0]} 
+                    alt={project.title}
+                    className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300"
+                  />
                 </div>
 
                 {/* Project Title */}

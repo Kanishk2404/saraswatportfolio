@@ -105,9 +105,9 @@ export const projects = {
     ],
     outcome: 'Reproducible environments; simpler path to ECS/EKS; production-ready containerization',
     tech: ['Docker', 'React', 'Node.js', 'Express', 'MongoDB', 'DevOps', 'Containerization'],
-    images: ['/images/cert_docker_kubernetes_practical_guide[ 2025 edition ].jpeg'],
-    github: null,
-    live: null,
+    images: ['/images/dockerized-fullstack.jpg'], // No direct match, keeping original
+  github: null,
+  live: null,
     achievements: [
       'Created separate containers for each service',
       'Set up Docker network for seamless communication',
@@ -223,7 +223,7 @@ export const projects = {
     oneLiner: 'Deployed DockerHub images to ECS services.',
     notes: 'Foundation to evolve into ECR + GitHub Actions pipeline',
     tech: ['AWS ECS', 'DockerHub', 'CI/CD'],
-    images: ['/images/cert_docker_kubernetes_practical_guide[ 2025 edition ].jpeg'],
+  images: [],
     github: null,
     live: null,
   },
