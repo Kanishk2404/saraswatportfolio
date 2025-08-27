@@ -277,81 +277,102 @@ export default function Home() {
       <section className="container py-16">
   <h2 className="section-title mb-8 text-center text-white">Featured Projects</h2>
         <div className="grid lg:grid-cols-2 gap-8">
-          {[{
-            title: 'Anicafe',
-            to: '/projects/anicafe',
-            badge: 'Exit',
-            desc: 'From anime streaming to legal blogging success. Pivoted due to copyright concerns, scaled to 100k users in 8 months, built 15k+ community, managed 22 admins, achieved high SEO rankings, and successfully exited.',
-            chips: ['SEO','Community','Product','Scale','WordPress','Analytics'],
-            highlights: ['100k users in 8 months', '15k+ community', '22 admins managed', 'High SEO rankings', 'Successful exit', 'Legal compliance pivot'],
-            images: ['/images/anicafe1.jpeg','/images/anicafe2.jpeg','/images/anicafe3.jpeg']
-          },{
-            title: 'Cloud Bouncer (2024)',
-            to: '/projects/cloud-bouncer',
-            badge: 'SIH (MoD)',
-            desc: 'AI-powered DDoS/DoS protection tool with automated detection, response, and analysis. Team lead for SIH Smart India Hackathon project with comprehensive traffic monitoring.',
-            chips: ['React','Node','Python','MongoDB','AI','Cybersecurity','Team Lead'],
-            highlights: ['AI traffic classification', 'Automated rate limiting', 'Real-time analysis', 'Team lead role', 'SIH participation', 'Future Filter module'],
-            images: ['/images/cloudbouncer_!.jpeg','/images/cloudbouncer_2.jpeg','/images/cloudbouncer_3.jpeg']
-          }].map((card, i) => (
+          {[
+            {
+              title: 'Anicafe',
+              to: '/projects/anicafe',
+              badge: 'Exit',
+              desc: 'Started as an anime/movies streaming site; pivoted to legal blogging due to copyright concerns; scaled to 100,000 users in 8 months; built 15,000+ community; managed 15 admins and 7 core admins; sold the property.',
+              chips: ['SEO','Community','Product','Scale','WordPress','Analytics'],
+              highlights: [
+                '100,000 users in 8 months; 15,000+ community; 15 admins and 7 core admins',
+                'Successfully pivoted from streaming to legal blogging format',
+                'Achieved high SEO rankings for key terms like "anicafe," "anime cafe," "anime news"',
+                'Built vibrant Telegram and Instagram communities',
+                'Sold the property after significant growth',
+                'Reviving brand as an anime merch store (see Ventures)',
+                'Learned valuable lessons in compliance, team management, and business pivoting',
+              ],
+              images: ['/images/anicafe1.jpeg','/images/anicafe2.jpeg','/images/anicafe3.jpeg']
+            },
+            {
+              title: 'Cloud Bouncer (2024)',
+              to: '/projects/cloud-bouncer',
+              badge: 'SIH (MoD)',
+              desc: 'AI-powered DDoS/DoS protection tool with automated detection, response, and analysis. Built for Smart India Hackathon with comprehensive traffic monitoring and protection modules.',
+              chips: ['React','Node','Python','MongoDB','AI','Cybersecurity','Team Lead'],
+              highlights: [
+                'Built for Smart India Hackathon (MoD) with advanced DDoS/DoS protection',
+                'AI-powered traffic classification and automated response modules',
+                'Comprehensive analysis and visualization of attack patterns',
+                'Modular design: Detector, Action, Analysis, and Filter modules',
+                'Team: Kanishk Saraswat (Lead), Abhay Bharti, Prashant Yadav, SHIVAM KUMAR, Ashutosh Singh',
+                'Future plans: Live testing, >90% accuracy in Filter module, scale to multiple client websites',
+              ],
+              images: ['/images/cloudbouncer_!.jpeg','/images/cloudbouncer_2.jpeg','/images/cloudbouncer_3.jpeg']
+            }
+          ].map((card, i) => (
             <motion.div 
               key={card.to} 
               initial={{opacity:0,y:8}} 
               whileInView={{opacity:1,y:0}} 
               viewport={{once:true}} 
               transition={{delay: i*0.05}} 
-              className="neo h-[600px]"
+              className="card bg-gradient-to-br from-cyan-900/80 to-zinc-900/90 p-10 rounded-3xl shadow-2xl border-2 border-cyan-400/60 hover:scale-[1.04] transition-all duration-300 hover:shadow-cyan-400/30 h-[700px] flex flex-col relative"
             >
-              <div className="inner p-8 h-full flex flex-col">
-                {/* Header Section */}
-                <div className="mb-6 flex-shrink-0">
-                  <div className="flex items-center justify-between mb-3">
-                    <h3 className="text-2xl font-bold text-zinc-100">{card.title}</h3>
-                    <span className="chip font-medium">{card.badge}</span>
-                  </div>
-                  <p className="text-zinc-300 text-base leading-relaxed overflow-safe-multiline">{card.desc}</p>
+              {/* Header Section */}
+              <div className="mb-6 flex-shrink-0">
+                <div className="flex items-center justify-between mb-3">
+                  <h3 className="text-3xl font-extrabold text-cyan-300 gradient-text drop-shadow-lg tracking-tight">{card.title}</h3>
+                  <span className="chip font-medium bg-cyan-500/30 text-cyan-100 border-cyan-400/40 shadow-md animate-pulse">{card.badge}</span>
+              {/* Glowing border effect */}
+              <div className="absolute inset-0 pointer-events-none rounded-3xl border-4 border-cyan-400/30 shadow-[0_0_40px_10px_rgba(14,165,233,0.15)]"></div>
                 </div>
+                <p className="text-zinc-300 text-base leading-relaxed overflow-safe-multiline">{card.desc}</p>
+              </div>
 
-                {/* Images Section */}
-                <div className="mb-6 flex items-center justify-center">
-                  <img 
-                    src={card.images[0]}
-                    alt={card.title + ' - Card thumbnail'}
-                    loading="lazy" width="256" height="176"
-                    className="w-64 h-44 object-cover rounded-xl border border-zinc-700 bg-zinc-900/50 shadow-lg"
-                    onError={(e) => {
-                      e.target.src = `https://via.placeholder.com/256x176/${i === 0 ? '0ea5e9' : '8b5cf6'}/FFFFFF?text=${card.title.replace(/\s+/g, '+')}+Image`
-                    }}
-                  />
-                </div>
+              {/* Images Section */}
+              <div className="mb-6 flex items-center justify-center">
+                <img 
+                  src={card.images[0]}
+                  alt={card.title + ' - Card thumbnail'}
+                  loading="lazy" width="256" height="176"
+                  className="w-full max-w-xs h-48 md:h-56 lg:h-64 object-cover rounded-2xl border border-cyan-700 bg-zinc-900/50 shadow-lg"
+                  onError={(e) => {
+                    e.target.src = `https://via.placeholder.com/256x176/${i === 0 ? '0ea5e9' : '8b5cf6'}/FFFFFF?text=${card.title.replace(/\s+/g, '+')}+Image`
+                  }}
+                />
+              </div>
 
-                {/* Highlights Section */}
-                <div className="mb-6 flex-grow overflow-hidden">
-                  <h4 className="text-sm font-semibold text-zinc-200 mb-3">Key Highlights:</h4>
-                  <div className="space-y-2">
-                    {card.highlights.map((highlight, idx) => (
-                      <div key={idx} className="flex items-center gap-3 p-2 bg-zinc-800/50 rounded-md">
-                        <span className="w-2 h-2 bg-cyan-400 rounded-full flex-shrink-0"></span>
-                        <span className="text-sm text-zinc-300 leading-relaxed">{highlight}</span>
+              {/* Highlights Section */}
+              <div className="mb-6 flex-grow overflow-hidden">
+                <h4 className="text-sm font-semibold text-zinc-200 mb-3">Key Highlights:</h4>
+                <ul className="space-y-2">
+                  {card.highlights.map((highlight, idx) => (
+                    <li key={idx}>
+                      <div className="flex items-center bg-zinc-900 rounded-lg px-4 py-2">
+                        <span className="w-2 h-2 rounded-full bg-cyan-400 mr-3"></span>
+                        <span className="text-zinc-200 text-base">{highlight}</span>
                       </div>
-                    ))}
-                  </div>
-                </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
 
-                {/* Footer Section */}
-                <div className="mt-auto flex-shrink-0">
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {card.chips.map(tech => (
-                      <span key={tech} className="chip text-xs font-medium">{tech}</span>
-                    ))}
-                  </div>
-                  <Link 
-                    to={card.to} 
-                    className="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 font-medium text-base transition-colors"
-                  >
-                    View case study <ArrowRight size={18} />
-                  </Link>
+              {/* Footer Section */}
+              <div className="mt-auto flex-shrink-0">
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {card.chips.map(tech => (
+                    <span key={tech} className="chip text-xs bg-cyan-700/30 text-cyan-200 border-cyan-500/40 font-semibold shadow-sm">{tech}</span>
+                  ))}
                 </div>
+                <Link 
+                  to={card.to} 
+                  className="btn-secondary inline-flex items-center gap-2"
+                >
+                  <ArrowRight size={16} />
+                  Read More
+                </Link>
               </div>
             </motion.div>
           ))}

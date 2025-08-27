@@ -51,6 +51,13 @@ export const projects = {
     title: 'Cloud Bouncer (2024) — SIH (MoD) DDoS/DoS Protection Tool',
     role: 'Team Lead',
     oneLiner: 'AI-powered DDoS/DoS protection tool with automated detection, response, and analysis. Built for Smart India Hackathon with comprehensive traffic monitoring and protection modules.',
+    highlights: [
+      'Built for Smart India Hackathon (MoD) with advanced DDoS/DoS protection',
+      'AI-powered traffic classification and automated response modules',
+      'Comprehensive analysis and visualization of attack patterns',
+      'Modular design: Detector, Action, Analysis, and Filter modules',
+      'Team: Kanishk Saraswat (Lead), Abhay Bharti, Prashant Yadav, SHIVAM KUMAR, Ashutosh Singh'
+    ],
     modules: [
       'Detector AI: Classifies traffic into normal [0], potential DDoS [1], and peak hours [2]',
       'Action Module: Automatically applies rate limiting, reCAPTCHA, and dynamic IP blocking (15s fail window)',
@@ -98,9 +105,9 @@ export const projects = {
     ],
     outcome: 'Reproducible environments; simpler path to ECS/EKS; production-ready containerization',
     tech: ['Docker', 'React', 'Node.js', 'Express', 'MongoDB', 'DevOps', 'Containerization'],
-    images: ['/images/dockerized-fullstack.jpg'], // No direct match, keeping original
-  github: null,
-  live: null,
+    images: ['/images/cert_docker_kubernetes_practical_guide[ 2025 edition ].jpeg'],
+    github: null,
+    live: null,
     achievements: [
       'Created separate containers for each service',
       'Set up Docker network for seamless communication',
@@ -216,7 +223,7 @@ export const projects = {
     oneLiner: 'Deployed DockerHub images to ECS services.',
     notes: 'Foundation to evolve into ECR + GitHub Actions pipeline',
     tech: ['AWS ECS', 'DockerHub', 'CI/CD'],
-  images: [],
+    images: ['/images/cert_docker_kubernetes_practical_guide[ 2025 edition ].jpeg'],
     github: null,
     live: null,
   },

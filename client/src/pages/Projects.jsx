@@ -9,15 +9,15 @@ export default function Projects() {
 
   const allTechnologies = useMemo(() => {
     const techSet = new Set();
-    projects.forEach(project => {
+    Object.values(projects).forEach(project => {
       project.tech.forEach(tech => techSet.add(tech));
     });
     return Array.from(techSet).sort();
   }, []);
 
   const filteredProjects = useMemo(() => {
-    if (activeFilter === 'All') return projects;
-    return projects.filter(project => 
+    if (activeFilter === 'All') return Object.values(projects);
+    return Object.values(projects).filter(project => 
       project.tech.includes(activeFilter)
     );
   }, [activeFilter]);
@@ -52,18 +52,100 @@ export default function Projects() {
           </p>
         </header>
 
-        {/* Filter Buttons */}
-        <div className="mb-12 flex flex-wrap gap-3 justify-center">
+        {/* Featured Projects Section */}
+        <section className="mb-16">
+          <h2 className="section-title mb-10">Featured Projects</h2>
+          <div className="grid md:grid-cols-2 gap-10 max-w-5xl mx-auto">
+            {[projects['cloud-bouncer'], projects['anicafe']].map(project => (
+              <article key={project.title} className="card bg-gradient-to-br from-cyan-900/60 to-zinc-900/80 p-8 rounded-3xl shadow-2xl border-2 border-cyan-700 hover:scale-[1.03] transition-all duration-300 hover:shadow-cyan-500/20">
+                <div className="overflow-hidden rounded-2xl mb-7">
+                  <div className="flex gap-4 overflow-x-auto pb-2">
+                    {(project.images && project.images.length > 0 ? project.images : [project.image]).map((imgSrc, idx) => (
+                      <img
+                        key={imgSrc || idx}
+                        src={imgSrc || 'https://via.placeholder.com/320x200/0ea5e9/FFFFFF?text=No+Image'}
+                        alt={project.title + ' image ' + (idx + 1)}
+                        className="object-cover rounded-2xl shadow-lg w-56 h-40 flex-shrink-0"
+                        loading="lazy"
+                      />
+                    ))}
+                  </div>
+                </div>
+                <h3 className="font-bold text-2xl mb-3 gradient-text">{project.title}</h3>
+                <p className="text-zinc-300 mb-5 text-lg leading-relaxed">{project.oneLiner || project.description}</p>
+                {/* Key Highlights */}
+                {/* Key Highlights Styled */}
+                {(project.highlights && project.highlights.length > 0 ? project.highlights :
+                  project.id === 'cloud-bouncer'
+                    ? [
+                        ...(projects['cloud-bouncer'].modules || []),
+                        ...(projects['cloud-bouncer'].functionality || []),
+                        `Team: ${projects['cloud-bouncer'].team?.join(', ')}`
+                      ]
+                    : []
+                ).length > 0 && (
+                  <div className="mb-6">
+                    <div className="font-semibold text-zinc-200 mb-2">Key Highlights:</div>
+                    <ul className="space-y-2">
+                      {(project.highlights && project.highlights.length > 0 ? project.highlights :
+                        project.id === 'cloud-bouncer'
+                          ? [
+                              ...(projects['cloud-bouncer'].modules || []),
+                              ...(projects['cloud-bouncer'].functionality || []),
+                              `Team: ${projects['cloud-bouncer'].team?.join(', ')}`
+                            ]
+                          : []
+                      ).map((highlight, idx) => (
+                        <li key={idx}>
+                          <div className="flex items-center bg-zinc-900 rounded-lg px-4 py-2">
+                            <span className="w-2 h-2 rounded-full bg-cyan-400 mr-3"></span>
+                            <span className="text-zinc-200 text-base">{highlight}</span>
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+                <div className="flex flex-wrap gap-2 mb-6">
+                  {project.tech?.map(tech => (
+                    <span key={tech} className="chip text-xs bg-cyan-700/30 text-cyan-200 border-cyan-500/40 font-semibold shadow-sm">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+                {/* Case Study Link and Add links if available */}
+                <div className="flex gap-3 mt-auto">
+                  <Link
+                    to={project.title.includes('Cloud Bouncer') ? '/projects/cloud-bouncer' : '/projects/anicafe'}
+                    className="btn-secondary flex items-center gap-2"
+                  >
+                    <ArrowRight size={16} />
+                    Read More
+                  </Link>
+                  {project.github && (
+                    <a href={project.github} target="_blank" rel="noopener noreferrer" className="btn-secondary flex items-center gap-2">
+                      <Github size={16} />
+                      Code
+                    </a>
+                  )}
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        {/* Filter Tags */}
+        <div className="flex flex-wrap gap-2 justify-center mb-10">
           <button
-            className={`chip ${activeFilter === 'All' ? 'bg-cyan-600 text-white' : ''}`}
+            className={`chip text-sm px-4 py-2 ${activeFilter === 'All' ? 'bg-cyan-600 text-white' : 'bg-zinc-800 text-cyan-300'}`}
             onClick={() => setActiveFilter('All')}
           >
-            All Projects
+            All
           </button>
           {allTechnologies.map(tech => (
             <button
               key={tech}
-              className={`chip ${activeFilter === tech ? 'bg-cyan-600 text-white' : ''}`}
+              className={`chip text-sm px-4 py-2 ${activeFilter === tech ? 'bg-cyan-600 text-white' : 'bg-zinc-800 text-cyan-300'}`}
               onClick={() => setActiveFilter(tech)}
             >
               {tech}
@@ -73,67 +155,71 @@ export default function Projects() {
 
         {/* Projects Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredProjects.map(project => (
-            <div key={project.id} className="card p-6 flex flex-col group hover:scale-105 transition-transform duration-300">
-              {/* Project Image */}
-              <div className="mb-4 overflow-hidden rounded-lg">
-                <img 
-                  src={project.image} 
-                  alt={project.title}
-                  className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300"
-                />
-              </div>
+          {Object.entries(projects)
+            .filter(([key, project]) => filteredProjects.includes(project) && !['cloud-bouncer', 'anicafe'].includes(key))
+            .map(([key, project]) => (
+              <div key={key} className="card p-6 flex flex-col group hover:scale-105 transition-transform duration-300">
+                {/* Project Image */}
+                <div className="mb-4 overflow-hidden rounded-lg">
+                  <div className="flex gap-3 overflow-x-auto pb-2">
+                    {(project.images && project.images.length > 0 ? project.images : [project.image]).map((imgSrc, idx) => (
+                      <img
+                        key={imgSrc || idx}
+                        src={imgSrc || 'https://via.placeholder.com/320x200/0ea5e9/FFFFFF?text=No+Image'}
+                        alt={project.title + ' image ' + (idx + 1)}
+                        className="rounded-lg w-40 h-28 object-cover group-hover:scale-110 transition-transform duration-300 flex-shrink-0"
+                        loading="lazy"
+                      />
+                    ))}
+                  </div>
+                </div>
 
-              {/* Project Title */}
-              <h3 className="text-xl font-bold mb-3 gradient-text group-hover:text-cyan-300 transition-colors">
-                {project.title}
-              </h3>
+                {/* Project Title */}
+                <h3 className="text-xl font-bold mb-3 gradient-text group-hover:text-cyan-300 transition-colors">
+                  {project.title}
+                </h3>
 
-              {/* Project Description */}
-              <p className="text-zinc-300 mb-4 flex-1 leading-relaxed">
-                {project.description}
-              </p>
+                {/* Project Description */}
+                <p className="text-zinc-300 mb-4 flex-1 leading-relaxed">
+                  {project.description}
+                </p>
 
-              {/* Tech Stack */}
-              <div className="flex flex-wrap gap-2 mb-4">
-                {project.tech.map(tech => (
-                  <span key={tech} className="chip text-xs">
-                    {tech}
-                  </span>
-                ))}
-              </div>
-
-              {/* Project Links */}
-              <div className="flex items-center gap-3 mt-auto">
-                {project.live && (
-                  <a 
-                    href={project.live} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="btn-secondary flex items-center gap-2 group-hover:bg-cyan-600 group-hover:text-white transition-colors"
+                {/* Tech Stack */}
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {project.tech.map(tech => (
+                    <span key={tech} className="chip text-xs">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+                {/* Case Study Link and Add links if available */}
+                <div className="flex gap-2 mt-auto">
+                  <Link
+                    to={`/projects/${key}`}
+                    className="btn-secondary flex items-center gap-2"
                   >
-                    <ExternalLink size={16} />
-                    Live Demo
-                  </a>
-                )}
-                {project.github && (
-                  <a 
-                    href={project.github} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="btn-secondary flex items-center gap-2 group-hover:bg-cyan-600 group-hover:text-white transition-colors"
-                  >
-                    <Github size={16} />
-                    Code
-                  </a>
-                )}
+                    <ArrowRight size={16} />
+                    Read More
+                  </Link>
+                  {project.live && (
+                    <a href={project.live} target="_blank" rel="noopener noreferrer" className="btn-secondary flex items-center gap-2">
+                      <ExternalLink size={16} />
+                      Live
+                    </a>
+                  )}
+                  {project.github && (
+                    <a href={project.github} target="_blank" rel="noopener noreferrer" className="btn-secondary flex items-center gap-2">
+                      <Github size={16} />
+                      Code
+                    </a>
+                  )}
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
         </div>
 
         {/* No Projects Message */}
-        {filteredProjects.length === 0 && (
+        {filteredProjects.filter(project => !['cloud-bouncer', 'anicafe'].includes(project.id)).length === 0 && (
           <div className="text-center py-16">
             <p className="text-zinc-400 text-lg mb-4">
               No projects found with the selected filter.
