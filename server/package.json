@@ -15,6 +15,7 @@
     "express": "^4.19.2",
     "kanishk-portfolio-monorepo": "file:..",
     "nodemailer": "^7.0.5",
+    "resend": "^6.0.3",
     "serverless-http": "^3.2.0"
   },
   "devDependencies": {

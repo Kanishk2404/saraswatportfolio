@@ -48,10 +48,7 @@ export default function Contact() {
     }
   };
 
-  const handleResumeDownload = () => {
-    // For now, show a message. You can replace this with actual resume download
-    alert('Resume download feature coming soon! In the meantime, feel free to reach out via email.');
-  };
+
 
   return (
     <>
@@ -243,11 +240,17 @@ export default function Contact() {
               <div className="bg-zinc-800/50 p-6 rounded-lg mt-6">
                 <h3 className="text-lg font-semibold text-zinc-200 mb-3">Resume</h3>
                 <p className="text-zinc-300 mb-4">Download my latest resume to learn more about my experience and skills.</p>
-                <button className="btn-secondary inline-flex items-center gap-2" onClick={handleResumeDownload}>
+                <a
+                  className="btn-secondary inline-flex items-center gap-2"
+                  href="https://drive.google.com/file/d/1ZDZpCayTf8h0uAaK3ZKqNk8XcWN2xY3G/view?usp=drive_link"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  download
+                >
                   <Download size={18} />
                   Download Resume (PDF)
-                </button>
-                <p className="text-xs text-zinc-400 mt-2">Resume will be available soon.</p>
+                </a>
+                <p className="text-xs text-zinc-400 mt-2">Resume is always up to date and accessible.</p>
               </div>
             </div>
           </motion.div>

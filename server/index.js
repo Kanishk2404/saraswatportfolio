@@ -2,7 +2,8 @@ import express from 'express'
 import compression from 'compression'
 import cors from 'cors'
 import dotenv from 'dotenv'
-import nodemailer from 'nodemailer'
+
+import { Resend } from 'resend'
 
 dotenv.config()
 
@@ -47,30 +48,22 @@ app.post('/api/contact', async (req, res) => {
     return res.status(400).json({ error: 'Missing required fields' })
   }
   try {
-    const transporter = nodemailer.createTransport({
-      service: 'gmail',
-      auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.GMAIL_APP_PASSWORD
-      }
-    })
-    console.log('Nodemailer transporter created.')
-    const mailOptions = {
-      from: email,
+    const resend = new Resend(process.env.RESEND_API_KEY)
+    const { data, error } = await resend.emails.send({
+      from: `Portfolio Contact <noreply@kanishksaraswat.me>`,
       to: process.env.EMAIL_USER,
       subject: `Portfolio Contact Form: ${subject}`,
       text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
-      replyTo: email
+      reply_to: email
+    })
+    if (error) {
+      console.error('Resend error:', error)
+      return res.status(500).json({ error: 'Failed to send email', details: error.message })
     }
-    console.log('Mail options:', mailOptions)
-    const info = await transporter.sendMail(mailOptions)
-    console.log('Email sent:', info)
+    console.log('Email sent:', data)
     res.json({ ok: true })
   } catch (error) {
     console.error('Error sending email:', error)
-    if (error.response) {
-      console.error('SMTP response:', error.response)
-    }
     res.status(500).json({ error: 'Failed to send email', details: error.message })
   }
 })
