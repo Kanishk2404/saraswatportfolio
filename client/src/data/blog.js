@@ -167,5 +167,96 @@ export const blogPosts = [
         <p class="mb-4">Keep testing, keep iterating, and remember: the best SEO strategy is one that evolves with the web.</p>
       </article>
     `
+  },
+  {
+    id: 'suitegenie-story',
+    title: 'From Rejection to Revolution: How I Built a Social Media Automation Platform',
+    category: 'Projects',
+    date: '2025-09-18',
+    author: 'Kanishk Saraswat',
+    readTime: '10 min read',
+    summary: 'A journey from a rejected Twitter automator to a unified social media automation platform, with lessons, pivots, and real screenshots.',
+    tags: ['SuiteGenie', 'Automation', 'Twitter', 'Startup', 'Journey', 'DevOps'],
+    content: `
+      <article class="prose prose-lg max-w-3xl mx-auto">
+        <header class="mb-8">
+          <div class="flex items-center gap-4 text-zinc-400 mb-4">
+            <span>By Kanishk Saraswat</span>
+            <span>•</span>
+            <span>September 18, 2025</span>
+            <span>•</span>
+            <span>10 min read</span>
+          </div>
+          <div class="flex gap-2 flex-wrap">
+            <span class="chip text-xs">SuiteGenie</span>
+            <span class="chip text-xs">Automation</span>
+            <span class="chip text-xs">Twitter</span>
+            <span class="chip text-xs">Startup</span>
+            <span class="chip text-xs">Journey</span>
+          </div>
+        </header>
+
+        <h2>Chapter 1: The Beginning</h2>
+        <p>It all started when I was building a Twitter Automator that used API keys to generate content and automatically post it on Twitter. I had built in scheduling, history tracking, bulk creation - everything a user would need. Users could either bring their own Twitter API keys or use the platform's built-in keys, with a smart fallback mechanism if multiple keys were added.</p>
+        <p>I was proud of the work, but then came the blow - the app wasn't needed anymore. Instead of letting months of development go to waste, I made a decision that would change everything. I dockerized the entire solution, creating production Docker files so anyone could run their own personal tweet automator.</p>
+        <img src="/images/dockered-tweetautomator.jpg" alt="Dockerized Tweet Automator" class="rounded-xl my-6" />
+
+        <h2>Chapter 2: The First Sign</h2>
+        <p>When I pushed the Docker images live, I didn't expect much at first. The pull counter climbed steadily - some users were friends or fellow developers I knew, but I guess at least 20 downloads came from outside our circle.</p>
+        <img src="/images/dockerhub.png" alt="DockerHub Pulls" class="rounded-xl my-6" />
+        <p>It felt encouraging to see real people interested in something that was supposed to be obsolete.</p>
+        <p>The memory hit me like a wave. My anime website days — the endless cycle of creating content for the site while spending hours crafting social media posts to promote it. The stress of maintaining presence across platforms while tools like Hootsuite demanded expensive monthly fees made it clear I wasn't alone in this struggle.</p>
+
+        <h2>Chapter 3: The Vision</h2>
+        <p>After starting to build the Tweet Automator for multiple users and the platform, I contacted my teammates Abhay Bharti and Ashutosh Singh. We started ambitious: separate modules for the main platform, Twitter integration, and LinkedIn automation. We thought modularity meant smart architecture.</p>
+        <p>We were wrong.</p>
+
+        <h2>Chapter 4: The Crash</h2>
+        <p>Integration became our nightmare. Our database knowledge was surface-level at best. Sure, individual modules worked in isolation, but together? They looked like three different companies had built them. No cohesion. No unified experience. Users would be confused, and rightly so.</p>
+        <p>We had built something that worked but felt broken.</p>
+
+        <h2>Chapter 5: The Restart</h2>
+        <p>That failure taught me the most important lesson in product development: working features don't guarantee a working product. I made the hardest decision of my entrepreneurial journey - scrap everything and rebuild from scratch.</p>
+        <p>This time, integration wasn't an afterthought. It was the foundation.</p>
+
+        <h2>Chapter 6: The Test</h2>
+        <p>Our first integrated release was Tweet Genie. The test was simple but crucial: seamless authentication flow. Non-logged users get redirected to platform login. Authenticated users access everything instantly.</p>
+        <img src="/images/tweetgenie.png" alt="Tweet Genie Frontend" class="rounded-xl my-6" />
+        <p>It worked.</p>
+        <p>Next came the platform dashboard, then the full tweet automator. But our biggest challenge was yet to come.</p>
+
+        <h2>Chapter 7: The Learning Curve</h2>
+        <p>Deployment nearly broke us. We were in over our heads with cookies, cross-domain authentication, and OAuth implementations. Each error message felt like a personal attack on our competence.</p>
+        <p>But desperation teaches you things no tutorial can. We learned by breaking things, fixing them, then breaking them again. Slowly, we became deployment experts through pure necessity.</p>
+
+        <h2>Chapter 8: The Crisis</h2>
+        <p>Just when everything seemed smooth, Twitter hit us with reality. Rate limits weren't just for users - they applied to developer apps too. I watched in horror as our OAuth implementation triggered limit after limit.</p>
+        <p>The math was devastating: if we had 100 users generating content simultaneously, we'd hit limits constantly. Our entire model seemed doomed.</p>
+        <p>I spent sleepless nights questioning everything. Had we built something fundamentally flawed?</p>
+
+        <h2>Chapter 9: The Trade-off</h2>
+        <p>Sometimes leadership means choosing between perfect and possible. I decided to implement manual key submission alongside our OAuth flow - not ideal for user experience, but necessary for functionality.</p>
+        <p>The compromise stung, but I promised myself: once we have enterprise partnerships like Buffer and Hootsuite, we'll bring back seamless OAuth for everyone.</p>
+
+        <h2>Chapter 10: The Analytics Challenge</h2>
+        <p>Twitter's restrictive analytics endpoints presented another hurdle. But I knew data insights would be crucial for user success. We'd build analytics that mattered, even if we had to work within tight constraints.</p>
+
+        <h2>Chapter 11: The Breakthrough</h2>
+        <p>Everything clicked when I redesigned our database architecture and implemented BYOK (Bring Your Own Key) mode. Suddenly, users had choice. They could use their keys or ours. Short-term or committed. Credits or subscriptions.</p>
+        <p>The platform finally felt complete.</p>
+
+        <h2>Chapter 12: Today and Tomorrow</h2>
+        <p>Users now enjoy a seamless experience: browse our interactive platform, sign up in seconds, access a comprehensive dashboard, and launch powerful automation tools.</p>
+        <img src="/images/suitegenie_frontedn.png" alt="SuiteGenie Dashboard" class="rounded-xl my-6" />
+        <p>They can choose BYOK or platform keys with 90-day commitment, purchase credits via Razorpay, and generate content individually or in bulk through Tweet Genie.</p>
+        <p>Our analytics currently provide mathematical insights - engagement rates, optimal timing, performance trends. But we're building something revolutionary: AI that will guide users on what to post, when to post, and how to reach their ideal audience. We're even developing our own LLM specifically trained for content creation.</p>
+        <p>The roadmap is ambitious: LinkedIn Genie for professional content, WordPress automation for seamless publishing, and intelligence that learns from each user's unique voice and goals.</p>
+
+        <h2>Epilogue: The Team</h2>
+        <p>Thanks to my teammates Abhay Bharti and Ashutosh Singh for working on this with me and helping me bring this vision to life. We will continue to make this platform better and are excited to roll out other modules we have planned - including LinkedIn Genie and WordPress automation.</p>
+        <p>What started as an unwanted project became the foundation for something that could revolutionize how creators and businesses approach social media. Sometimes the best ventures rise from what others deemed unnecessary.</p>
+        <p>The journey from rejection to revolution taught us that persistence, combined with the right team and unwavering focus on user needs, can transform any setback into a comeback.</p>
+      </article>
+    `
   }
 ];
