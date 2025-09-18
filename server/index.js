@@ -43,6 +43,8 @@ app.get('/api/health', (req, res) => {
 app.post('/api/contact', async (req, res) => {
   const { name, email, subject, message } = req.body || {}
   console.log('Contact form request received:', { name, email, subject, message })
+  // Debug log for RESEND_API_KEY
+  console.log('RESEND_API_KEY:', process.env.RESEND_API_KEY);
   if (!name || !email || !subject || !message) {
     console.log('Missing required fields:', { name, email, subject, message })
     return res.status(400).json({ error: 'Missing required fields' })
