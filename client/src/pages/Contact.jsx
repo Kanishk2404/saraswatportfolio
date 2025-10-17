@@ -22,9 +22,25 @@ export default function Contact() {
     const subject = `Portfolio Contact - ${name}`;
     
     try {
-      // Build endpoint safely. If VITE_API_URL is unset, use same-origin /api/contact
-      const base = import.meta.env.VITE_API_URL || '';
-      const endpoint = base ? base.replace(/\/+$/, '') + '/api/contact' : '/api/contact';
+      // Build endpoint safely.
+      // Prefer same-origin '/api/contact' to avoid CORS unless VITE_API_URL explicitly matches current origin.
+      const rawBase = import.meta.env.VITE_API_URL || '';
+      let endpoint = '/api/contact';
+      if (rawBase) {
+        try {
+          const parsed = new URL(rawBase);
+          if (parsed.origin === window.location.origin) {
+            endpoint = rawBase.replace(/\/+$/, '') + '/api/contact';
+          } else {
+            // If the configured API URL points to a different origin, prefer same-origin to avoid CORS  issues
+            console.warn('VITE_API_URL points to a different origin; using same-origin /api/contact to avoid CORS.', rawBase);
+            endpoint = '/api/contact';
+          }
+        } catch (e) {
+          // If rawBase isn't an absolute URL (unlikely), build from it as a path
+          endpoint = rawBase.replace(/\/+$/, '') + '/api/contact';
+        }
+      }
       console.log('Contact endpoint:', endpoint);
 
       const res = await fetch(endpoint, {
