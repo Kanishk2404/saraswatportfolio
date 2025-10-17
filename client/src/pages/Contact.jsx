@@ -22,7 +22,12 @@ export default function Contact() {
     const subject = `Portfolio Contact - ${name}`;
     
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/contact`, {
+      // Build endpoint safely. If VITE_API_URL is unset, use same-origin /api/contact
+      const base = import.meta.env.VITE_API_URL || '';
+      const endpoint = base ? base.replace(/\/+$/, '') + '/api/contact' : '/api/contact';
+      console.log('Contact endpoint:', endpoint);
+
+      const res = await fetch(endpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
@@ -34,14 +39,17 @@ export default function Contact() {
           message 
         })
       });
-      
+
       if (res.ok) {
         setSubmitStatus('success');
         e.target.reset();
       } else {
+        const text = await res.text().catch(() => null);
+        console.error('Contact submit failed:', res.status, text);
         setSubmitStatus('error');
       }
     } catch (err) {
+      console.error('Contact submit error:', err);
       setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);
