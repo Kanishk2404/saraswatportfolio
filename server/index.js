@@ -16,6 +16,8 @@ const PORT = process.env.PORT || 5000
 
 // Configure CORS
 const allowedOrigins = [
+  'http://localhost:3000',
+  'http://localhost:5173',
   'https://kanishksaraswat.me',
   'https://www.kanishksaraswat.me'
 ];
@@ -92,6 +94,12 @@ app.post('/api/contact', async (req, res) => {
     res.status(500).json({ error: 'Failed to send email', details: error.message })
   }
 })
+
+if (process.env.NODE_ENV !== 'production' && !process.env.VERCEL) {
+  app.listen(PORT, () => {
+    console.log(`API server running on http://localhost:${PORT}`);
+  });
+}
 
 export default app;
 
