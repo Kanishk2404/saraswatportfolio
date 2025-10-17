@@ -1,4 +1,7 @@
-dotenv.config()
+
+import express from 'express';
+import compression from 'compression';
+dotenv.config();
 
 import fs from 'fs'
 console.log('CWD:', process.cwd());
