@@ -1,10 +1,10 @@
-import express from 'express'
-import compression from 'compression'
-import cors from 'cors'
+dotenv.config()
+
+import fs from 'fs'
+console.log('CWD:', process.cwd());
+console.log('.env exists:', fs.existsSync('./.env'));
 import dotenv from 'dotenv'
-
 import { Resend } from 'resend'
-
 dotenv.config()
 
 const app = express()
