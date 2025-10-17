@@ -68,6 +68,8 @@ app.post('/api/contact', async (req, res) => {
     return res.status(400).json({ error: 'Missing required fields' })
   }
   try {
+    // Debug log for RESEND_API_KEY
+    console.log('RESEND_API_KEY:', process.env.RESEND_API_KEY);
     const resend = new Resend(process.env.RESEND_API_KEY)
     const { data, error } = await resend.emails.send({
       from: `Portfolio Contact <noreply@kanishksaraswat.me>`,
