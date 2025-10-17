@@ -2,6 +2,8 @@
 // Deploy this under the `client` project on Vercel so `/api/contact` is available.
 
 export default async function handler(req, res) {
+  // Debug log for RESEND_API_KEY
+  console.log('RESEND_API_KEY:', process.env.RESEND_API_KEY);
   if (req.method !== 'POST') {
     res.setHeader('Allow', 'POST');
     return res.status(405).json({ error: 'Method Not Allowed' });
