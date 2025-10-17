@@ -43,7 +43,8 @@ export default function Project() {
         <motion.div variants={itemVariants} className="mb-8">
           <Link to="/projects" className="inline-flex items-center gap-2 text-cyan-400 hover:text-cyan-300 font-medium mb-6">
             <ArrowLeft size={18} />
-            Back to Projects
+            Back to Projects!
+            
           </Link>
           
           <div className="flex flex-wrap items-center gap-4 mb-4">
