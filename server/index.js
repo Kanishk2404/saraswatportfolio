@@ -74,7 +74,7 @@ app.post('/api/contact', async (req, res) => {
     const { data, error } = await resend.emails.send({
       from: `Portfolio Contact <noreply@kanishksaraswat.me>`,
       to: process.env.EMAIL_USER,
-      subject: `Portfolio Contact Form: ${subject}`,
+      subject: `Portfolio Contact Form!: ${subject}`,
       text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
       reply_to: email
     })
