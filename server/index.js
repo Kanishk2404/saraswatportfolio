@@ -51,8 +51,12 @@ app.use((req, res, next) => {
 })
 
 app.get('/api/health', (req, res) => {
-  res.json({ status: 'ok' })
-})
+  res.json({
+    status: 'ok',
+    serverTime: new Date().toISOString(),
+    message: 'Backend is running!'
+  });
+});
 
 // Self-check endpoint for production verification (no secrets)
 app.get('/api/self-check', (req, res) => {
