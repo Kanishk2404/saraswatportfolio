@@ -90,9 +90,7 @@ app.post('/api/contact', async (req, res) => {
   }
 })
 
-app.listen(PORT, () => {
-  console.log(`API server running on http://localhost:${PORT}`)
-})
+export default app;
 
 
 
