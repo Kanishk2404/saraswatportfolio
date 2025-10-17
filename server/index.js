@@ -11,22 +11,31 @@ const app = express()
 app.use(compression())
 const PORT = process.env.PORT || 5000
 
+// Configure CORS
 const allowedOrigins = [
   'https://kanishksaraswat.me',
-  'kanishksaraswat.me',
-  'http://localhost:5173'];
-app.use(cors({
-  origin: function (origin, callback) {
-    // allow requests with no origin (like mobile apps, curl, etc)
-    if (!origin) return callback(null, true);
-    if (allowedOrigins.indexOf(origin) === -1) {
-      const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
-      return callback(new Error(msg), false);
-    }
-    return callback(null, true);
-  },
-  credentials: true
-}))
+  'https://www.kanishksaraswat.me'
+];
+
+app.use((req, res, next) => {
+  const origin = req.headers.origin;
+  if (!origin) {
+    // no origin (curl, server-to-server)
+    return next();
+  }
+  if (allowedOrigins.includes(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+    res.setHeader('Access-Control-Allow-Methods', 'GET,POST,OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type,Authorization');
+    // For preflight, short-circuit the request
+    if (req.method === 'OPTIONS') return res.sendStatus(204);
+    return next();
+  } else {
+    console.warn('Blocked CORS origin:', origin);
+    return res.status(403).json({ error: 'CORS blocked' });
+  }
+});
 app.use(express.json())
 // Set cache headers for static assets
 app.use((req, res, next) => {
@@ -38,6 +47,15 @@ app.use((req, res, next) => {
 
 app.get('/api/health', (req, res) => {
   res.json({ status: 'ok' })
+})
+
+// Self-check endpoint for production verification (no secrets)
+app.get('/api/self-check', (req, res) => {
+  res.json({
+    status: 'ok',
+    serverTime: new Date().toISOString(),
+    allowedOrigins
+  })
 })
 
 app.post('/api/contact', async (req, res) => {
