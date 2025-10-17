@@ -1,14 +1,13 @@
 
 import express from 'express';
 import compression from 'compression';
-dotenv.config();
+import fs from 'fs';
+import dotenv from 'dotenv';
+import { Resend } from 'resend';
 
-import fs from 'fs'
+dotenv.config();
 console.log('CWD:', process.cwd());
 console.log('.env exists:', fs.existsSync('./.env'));
-import dotenv from 'dotenv'
-import { Resend } from 'resend'
-dotenv.config()
 
 const app = express()
 app.use(compression())
