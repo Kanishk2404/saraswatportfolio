@@ -15,7 +15,7 @@ Add the following images to this folder for your portfolio:
 - `ecs-dockerhub.jpg` - ECS deployment screenshot (recommended: 800x500px)
 
 ## Venture Images
-- `autoverse-venture.jpg` - Autoverse venture screenshot (recommended: 800x500px)
+- `suitegenie-venture.jpg` - SuiteGenie venture screenshot (recommended: 800x500px)
 - `anicafe-merch-venture.jpg` - AniCafe merch venture screenshot (recommended: 800x500px)
 
 ## Image Requirements

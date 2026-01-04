@@ -49,7 +49,7 @@ export const blogPosts = [
 
         <div class="mb-6">
           <blockquote class="border-l-4 border-cyan-500 pl-4 italic text-zinc-300">
-            <p>Search Engine Optimization (SEO) in 2025 is no longer just about keywords — it's about experience, trust, and adaptability. Search engines now evaluate how well your website serves users through E-E-A-T (Expertise, Experience, Authoritativeness, Trustworthiness), Core Web Vitals, and structured data.</p>
+            <p>Search Engine Optimization (SEO) in 2025 is no longer just about keywords - it's about experience, trust, and adaptability. Search engines now evaluate how well your website serves users through E-E-A-T (Expertise, Experience, Authoritativeness, Trustworthiness), Core Web Vitals, and structured data.</p>
           </blockquote>
         </div>
 
@@ -138,7 +138,7 @@ export const blogPosts = [
         
         <details class="mb-4">
           <summary class="cursor-pointer font-medium text-cyan-300 hover:text-cyan-200">Is SEO still relevant in 2025?</summary>
-          <p class="mt-2 text-zinc-300">Yes — SEO has evolved, but it remains essential for visibility, credibility, and organic growth.</p>
+          <p class="mt-2 text-zinc-300">Yes - SEO has evolved, but it remains essential for visibility, credibility, and organic growth.</p>
         </details>
 
         <details class="mb-4">
@@ -158,7 +158,7 @@ export const blogPosts = [
 
         <details class="mb-4">
           <summary class="cursor-pointer font-medium text-cyan-300 hover:text-cyan-200">Should I use AI for SEO content?</summary>
-          <p class="mt-2 text-zinc-300">Yes — use AI for drafts and ideation, but always edit for accuracy, tone, and originality.</p>
+          <p class="mt-2 text-zinc-300">Yes - use AI for drafts and ideation, but always edit for accuracy, tone, and originality.</p>
         </details>
 
         <h2 class="text-xl font-semibold mt-6 mb-2">Conclusion</h2>
@@ -205,7 +205,7 @@ export const blogPosts = [
         <p>When I pushed the Docker images live, I didn't expect much at first. The pull counter climbed steadily - some users were friends or fellow developers I knew, but I guess at least 20 downloads came from outside our circle.</p>
         <img src="/images/dockerhub.png" alt="DockerHub Pulls" class="rounded-xl my-6" />
         <p>It felt encouraging to see real people interested in something that was supposed to be obsolete.</p>
-        <p>The memory hit me like a wave. My anime website days — the endless cycle of creating content for the site while spending hours crafting social media posts to promote it. The stress of maintaining presence across platforms while tools like Hootsuite demanded expensive monthly fees made it clear I wasn't alone in this struggle.</p>
+        <p>The memory hit me like a wave. My anime website days - the endless cycle of creating content for the site while spending hours crafting social media posts to promote it. The stress of maintaining presence across platforms while tools like Hootsuite demanded expensive monthly fees made it clear I wasn't alone in this struggle.</p>
 
         <h2>Chapter 3: The Vision</h2>
         <p>After starting to build the Tweet Automator for multiple users and the platform, I contacted my teammates Abhay Bharti and Ashutosh Singh. We started ambitious: separate modules for the main platform, Twitter integration, and LinkedIn automation. We thought modularity meant smart architecture.</p>

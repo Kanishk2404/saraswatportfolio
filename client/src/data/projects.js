@@ -48,7 +48,7 @@ export const projects = {
     ]
   },
   'cloud-bouncer': {
-    title: 'Cloud Bouncer (2024) — SIH (MoD) DDoS/DoS Protection Tool',
+    title: 'Cloud Bouncer (2024) - SIH (MoD) DDoS/DoS Protection Tool',
     role: 'Team Lead',
     oneLiner: 'AI-powered DDoS/DoS protection tool with automated detection, response, and analysis. Built for Smart India Hackathon with comprehensive traffic monitoring and protection modules.',
     highlights: [
@@ -181,7 +181,7 @@ export const projects = {
   },
   'ec2-nginx-https': {
     title: 'EC2 + Route53 + Nginx + HTTPS Production Deployment (2025)',
-    oneLiner: 'Full production deployment of Autoverse platform from localhost to https://kanishksaraswat.me with complete DevOps infrastructure.',
+    oneLiner: 'Full production deployment of SuiteGenie platform from localhost to https://kanishksaraswat.me with complete DevOps infrastructure.',
     infrastructure: [
       'AWS EC2 (Ubuntu) with proper security groups (ports 22, 80, 443)',
       'Route 53 DNS management with A records for kanishksaraswat.me',
@@ -231,17 +231,17 @@ export const projects = {
 
 export const ventures = [
   {
-    id: 'autoverse',
-    title: 'Autoverse',
-    description: 'Building a platform that includes AI with modular tools for content and social workflows. Starting with separate modules; simple, logged‑in access. Also built a local AI for content development; will host publicly after traction (traffic, initial revenue, or grant).',
-    status: 'Building',
+    id: 'suitegenie',
+    title: 'SuiteGenie',
+    description: 'The all-in-one AI suite for creators, marketers, and teams. Effortlessly generate, schedule, and manage content across every platform. Features Tweet Genie, LinkedIn Automator, and WordPress Automator with OAuth integration, bulk content creation, and performance analytics.',
+    status: 'Live',
     image: '/images/profile.jpg', // No direct match, using profile.jpg
-    cta: 'Contact',
-    ctaLink: '/contact',
+    cta: 'Visit SuiteGenie',
+    ctaLink: 'https://suitegenie.com',
   },
   {
     id: 'anicafe-merch',
-    title: 'Anicafe — Merch',
+    title: 'Anicafe - Merch',
     description: 'Reviving the Anicafe brand as an anime merchandise store with a modern e‑commerce stack and CI/CD.',
     status: 'In progress',
     image: '/images/anicafe2.jpeg',

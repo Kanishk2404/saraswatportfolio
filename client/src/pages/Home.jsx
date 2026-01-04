@@ -21,10 +21,10 @@ const currentWork = [
     icon: TrendingUp
   },
   {
-    title: "Autoverse",
-    description: "Building a unified social media platform with different modules for various platforms",
-    tech: ["React", "Node.js", "Express", "PostgreSQL"],
-    progress: 45,
+    title: "SuiteGenie",
+    description: "All-in-one AI suite for content creation and automation across Twitter, LinkedIn, and WordPress with analytics",
+    tech: ["React", "Node.js", "Express", "PostgreSQL", "OAuth", "AI APIs"],
+    progress: 90,
     icon: Code
   },
   {

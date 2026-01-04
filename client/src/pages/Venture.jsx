@@ -1,17 +1,21 @@
 import { useParams, Link } from 'react-router-dom'
 
 const ventures = {
-  'autoverse': {
-    title: 'Autoverse',
-    status: 'Building',
+  'suitegenie': {
+    title: 'SuiteGenie',
+    status: 'Live',
     body: [
-      'Building a platform that includes AI with modular tools for content and social workflows.',
-      'Starting with separate modules; simple, logged‑in access.',
-      'Also built a local AI for content development; will host publicly after traction (traffic, initial revenue, or grant).'
+      'All-in-one AI suite for creators, marketers, and teams to automate content creation, scheduling, and publishing.',
+      'Tweet Genie: AI-powered tweet and thread generation with OAuth integration, bulk creation, and performance analytics.',
+      'LinkedIn Automator: Professional networking made effortless with thought-leadership content generation and scheduling.',
+      'WordPress Automator: Transform your blog into a content powerhouse with SEO-optimized posts and auto-publishing.',
+      'Bulk Scheduling: Create and schedule dozens of posts in one go. Plan entire campaigns, fill your calendar, and save hours of work - no more manual posting.',
+      'Features: Content & Image Generation, Engagement Analytics, BYOK (Bring Your Own Keys), and Campaign Planning.',
+      'Trusted by creators and businesses worldwide, saving up to 80% on AI costs with your own API keys.'
     ]
   },
   'anicafe-merch': {
-    title: 'Anicafe — Merch',
+    title: 'Anicafe - Merch',
     status: 'In progress',
     body: [
       'Reviving the Anicafe brand as an anime merchandise store with a modern e‑commerce stack and CI/CD.'

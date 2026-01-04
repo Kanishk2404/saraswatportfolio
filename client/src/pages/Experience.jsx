@@ -52,20 +52,35 @@ export default function Experience(){
 
         {/* Experience Timeline */}
         <div className="space-y-8">
-                     <Exp
-             company="Sparklehood"
-             role="DevOps/SEO/Full‑Stack"
-             date="Jul 2025 – Present"
-             location="Remote"
-             achievements={[
-               'Hosting and DevOps for internal tools (n8n) and a Node.js AI app on AWS (VPC, EC2, RDS)',
-               'Built initial React + headless CMS iteration; pivoted to Framer as requested',
-               'Implemented SEO foundations; supported deployments and ops',
-               'Reduced deployment time by 40% through CI/CD optimization'
-             ]}
-                           tech={['AWS', 'React', 'Node.js', 'Framer', 'SEO', 'Content Writing']}
-             icon={Code}
-           />
+          <Exp
+            company="Bluez"
+            role="Website Development/SEO"
+            date="Jan 2026 – Present"
+            location="Remote"
+            achievements={[
+              'Working on website development and optimization',
+              'Implementing comprehensive SEO strategies',
+              'Improving site performance and user experience',
+              'Optimizing content for search engine visibility'
+            ]}
+            tech={['Web Development', 'SEO', 'Content Optimization', 'Analytics']}
+            icon={TrendingUp}
+          />
+
+          <Exp
+            company="Sparklehood"
+            role="DevOps/SEO/Full‑Stack"
+            date="Jul 2025 – Present"
+            location="Remote"
+            achievements={[
+              'Hosting and DevOps for internal tools (n8n) and a Node.js AI app on AWS (VPC, EC2, RDS)',
+              'Built initial React + headless CMS iteration; pivoted to Framer as requested',
+              'Implemented SEO foundations; supported deployments and ops',
+              'Reduced deployment time by 40% through CI/CD optimization'
+            ]}
+            tech={['AWS', 'React', 'Node.js', 'Framer', 'SEO', 'Content Writing']}
+            icon={Code}
+          />
 
           <Exp
             company="Fotographiya"
