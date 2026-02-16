@@ -1,27 +1,5 @@
 import { Link } from 'react-router-dom'
-
-const ventures = [
-  {
-    slug: 'suitegenie',
-    title: 'SuiteGenie',
-    status: 'Live',
-    body: [
-      'All-in-one AI suite for creators, marketers, and teams. Automate content creation, scheduling, and publishing across all platforms.',
-      'Features Tweet Genie (OAuth integration, bulk content creation, analytics), LinkedIn Automator (professional content), and WordPress Automator (SEO-optimized posts).',
-      'Bulk Scheduling: Create and schedule dozens of posts in one go. Plan entire campaigns and save hours of work in minutes.',
-      'Includes engagement analytics, BYOK support (OpenAI, Gemini, Perplexity), and campaign planning tools.',
-      'Trusted by creators worldwide - save up to 80% on AI costs with your own API keys.'
-    ]
-  },
-  {
-    slug: 'anicafe-merch',
-    title: 'Anicafe - Merch',
-    status: 'In progress',
-    body: [
-      'Reviving the Anicafe brand as an anime merchandise store with a modern e‑commerce stack and CI/CD.'
-    ]
-  }
-]
+import { ventures as venturesData } from '@/data/projects.js'
 
 export default function Ventures(){
   return (
@@ -30,17 +8,25 @@ export default function Ventures(){
       <p className="subtle max-w-3xl">Founder‑led builds bigger than single tech demos—longer‑term products with clear roadmaps.</p>
 
       <div className="grid md:grid-cols-2 gap-10 mt-10">
-        {ventures.map(v => (
-          <div key={v.slug} className="card p-8 shadow-xl bg-gradient-to-br from-zinc-950 via-zinc-900 to-zinc-800 rounded-2xl flex flex-col">
+        {venturesData.map(v => (
+          <div key={v.id} className="card p-8 shadow-xl bg-gradient-to-br from-zinc-950 via-zinc-900 to-zinc-800 rounded-2xl flex flex-col">
             <div className="flex items-center justify-between mb-6">
               <div className="text-2xl md:text-3xl font-bold gradient-text">{v.title}</div>
               <span className="chip bg-cyan-600 text-white border-none text-base px-4 py-2">{v.status}</span>
             </div>
             <div className="flex flex-col md:flex-row gap-6 items-center mb-6">
               <div className="flex-1">
-                <ul className="list-disc pl-5 subtle space-y-2 text-lg">
-                  {v.body.map(p => <li key={p}>{p}</li>)}
-                </ul>
+                <p className="text-lg subtle mb-3">{v.description}</p>
+                {v.metrics && (
+                  <div className="flex flex-wrap gap-3">
+                    {v.metrics.map((m, idx) => (
+                      <div key={idx} className="bg-zinc-900/60 rounded-md px-4 py-3">
+                        <div className="font-bold text-lg text-zinc-100">{m.value}</div>
+                        <div className="text-sm text-zinc-400">{m.label} {m.sub ? <span className="text-zinc-500">· {m.sub}</span> : null}</div>
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
               {v.image && (
                 <div className="flex-shrink-0">
@@ -49,7 +35,7 @@ export default function Ventures(){
               )}
             </div>
             <div className="mt-auto flex justify-end">
-              <Link to="/contact" className="btn-primary">Contact →</Link>
+              <a href={v.ctaLink || '/contact'} className="btn-primary" target={v.ctaLink && v.ctaLink.startsWith('http') ? '_blank' : '_self'} rel="noreferrer">{v.cta} →</a>
             </div>
           </div>
         ))}

@@ -76,6 +76,24 @@ export default function About() {
           </p>
         </motion.div>
 
+        {/* Highlight: SuiteGenie Achievement */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="mb-10"
+        >
+          <div className="bg-cyan-900/20 border border-cyan-800 rounded-xl p-6 max-w-4xl mx-auto">
+            <h3 className="text-lg font-semibold text-cyan-200 mb-2">Notable Achievement</h3>
+            <p className="text-zinc-200 leading-relaxed">
+              In 2025-26, I founded <strong className="text-white">SuiteGenie</strong>, an AI-powered social media management platform that automates bulk content generation and scheduling — features missing in tools like Hootsuite and Buffer. Within 2 months, we acquired <strong className="text-white">30 active users</strong> and reduced manual social media workflows from <strong className="text-white">3 hours to 5 minutes</strong>.
+            </p>
+            <p className="text-zinc-300 mt-3">
+              The platform showcases my expertise in full-stack development (<span className="font-medium">React, Node.js, PostgreSQL, Redis</span>), OAuth integration, payment systems (<span className="font-medium">Razorpay</span>), and infrastructure optimization (resulting in <span className="font-medium">significant cost reductions</span> through smarter Redis usage).
+            </p>
+          </div>
+        </motion.div>
+
         {/* Personal Info Grid */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}

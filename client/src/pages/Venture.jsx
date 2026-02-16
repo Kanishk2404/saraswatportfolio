@@ -11,7 +11,7 @@ const ventures = {
       'WordPress Automator: Transform your blog into a content powerhouse with SEO-optimized posts and auto-publishing.',
       'Bulk Scheduling: Create and schedule dozens of posts in one go. Plan entire campaigns, fill your calendar, and save hours of work - no more manual posting.',
       'Features: Content & Image Generation, Engagement Analytics, BYOK (Bring Your Own Keys), and Campaign Planning.',
-      'Trusted by creators and businesses worldwide, saving up to 80% on AI costs with your own API keys.'
+      'Trusted by creators and businesses worldwide, delivering meaningful savings on AI costs with support for BYOK (bring your own keys).'
     ]
   },
   'anicafe-merch': {

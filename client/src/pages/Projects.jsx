@@ -56,7 +56,7 @@ export default function Projects() {
         <section className="mb-16">
           <h2 className="section-title mb-10">Featured Projects</h2>
           <div className="grid md:grid-cols-2 gap-10 max-w-5xl mx-auto">
-            {[projects['cloud-bouncer'], projects['anicafe']].map(project => (
+            {[projects['suitegenie'], projects['cloud-bouncer'], projects['anicafe']].map(project => (
               <article key={project.title} className="card bg-gradient-to-br from-cyan-900/60 to-zinc-900/80 p-8 rounded-3xl shadow-2xl border-2 border-cyan-700 hover:scale-[1.03] transition-all duration-300 hover:shadow-cyan-500/20">
                 <div className="overflow-hidden rounded-2xl mb-7">
                   <img
@@ -110,7 +110,7 @@ export default function Projects() {
                 {/* Case Study Link and Add links if available */}
                 <div className="flex gap-3 mt-auto">
                   <Link
-                    to={project.title.includes('Cloud Bouncer') ? '/projects/cloud-bouncer' : '/projects/anicafe'}
+                    to={`/projects/${Object.keys(projects).find(k => projects[k].title === project.title) || 'projects'}`}
                     className="btn-secondary flex items-center gap-2"
                   >
                     <ArrowRight size={16} />
@@ -150,7 +150,7 @@ export default function Projects() {
         {/* Projects Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {Object.entries(projects)
-            .filter(([key, project]) => filteredProjects.includes(project) && !['cloud-bouncer', 'anicafe'].includes(key))
+            .filter(([key, project]) => filteredProjects.includes(project) && !['cloud-bouncer', 'anicafe', 'suitegenie'].includes(key))
             .map(([key, project]) => (
               <div key={key} className="card p-6 flex flex-col group hover:scale-105 transition-transform duration-300">
                 {/* Project Image */}

@@ -259,4 +259,110 @@ export const blogPosts = [
       </article>
     `
   }
+  ,
+  {
+    id: 'from-3-hours-to-5-minutes',
+    title: 'From 3 Hours to 5 Minutes: Why I Built SuiteGenie',
+    category: 'Projects',
+    date: '2026-02-16',
+    author: 'Kanishk Saraswat',
+    readTime: '8 min read',
+    summary: 'I spent 3 hours every week manually creating social media posts at Anicafe. Here\'s how I built SuiteGenie to automate the entire workflow down to 5 minutes.',
+    tags: ['SaaS','AI','SocialMedia','StartupJourney','SoloFounder'],
+    content: `
+      <article class="prose prose-lg max-w-3xl mx-auto">
+        <header class="mb-8">
+          <h1 class="text-3xl font-bold mb-4">From 3 Hours to 5 Minutes: Why I Built SuiteGenie</h1>
+          <div class="flex items-center gap-4 text-zinc-400 mb-4">
+            <span>By Kanishk Saraswat</span>
+            <span>•</span>
+            <span>February 16, 2026</span>
+            <span>•</span>
+            <span>8 min read</span>
+          </div>
+          <div class="flex gap-2 flex-wrap">
+            <span class="chip text-xs">SaaS</span>
+            <span class="chip text-xs">AI</span>
+            <span class="chip text-xs">SocialMedia</span>
+            <span class="chip text-xs">StartupJourney</span>
+            <span class="chip text-xs">SoloFounder</span>
+          </div>
+        </header>
+
+        <!-- Hook -->
+        <div class="mb-8 p-6 bg-gradient-to-r from-cyan-500/10 to-blue-500/10 border border-cyan-500/20 rounded-xl">
+          <p class="text-lg font-semibold text-cyan-300 mb-2">Every Tuesday morning at Anicafe, I'd sit down with the same dreaded task: creating and scheduling 30 social media posts for the week.</p>
+          <p class="text-zinc-200 leading-relaxed">The routine was painfully manual: Open ChatGPT, paste prompts one by one, copy responses, switch to Buffer, paste and schedule each post — repeat 30 times. Three hours. Every. Single. Week. That frustration became SuiteGenie — an AI social media platform that does in 5 minutes what took me 3 hours. Today it serves 30 active users and is getting ~100 Google Search impressions per month.</p>
+        </div>
+
+        <h2 class="text-xl font-semibold mt-6 mb-2">The Problem I Couldn't Ignore</h2>
+        <h3 class="text-lg font-medium mt-4 mb-2">The 3-Hour Social Media Grind</h3>
+        <p class="mb-4">While working at Anicafe managing their social media, I discovered that existing tools like Hootsuite, Sprout Social, and Buffer are built for scheduling, not creation. My workflow was:</p>
+        <ul class="mb-4 list-disc list-inside space-y-2">
+          <li>Step 1: Content Strategy — manual brainstorming</li>
+          <li>Step 2: AI Generation — ChatGPT in a separate tab, 30+ copy-paste cycles</li>
+          <li>Step 3: Formatting — clean up each post individually</li>
+          <li>Step 4: Scheduling — Buffer, one post at a time</li>
+        </ul>
+        <p class="mb-4">What I needed: bulk AI generation (30–50 posts in one click), bulk scheduling with frequency rules, and one unified workflow. Nothing on the market did this.</p>
+
+        <h2 class="text-xl font-semibold mt-6 mb-2">The "Aha" Moment</h2>
+        <h3 class="text-lg font-medium mt-4 mb-2">What If One Platform Did Everything?</h3>
+        <p class="mb-4">After my 47th copy-paste between ChatGPT and Buffer, I realized: as a developer I could build a single platform combining AI generation and bulk scheduling. BYOK (bring your own keys) would keep costs low for power users. If I could save 3 hours/week, agencies managing many clients would save dozens of hours.</p>
+
+        <h2 class="text-xl font-semibold mt-6 mb-2">Building SuiteGenie</h2>
+        <h3 class="text-lg font-medium mt-4 mb-2">From Idea to 30 Active Users in 2 Months</h3>
+        <p class="mb-4">I started building an MVP as a solo founder. Core features shipped included:</p>
+        <ol class="mb-4 list-decimal list-inside space-y-2">
+          <li><strong>Multi-Platform Support</strong> — Tweet Genie and LinkedIn Genie with seamless subdomain switching.</li>
+          <li><strong>Bulk AI Generation</strong> — generate 30–50 posts from a strategy; progressive streaming gives the first result in under 2s.</li>
+          <li><strong>Bulk Scheduling</strong> — select generated posts and schedule across a custom calendar with frequency rules.</li>
+          <li><strong>Team Collaboration (RBAC)</strong> — Owner/Admin/Editor/Member roles; teams up to 15 members and 25 social accounts.</li>
+          <li><strong>BYOK Mode</strong> — users plug in their OpenAI/Perplexity/Gemini keys to control costs.</li>
+        </ol>
+        <p class="mb-4"><strong>Tech stack:</strong> React + Tailwind, Node + Express, PostgreSQL (Supabase), Redis (Upstash), OAuth 2.0, Razorpay.</p>
+
+        <h2 class="text-xl font-semibold mt-6 mb-2">The Technical Challenges</h2>
+        <h3 class="text-lg font-medium mt-4 mb-2">What I Learned Building This Solo</h3>
+
+        <h4 class="text-md font-semibold mt-3">BullMQ Cost & Scheduler</h4>
+        <p class="mb-4">BullMQ caused high Redis command usage during constant polling. I replaced it with a PostgreSQL-backed scheduler that polls conditionally, which reduced Redis reliance and costs substantially.</p>
+
+        <h4 class="text-md font-semibold mt-3">Slow Bulk Generation</h4>
+        <p class="mb-4">Generating 30–50 posts took too long and left users staring at loaders. I implemented Redis streaming and progressive results so the first items appear quickly while the rest stream in.</p>
+
+        <h4 class="text-md font-semibold mt-3">Credit System Latency</h4>
+        <p class="mb-4">Synchronous DB credit checks slowed the UI. Moving instant deductions to Redis with periodic batch sync to PostgreSQL gave sub-50ms feedback to users and dramatically reduced DB write frequency.</p>
+
+        <h4 class="text-md font-semibold mt-3">SEO for React SPA</h4>
+        <p class="mb-4">I used React Helmet, XML sitemaps, robots.txt, and structured data to improve search visibility — leading to organic impressions and clicks during the early months.</p>
+
+        <h2 class="text-xl font-semibold mt-6 mb-2">Early Results & Validation</h2>
+        <p class="mb-4">Launch stats (first 2 months): 30 active users, ~100 Google impressions, ~30 organic clicks, and several demo requests from outreach. User feedback confirmed that bulk generation and scheduling solved a real pain point.</p>
+
+        <h2 class="text-xl font-semibold mt-6 mb-2">Lessons for Other Founders</h2>
+        <h3 class="text-lg font-medium mt-4 mb-2">What Worked</h3>
+        <ul class="mb-4 list-disc list-inside space-y-2">
+          <li>Build for your pain — I lived this problem at Anicafe.</li>
+          <li>Ship an MVP fast; optimize later.</li>
+          <li>Eat your own dog food — I manage SuiteGenie's accounts with SuiteGenie.</li>
+          <li>Start SEO early — it brought organic traffic without paid ads.</li>
+        </ul>
+
+        <h3 class="text-lg font-medium mt-4 mb-2">What I'd Change</h3>
+        <ul class="mb-4 list-disc list-inside space-y-2">
+          <li>Avoid over-engineering early — BullMQ was overkill for the initial scale.</li>
+          <li>Talk to users before building speculative features like AI images.</li>
+          <li>Focus on one channel first before expanding.</li>
+        </ul>
+
+        <h2 class="text-xl font-semibold mt-6 mb-2">Closing</h2>
+        <p class="mb-4">If you're tired of copy-paste social media workflows, try SuiteGenie: <a href="https://suitegenie.in" class="text-cyan-300">suitegenie.in</a>. I'm still iterating as a solo founder — if you have ideas or want to chat, reach out on Twitter/X or LinkedIn.</p>
+
+        <footer class="mt-8">
+          <p class="text-sm text-zinc-400">Appendix & links: deep dives on BullMQ removal, Redis streaming, and SEO optimizations available on this blog.</p>
+        </footer>
+      </article>
+    `
+  }
 ];

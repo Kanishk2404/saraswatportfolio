@@ -1,5 +1,6 @@
 export const projectsIndexOrder = [
   'anicafe',
+  'suitegenie',
   'cloud-bouncer',
   'dockerized-fullstack',
   'serverless-forms',
@@ -227,25 +228,142 @@ export const projects = {
     github: null,
     live: null,
   },
+  'suitegenie': {
+    title: 'SuiteGenie - AI Social Media Management Platform',
+    role: 'Full-Stack Developer and marketing',
+    dates: '[Sept2025] – Present',
+    oneLiner: 'From 3 hours to 5 minutes: Bulk AI content generation and scheduling for creators and agencies',
+    description: 'Built AI-powered social media management platform solving critical gaps in Hootsuite, Sprout Social, and Buffer by adding bulk AI content generation and bulk scheduling features.',
+    live: 'https://suitegenie.in',
+    links: {
+      main: 'https://suitegenie.in',
+      tweet: 'https://tweet.suitegenie.in',
+      linkedin: 'https://linkedin.suitegenie.in'
+    },
+    tech: ['React.js', 'Node.js', 'Express.js', 'PostgreSQL (Supabase)', 'Redis (Upstash)', 'OAuth 2.0', 'Razorpay'],
+    status: 'Live',
+    images: [
+      '/images/suitegenie_main.jpeg',
+      '/images/suitegenie_tweet.jpeg',
+      '/images/suitegenie_linkedin.jpeg',
+      '/images/suitegenie_hero.svg',
+      '/images/suitegenie_comparison.jpeg',
+      '/images/suitegenie_features.jpeg',
+      '/images/suitegenie_pricing.jpeg',
+      '/images/suitegenie_howitstarted.svg',
+      '/images/suitegenie_dashboard.svg',
+      '/images/suitegenie_card.jpg'
+    ],
+    metrics: [
+      { id: 'users', label: 'Active Users', value: '30', detail: '30 active users in 2 months', icon: 'Users' },
+      { id: 'impressions', label: 'Google Impressions', value: '100', detail: '100 impressions, 30 clicks', icon: 'Search' },
+      { id: 'time_save', label: 'Workflow Time', value: '3h → 5m', detail: 'Manual workflow automated from 3 hours to 5 minutes', icon: 'Clock' },
+        { id: 'cost', label: 'Redis Cost', value: 'Reduced', detail: 'Significant Redis cost reduction after removing BullMQ', icon: 'Zap' },
+        { id: 'api_calls', label: 'API Calls', value: 'Reduced', detail: 'Substantially fewer API calls after credit refresh optimization', icon: 'Zap' },
+        { id: 'db_writes', label: 'DB Writes', value: 'Reduced', detail: 'Fewer database writes due to Redis batching and periodic sync', icon: 'Database' }
+    ],
+    highlights: [
+      '30 active users acquired in 2 months',
+      '100 Google Search impressions; 30 clicks',
+      '3 hours → 5 minutes workflow automation',
+        'Significant Redis infrastructure cost reduction',
+        'Substantially fewer API calls after credit refresh optimization',
+        'Fewer database writes due to Redis batching'
+    ],
+    tabs: {
+      'Overview': {
+        summary: `Within 2 months, we acquired 30 active users and reduced manual social media workflows from 3 hours to 5 minutes.`,
+        problem: `During my time at Anicafe, I spent hours manually creating and scheduling social media posts. Existing tools like Hootsuite ($99/mo), Sprout Social ($249/mo), and Buffer lack bulk AI content generation (30-50 posts at once) and bulk scheduling with custom frequencies.`,
+        solution: `SuiteGenie automates the entire workflow with AI-powered bulk generation, intelligent scheduling, and BYOK (Bring Your Own Keys) pricing.`,
+        results: [
+          '30 active users (2 months)',
+          '100 Google Search impressions',
+          '30 clicks from organic search',
+          'Significant infrastructure cost reduction'
+        ]
+      },
+      'Features': {
+        mainPlatform: [
+          '4-role RBAC (owner/admin/editor/member)',
+          'Team collaboration: up to 15 members, 25 social accounts',
+          'BYOK mode: Perplexity, OpenAI, Gemini support',
+          'Razorpay payment integration',
+          'HTTP-only cookie authentication across subdomains'
+        ],
+        tweetGen: [
+          'OAuth 2.0 Twitter/X integration',
+          'AI tweet & thread generation',
+          'Bulk scheduling (30-50 posts, custom frequencies)',
+          'Rule-based analytics (likes, retweets, engagement timing)',
+          'Rich text editor with formatting',
+          'Account toggling in Teams mode'
+        ],
+        linkedinGen: [
+          'OAuth 2.0 LinkedIn integration',
+          'Professional content generation',
+          'LinkedIn-specific rich text editor',
+          'Same bulk capabilities as Tweet Genie',
+          'Industry insights and hashtag suggestions'
+        ],
+        strategyBuilder: [
+          'AI generates 30-50 content prompts per strategy',
+          '~5 min end-to-end flow',
+          '<500ms API response targets',
+          '<2s page load targets'
+        ]
+      },
+      'Technical Highlights': [
+        'Migrated from BullMQ after identifying high Redis command usage during constant polling',
+        'Built custom PostgreSQL scheduler, reducing reliance on Redis and lowering costs',
+        'Polling every 10-15s with retry controls (up to 5 attempts)',
+        'Exponential backoff: 60s → 900s',
+        'Instant credit deduction: <50ms UI feedback',
+        'PostgreSQL batch sync every 30s to reduce write amplification',
+        'Progressive bulk generation streaming: improved perceived latency for initial results',
+        'OTP caching with TTL-based expiration',
+        'Credit refresh: 30s → 5min (reduced API call frequency)',
+        'Multi-layer caching: analytics (20s client + 2min server), scheduling (15s TTL)'
+      ],
+      'Challenges Solved': [
+        'BullMQ cost explosion → replaced with conditional PostgreSQL scheduler resulting in substantial cost reduction',
+        'Slow bulk generation → Redis streaming with progressive results (much faster initial feedback)',
+        'Credit system latency → Redis instant deduction + batch PostgreSQL sync (<50ms UI feedback)',
+        'PostgreSQL INTEGER overflow for Twitter IDs → migrated columns to BIGINT (zero downtime)',
+        'Editor approval bypass → 3-state approval workflow (approved/pending/rejected)'
+      ],
+      'Metrics & Impact': {
+        users: ['30 active users in 2 months', '100 Google Search impressions', '30 organic clicks'],
+        performance: ['Substantially fewer API calls (credit refresh optimization)', 'Fewer DB writes (Redis batching)', 'Significant Redis cost reduction (BullMQ removal)', 'Improved initial response times (from ~15–20s to around 2s for progressive results)'],
+        productivity: ['3 hours → 5 minutes (manual workflow automation)', '30-50 posts bulk scheduled at once', '~5 min strategy generation flow']
+      }
+    }
+  },
 };
 
 export const ventures = [
   {
     id: 'suitegenie',
     title: 'SuiteGenie',
-    description: 'The all-in-one AI suite for creators, marketers, and teams. Effortlessly generate, schedule, and manage content across every platform. Features Tweet Genie, LinkedIn Automator, and WordPress Automator with OAuth integration, bulk content creation, and performance analytics.',
+    description: 'Built an AI-powered social media management platform (SuiteGenie) providing bulk AI content generation, scheduling, and team workflows for creators and agencies.',
+    role: 'Full-Stack Developer and marketing',
+    dates: '[Sept2025] – Present',
     status: 'Live',
-    image: '/images/profile.jpg', // No direct match, using profile.jpg
+    image: '/images/suitegenie_card.jpg',
     cta: 'Visit SuiteGenie',
-    ctaLink: 'https://suitegenie.com',
+    ctaLink: 'https://suitegenie.in',
+    metrics: [
+      { label: 'Active Users', value: '30', sub: 'in 2 months' },
+      { label: 'Google Impressions', value: '100', sub: '30 clicks' },
+      { label: 'Workflow Time', value: '3h → 5m', sub: 'automation' }
+    ]
   },
   {
     id: 'anicafe-merch',
     title: 'Anicafe - Merch',
-    description: 'Reviving the Anicafe brand as an anime merchandise store with a modern e‑commerce stack and CI/CD.',
-    status: 'In progress',
+    description: 'Anicafe merch store (anicafe.store) — currently in build.',
+    status: 'In build',
     image: '/images/anicafe2.jpeg',
-    cta: 'Contact',
-    ctaLink: '/contact',
+    cta: 'Visit Store',
+    ctaLink: 'https://anicafe.store',
   },
 ];

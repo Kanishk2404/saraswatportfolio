@@ -1,13 +1,13 @@
 import { Helmet } from 'react-helmet-async';
 
-const siteName = 'Kanishk Saraswat';
+const siteName = 'Kanishk Saraswat | Full-Stack Developer | SuiteGenie Founder';
 
 export default function SEO({ 
   title, 
-  description, 
+  description = 'Full-stack developer and founder of SuiteGenie - AI social media automation platform. Expert in React, Node.js, PostgreSQL, Redis, OAuth 2.0. Built platform serving 30 users with significant infrastructure optimizations.', 
   keywords = [], 
   url, 
-  ogImage = '/images/profile.jpg',
+  ogImage = '/images/suitegenie_card.jpg',
   type = 'website',
   author = 'Kanishk Saraswat',
   publishedTime,
@@ -17,6 +17,12 @@ export default function SEO({
 }) {
   const fullTitle = title ? `${title} | ${siteName}` : siteName;
   const fullUrl = `https://kanishksaraswat.me${url}`;
+
+  const defaultKeywords = [
+    'Anicafe',
+    'SuiteGenie'
+  ];
+  const allKeywords = keywords.length ? keywords : defaultKeywords;
 
   // Generate schema markup based on page type
   const generateSchema = () => {
@@ -35,7 +41,7 @@ export default function SEO({
         "@type": "Organization",
         "name": "Freelance"
       },
-      "description": "Full-stack developer and DevOps enthusiast who builds scalable web applications."
+      "description": "Full-stack developer and founder of SuiteGenie - AI social media automation platform. Expert in React, Node.js, PostgreSQL, Redis, OAuth 2.0."
     };
 
     // Blog post specific schema
@@ -190,7 +196,7 @@ export default function SEO({
       {/* Basic Meta Tags */}
       <title>{fullTitle}</title>
       <meta name="description" content={description} />
-      <meta name="keywords" content={keywords.join(', ')} />
+      <meta name="keywords" content={allKeywords.join(', ')} />
       <meta name="author" content={author} />
       <meta name="robots" content="index, follow" />
       <link rel="canonical" href={fullUrl} />
@@ -198,7 +204,7 @@ export default function SEO({
       {/* Open Graph Tags */}
       <meta property="og:type" content={type} />
       <meta property="og:url" content={fullUrl} />
-      <meta property="og:title" content={title} />
+      <meta property="og:title" content={title ? `${title} | ${siteName}` : `${siteName}`} />
       <meta property="og:description" content={description} />
       <meta property="og:image" content={ogImage.startsWith('http') ? ogImage : `https://kanishksaraswat.me${ogImage}`} />
       <meta property="og:site_name" content={siteName} />
@@ -207,7 +213,7 @@ export default function SEO({
       {/* Twitter Card Tags */}
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:url" content={fullUrl} />
-      <meta name="twitter:title" content={title} />
+      <meta name="twitter:title" content={title ? `${title} | ${siteName}` : `${siteName}`} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={ogImage.startsWith('http') ? ogImage : `https://kanishksaraswat.me${ogImage}`} />
       <meta name="twitter:creator" content="@kanishksaraswat" />

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700">
+  <rect width="100%" height="100%" fill="#f8fafc"/>
+  <g transform="translate(40,40)">
+    <rect width="720" height="420" rx="20" fill="#0f172a"/>
+    <text x="40" y="60" font-family="Inter, Arial, sans-serif" font-size="28" fill="#fff">How It Started — SuiteGenie</text>
+    <rect x="40" y="100" width="640" height="260" rx="12" fill="#0b1220" opacity="0.9"/>
+    <g fill="#06b6d4" font-family="Inter, Arial, sans-serif" font-size="14">
+      <text x="60" y="140">• Began as an anime streaming + blogging project</text>
+      <text x="60" y="170">• Needed unified content creation & scheduling</text>
+      <text x="60" y="200">• Built internal tools, iterated to an external product</text>
+      <text x="60" y="230">• BYOK mode and bulk AI generation added</text>
+    </g>
+  </g>
+  <text x="40" y="680" font-family="Inter, Arial, sans-serif" font-size="11" fill="#64748b">Placeholder image: replace with actual screenshot (suitegenie_howitstarted.jpeg)</text>
+</svg>

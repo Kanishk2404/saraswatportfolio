@@ -1,6 +1,7 @@
 import { useParams, Link } from 'react-router-dom'
+import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { ArrowLeft, ExternalLink, Github, Calendar, User, Target, Code, BookOpen, Lightbulb, CheckCircle, ArrowUpRight, Shield, Globe, Server, Users } from 'lucide-react'
+import { ArrowLeft, ExternalLink, Github, Calendar, User, Target, Code, BookOpen, Lightbulb, CheckCircle, ArrowUpRight, Shield, Globe, Server, Users, Search, Clock, Zap, Database, BarChart } from 'lucide-react'
 import { projects } from '@/data/projects.js'
 import ImageGallery from '@/components/ImageGallery.jsx'
 
@@ -20,9 +21,12 @@ const itemVariants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
 }
 
+const iconMap = { Users, Search, Clock, Zap, Database, BarChart }
+
 export default function Project() {
   const { slug } = useParams()
   const p = slug ? projects[slug] : undefined
+  const [activeTab, setActiveTab] = useState(p && p.tabs ? Object.keys(p.tabs)[0] : null)
   
   if (!p) return (
     <section className="container py-16">
@@ -65,6 +69,31 @@ export default function Project() {
             </p>
           )}
         </motion.div>
+
+        {/* Metrics / Stat Cards */}
+        {p.metrics && (
+          <motion.div variants={itemVariants} className="mb-8">
+            <div className="grid sm:grid-cols-3 gap-4">
+              {p.metrics.map((m) => {
+                const Icon = iconMap[m.icon] || Users
+                return (
+                  <div key={m.id} className="neo p-4">
+                    <div className="inner p-4 h-full">
+                      <div className="flex items-center gap-4">
+                        <Icon size={28} className="text-cyan-300" />
+                        <div>
+                          <div className="text-2xl md:text-3xl font-extrabold text-zinc-100">{m.value}</div>
+                          <div className="text-sm text-zinc-400">{m.label}</div>
+                        </div>
+                      </div>
+                      {m.detail && <p className="text-zinc-400 mt-3">{m.detail}</p>}
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
+          </motion.div>
+        )}
 
         {/* Key Information Grid */}
         <motion.div variants={itemVariants} className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
@@ -123,6 +152,73 @@ export default function Project() {
             </div>
           )}
         </motion.div>
+
+        {/* Tabbed Interface (if project provides tabs) */}
+        {p.tabs && (
+          (() => {
+            const tabKeys = Object.keys(p.tabs)
+            const content = activeTab ? p.tabs[activeTab] : p.tabs[tabKeys[0]]
+
+            return (
+              <motion.div variants={itemVariants} className="mb-12">
+                <div className="neo">
+                  <div className="inner p-6">
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {tabKeys.map((t) => (
+                        <button
+                          key={t}
+                          onClick={() => setActiveTab(t)}
+                          className={`px-4 py-2 rounded-md text-sm font-medium ${activeTab === t ? 'bg-cyan-600 text-black' : 'bg-zinc-800/50 text-zinc-300'}`}
+                        >
+                          {t}
+                        </button>
+                      ))}
+                    </div>
+
+                    <div className="mt-4 text-zinc-300 space-y-4">
+                      {typeof content === 'string' && <p className="leading-relaxed">{content}</p>}
+
+                      {Array.isArray(content) && (
+                        <div className="grid gap-3">
+                          {content.map((c, i) => (
+                            <div key={i} className="p-3 bg-zinc-800/50 rounded-lg">{c}</div>
+                          ))}
+                        </div>
+                      )}
+
+                      {content && typeof content === 'object' && !Array.isArray(content) && (
+                        <div className="space-y-4">
+                          {Object.entries(content).map(([sectionTitle, sectionContent], idx) => (
+                            <div key={idx}>
+                              <h4 className="text-lg font-semibold text-zinc-100 mb-2">{sectionTitle.replace(/([A-Z])/g, ' $1')}</h4>
+                              {typeof sectionContent === 'string' && <p className="leading-relaxed">{sectionContent}</p>}
+                              {Array.isArray(sectionContent) && (
+                                <div className="grid gap-3">
+                                  {sectionContent.map((item, j) => (
+                                    <div key={j} className="p-3 bg-zinc-800/50 rounded-lg">{item}</div>
+                                  ))}
+                                </div>
+                              )}
+                              {sectionContent && typeof sectionContent === 'object' && !Array.isArray(sectionContent) && (
+                                <div className="grid gap-3">
+                                  {Object.entries(sectionContent).map(([k,v], n) => (
+                                    <div key={n} className="p-3 bg-zinc-800/50 rounded-lg">
+                                      <strong className="text-zinc-200">{k}:</strong> {Array.isArray(v) ? v.join(', ') : v}
+                                    </div>
+                                  ))}
+                                </div>
+                              )}
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            )
+          })()
+        )}
 
         {/* Highlights Section */}
         {p.highlights && (

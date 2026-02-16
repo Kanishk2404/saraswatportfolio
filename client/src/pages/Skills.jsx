@@ -1,106 +1,84 @@
 import { motion } from 'framer-motion';
-import { Cloud, Shield, Layers, LineChart, Code, Database, Server, Zap } from 'lucide-react';
+import { Cloud, Shield, Layers, LineChart, Code, Database, Server, Zap, CreditCard, Key, Users, Lock, BarChart } from 'lucide-react';
 import SEO from '@/components/SEO.jsx';
+import { projects, ventures } from '@/data/projects.js'
 
 const skillCategories = [
   {
-    title: 'DevOps/Cloud',
-    icon: Cloud,
-    description: 'Infrastructure as code, cloud deployment, and automation',
-    skills: [
-      { name: 'AWS (EC2, Route53, ECS, Lambda)', level: null },
-      { name: 'Docker & Containerization', level: null },
-      { name: 'Jenkins CI/CD', level: null },
-      { name: 'Linux Administration', level: null },
-      { name: 'Nginx & HTTPS/Certbot', level: null },
-      { name: 'Kubernetes', level: 'Learning' },
-      { name: 'Terraform', level: 'Learning' }
-    ]
-  },
-  {
-    title: 'Full-Stack Development',
+    title: 'Frontend',
     icon: Code,
-    description: 'Frontend and backend development with modern frameworks',
+    description: 'Modern frontend stack for SuiteGenie',
     skills: [
-      { name: 'Html,CSS, Js', level: null },
-
-      { name: 'React', level: null },
-      { name: 'Node.js & Express', level: null },
-      { name: 'Tailwind CSS, Bootstrap', level: null },
-     
+      { name: 'React.js', badge: 'https://img.shields.io/badge/React-61DAFB?logo=react&logoColor=white&style=flat-square' },
+      { name: 'Tailwind CSS', badge: 'https://img.shields.io/badge/Tailwind-06B6D4?logo=tailwind-css&logoColor=white&style=flat-square' },
+      { name: 'React Helmet (SEO)', badge: 'https://img.shields.io/badge/React%20Helmet-000000?logo=react&logoColor=white&style=flat-square' },
+      { name: 'Quill.js (Rich Text Editor)', badge: 'https://img.shields.io/badge/Quill.js-006AFF?logo=quill&logoColor=white&style=flat-square' }
     ]
   },
   {
-    title: 'Security & Cybersecurity',
-    icon: Shield,
-    description: 'Web application security and penetration testing',
-    skills: [
-      { name: 'Web App Pentesting', level: null },
-      { name: 'Burp Suite', level: null },
-      { name: 'Wireshark', level: null },
-      { name: 'nslookup & DNS', level: null },
-      { name: 'picoCTF Top 500', level: null },
-      { name: 'PortSwigger Web Security Academy', level: null },
-      { name: 'TryHackMe', level: null }
-    ]
-  },
-  {
-    title: 'Growth & SEO',
-    icon: LineChart,
-    description: 'Search engine optimization and digital marketing',
-    skills: [
-      { name: 'WordPress at Scale', level: null },
-      { name: 'Google Analytics (GA4)', level: null },
-      { name: 'Search Console', level: null },
-      { name: 'Local SEO', level: null },
-      { name: 'AdSense Management', level: null },
-      { name: 'Content Strategy', level: null }
-    ]
-  },
-  {
-    title: 'AI Tools & Automation',
-    icon: Zap,
-    description: 'Leveraging AI for productivity and automation',
-    skills: [
-      { name: 'ChatGPT & Prompting', level: null },
-      { name: 'Notion AI', level: null },
-      { name: 'Framer AI', level: null },
-      { name: 'GitHub Copilot', level: null },
-      { name: 'AI Workflow Automation', level: null },
-      { name: 'Content Generation', level: null }
-    ]
-  },
-  {
-    title: 'Databases & Backend',
-    icon: Database,
-    description: 'Database design and backend infrastructure',
-    skills: [
-      { name: 'DynamoDB', level: null },
-      { name: 'RDS (PostgreSQL/MySQL)', level: 'Learning' },
-    ]
-  },
-  {
-    title: 'Serverless & Cloud Services',
+    title: 'Backend',
     icon: Server,
-    description: 'Modern cloud-native architectures',
+    description: 'API and authentication layer powering SuiteGenie',
     skills: [
-      { name: 'AWS Lambda', level: null },
-      { name: 'API Gateway', level: null },
-      { name: 'SNS & SQS', level: null },
-      { name: 'AWS Amplify', level: null },
-      { name: 'Serverless Architecture', level: null }
+      { name: 'Node.js', badge: 'https://img.shields.io/badge/Node.js-339933?logo=node.js&logoColor=white&style=flat-square' },
+      { name: 'Express.js', badge: 'https://img.shields.io/badge/Express-000000?logo=express&logoColor=white&style=flat-square' },
+      { name: 'JWT Authentication', badge: 'https://img.shields.io/badge/JWT-000000?logo=JSON%20web%20tokens&logoColor=white&style=flat-square' },
+      { name: 'HTTP-only Cookies', badge: null }
     ]
   },
   {
-    title: 'Tools & Technologies',
-    icon: Layers,
-    description: 'Development tools and version control',
+    title: 'Database & Caching',
+    icon: Database,
+    description: 'Persistent storage and fast caching',
     skills: [
-      { name: 'Git & GitHub', level: null },
-      { name: 'VS Code', level: null },
-      { name: 'Postman/Insomnia', level: null },
-      { name: 'Docker Desktop', level: null },
-      { name: 'Terminal/CLI', level: null }
+      { name: 'PostgreSQL (Supabase)', badge: 'https://img.shields.io/badge/PostgreSQL-336791?logo=postgresql&logoColor=white&style=flat-square' },
+      { name: 'Redis (Upstash)', badge: 'https://img.shields.io/badge/Redis-DC382D?logo=redis&logoColor=white&style=flat-square' }
+    ]
+  },
+  {
+    title: 'Payment',
+    icon: CreditCard,
+    description: 'In-app payments and billing',
+    skills: [
+      { name: 'Razorpay', badge: 'https://img.shields.io/badge/Razorpay-0E1B3C?logo=razorpay&logoColor=white&style=flat-square' }
+    ]
+  },
+  {
+    title: 'Authentication',
+    icon: Key,
+    description: 'Third-party auth and OAuth flows',
+    skills: [
+      { name: 'OAuth 2.0 (Twitter/X, LinkedIn)', badge: 'https://img.shields.io/badge/OAuth2-0A0A0A?logo=oauth&logoColor=white&style=flat-square' }
+    ]
+  },
+  {
+    title: 'DevOps & Infrastructure',
+    icon: Cloud,
+    description: 'Hosting, sitemaps, and robots for SEO and scaling',
+    skills: [
+      { name: 'Multi-subdomain hosting', badge: null },
+      { name: 'XML Sitemaps', badge: null },
+      { name: 'robots.txt', badge: null }
+    ]
+  },
+  {
+    title: 'Security',
+    icon: Lock,
+    description: 'HTTP security headers and best practices',
+    skills: [
+      { name: 'HSTS', badge: null },
+      { name: 'CSP (Content Security Policy)', badge: null },
+      { name: 'X-Frame-Options', badge: null },
+      { name: 'X-Content-Type-Options', badge: null }
+    ]
+  },
+  {
+    title: 'Tools & Observability',
+    icon: BarChart,
+    description: 'Analytics and real-time updates',
+    skills: [
+      { name: 'Chart.js', badge: 'https://img.shields.io/badge/Chart.js-FF6384?logo=chartdotjs&logoColor=white&style=flat-square' },
+      { name: 'Server-Sent Events (SSE)', badge: null }
     ]
   }
 ];
@@ -167,13 +145,70 @@ export default function Skills() {
 
                 <div className="space-y-3">
                   {category.skills.map((skill, skillIndex) => (
-                    <div key={skillIndex} className="flex items-center justify-between p-3 bg-zinc-800/50 rounded-lg">
-                      <span className="text-zinc-300 text-sm font-medium">{skill.name}</span>
-                      {skill.level && (
-                        <span className={`px-3 py-1 rounded-full text-xs font-medium ${getLevelColor(skill.level)}`}>
-                          {skill.level}
-                        </span>
-                      )}
+                    <div key={skillIndex} className="flex flex-col gap-2 p-3 bg-zinc-800/50 rounded-lg">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-3">
+                          {skill.badge ? (
+                            <img src={skill.badge} alt={skill.name} className="h-6 rounded-sm" />
+                          ) : (
+                            <span className="inline-block w-8 h-8 bg-zinc-700/40 rounded-full flex items-center justify-center text-xs text-zinc-200 font-semibold">{skill.name.split(' ').slice(0,2).map(w=>w[0]).join('')}</span>
+                          )}
+                          <span className="text-zinc-300 text-sm font-medium">{skill.name}</span>
+                        </div>
+                        {skill.level && (
+                          <span className={`px-3 py-1 rounded-full text-xs font-medium ${getLevelColor(skill.level)}`}>
+                            {skill.level}
+                          </span>
+                        )}
+                      </div>
+
+                      {/* Implementations: show projects/ventures where this skill was used */}
+                      {(() => {
+                        const normalize = s => (s || '').toString().toLowerCase().replace(/[^a-z0-9]+/g, '');
+                        const skillNorm = normalize(skill.name);
+                        const impls = [];
+
+                        // check projects
+                        Object.entries(projects).forEach(([pid, proj]) => {
+                          const techLists = [];
+                          if (proj.tech) techLists.push(...proj.tech);
+                          if (proj.stack) techLists.push(...proj.stack);
+                          if (proj.techStack) techLists.push(...proj.techStack);
+                          if (proj.techStack === undefined && proj.stack === undefined && proj.tech === undefined) {
+                            // ignore
+                          }
+                          const found = techLists.some(t => {
+                            const tNorm = normalize(t);
+                            return tNorm.includes(skillNorm) || skillNorm.includes(tNorm);
+                          });
+                          if (found) impls.push({ type: 'project', id: pid, title: proj.title });
+                        });
+
+                        // check ventures (link by id or title match)
+                        ventures.forEach(v => {
+                          if (projects[v.id]) {
+                            // already covered as project
+                            return;
+                          }
+                          const titleNorm = normalize(v.title);
+                          if (titleNorm.includes(skillNorm) || skillNorm.includes(titleNorm)) {
+                            impls.push({ type: 'venture', id: v.id, title: v.title });
+                          }
+                        });
+
+                        if (impls.length === 0) return null;
+
+                        return (
+                          <div className="flex flex-wrap gap-2 mt-2">
+                            <span className="text-xs text-zinc-400 mr-2">Implemented in:</span>
+                            {impls.map((imp, i) => (
+                              <a key={i} href={imp.type === 'project' ? `/projects/${imp.id}` : `/ventures/${imp.id}`} className="chip text-xs bg-zinc-900/40 text-zinc-200 hover:bg-cyan-600/40">
+                                {imp.title}
+                              </a>
+                            ))}
+                          </div>
+                        )
+                      })()}
                     </div>
                   ))}
                 </div>
