@@ -1,6 +1,8 @@
 export const projectsIndexOrder = [
   'anicafe',
   'suitegenie',
+  'tweetgenie',
+  'linkedingenie',
   'cloud-bouncer',
   'dockerized-fullstack',
   'serverless-forms',
@@ -228,6 +230,74 @@ export const projects = {
     github: null,
     live: null,
   },
+  'tweetgenie': {
+    title: 'Tweet Genie',
+    oneLiner: 'AI Twitter Automation & Bulk Scheduling',
+    role: 'Module — SuiteGenie Ecosystem',
+    live: 'https://tweet.suitegenie.in',
+    tech: ['React.js','Node.js','Express.js','PostgreSQL','Redis','Twitter OAuth 2.0','Quill.js'],
+    status: 'Live',
+    ecosystem: true,
+    image: '/images/tweetgenie.png',
+    images: ['/images/tweetgenie.png','/images/tweetgenieanaltics.png','/images/tweetgeniehistory.png'],
+    accent: '#1DA1F2',
+    stats: [
+      { label: '80% cost reduction' },
+      { label: '87.5% faster latency' },
+      { label: '30-50 bulk posts' }
+    ],
+    highlights: [
+      'Bulk AI generation: 30-50 tweets from strategy prompts in one click',
+      'Custom scheduling with frequency rules',
+      '80% Redis cost reduction by moving from BullMQ to PostgreSQL scheduler',
+      'Rule-based analytics and engagement tracking',
+      'Team workflows: approval, account toggling, role-based permissions',
+      'Progressive streaming: first result in <2s'
+    ],
+    description: `Tweet Genie automates bulk Twitter workflows missing from Hootsuite and Buffer — reducing 3 hours of manual work to 5 minutes.`,
+    features: [
+      'Bulk AI generation: 30-50 tweets',
+      'Custom scheduling: daily, 3×/week, 4×/week, custom',
+      'Redis cost reduction via custom PostgreSQL scheduler',
+      'Rule-based analytics and historical trends',
+      'Team approval workflows and RBAC',
+      'Progressive streaming for low latency'
+    ]
+  },
+  'linkedingenie': {
+    title: 'LinkedIn Genie',
+    oneLiner: 'B2B Content Automation for Professionals',
+    role: 'Module — SuiteGenie Ecosystem',
+    live: 'https://linkedin.suitegenie.in',
+    tech: ['React.js','Node.js','Express.js','PostgreSQL','Redis','LinkedIn OAuth 2.0','Quill.js'],
+    status: 'Live',
+    ecosystem: true,
+    image: '/images/linkedingeniecompose.png',
+    images: ['/images/linkedingeniecompose.png'],
+    accent: '#0A66C2',
+    stats: [
+      { label: '30-50 bulk posts' },
+      { label: '15s polling' },
+      { label: 'B2B optimized' }
+    ],
+    highlights: [
+      'AI professional content generation optimized for B2B',
+      'Bulk scheduling: 30-50 LinkedIn posts with custom frequencies',
+      'Rich text editor with LinkedIn formatting and hashtag suggestions',
+      'Team collaboration: up to 15 members, 25 accounts',
+      'LinkedIn OAuth 2.0 multi-profile management',
+      'Analytics with 15s cache TTL'
+    ],
+    description: `LinkedIn Genie helps agencies bulk-generate and schedule B2B content across client profiles with approval workflows.`,
+    features: [
+      'B2B-optimized AI content generation',
+      'Bulk scheduling & custom frequencies',
+      'LinkedIn-specific rich text editor',
+      'Team workflows and role-based access',
+      'Multi-profile OAuth and account toggling',
+      'Analytics with short TTL for freshness'
+    ]
+  },
   'suitegenie': {
     title: 'SuiteGenie - AI Social Media Management Platform',
     role: 'Full-Stack Developer and marketing',
@@ -242,18 +312,20 @@ export const projects = {
     },
     tech: ['React.js', 'Node.js', 'Express.js', 'PostgreSQL (Supabase)', 'Redis (Upstash)', 'OAuth 2.0', 'Razorpay'],
     status: 'Live',
-    images: [
-      '/images/suitegenie_main.jpeg',
-      '/images/suitegenie_tweet.jpeg',
-      '/images/suitegenie_linkedin.jpeg',
-      '/images/suitegenie_hero.svg',
-      '/images/suitegenie_comparison.jpeg',
-      '/images/suitegenie_features.jpeg',
-      '/images/suitegenie_pricing.jpeg',
-      '/images/suitegenie_howitstarted.svg',
-      '/images/suitegenie_dashboard.svg',
-      '/images/suitegenie_card.jpg'
-    ],
+      images: [
+        '/images/suitegenie-heropage.png',
+        '/images/suitegeniefeatures.png',
+        '/images/suitegenie_frontedn.png',
+        '/images/linkedingeniecompose.png',
+        '/images/strategybuilder.png',
+        '/images/tweetgenie.png',
+        '/images/tweetgenieanaltics.png',
+        '/images/tweetgeniehistory.png',
+        '/images/teams2suitegenie.png',
+        '/images/teamssuitegenie.png',
+        '/images/apikeysubmission.png',
+        '/images/bulkgenpage.png'
+      ],
     metrics: [
       { id: 'users', label: 'Active Users', value: '30', detail: '30 active users in 2 months', icon: 'Users' },
       { id: 'impressions', label: 'Google Impressions', value: '100', detail: '100 impressions, 30 clicks', icon: 'Search' },
@@ -348,7 +420,7 @@ export const ventures = [
     role: 'Full-Stack Developer and marketing',
     dates: '[Sept2025] – Present',
     status: 'Live',
-    image: '/images/suitegenie_card.jpg',
+    image: '/images/suitegenie-heropage.png',
     cta: 'Visit SuiteGenie',
     ctaLink: 'https://suitegenie.in',
     metrics: [

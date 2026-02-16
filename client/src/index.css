@@ -9,7 +9,7 @@
   --panel: #0e121b;
   --muted: #a1a1aa;
   --grid: #1f273a;
-  --primary-gradient: linear-gradient(90deg, #0ea5e9 0%, #8b5cf6 100%);
+  --primary-gradient: linear-gradient(90deg, #0ea5e9 0%, #3b82f6 100%);
   --scroll-gradient: linear-gradient(90deg, #0ea5e9, #3b82f6);
   --backtotop-gradient: linear-gradient(135deg, #0ea5e9, #3b82f6);
 }
@@ -42,7 +42,7 @@
   /* Enhanced Card with better hover effects */
   .card {
     @apply bg-zinc-900 rounded-2xl shadow-2xl border border-cyan-700 transition-all duration-300;
-    box-shadow: 0 8px 32px 0 rgba(14, 165, 233, 0.12), 0 1.5px 6px 0 rgba(139, 92, 246, 0.08);
+    box-shadow: 0 8px 32px 0 rgba(14, 165, 233, 0.12), 0 1.5px 6px 0 rgba(59, 130, 246, 0.08);
     backdrop-filter: blur(4px);
   }
   
@@ -87,9 +87,10 @@
   
   /* Enhanced gradient text with animation */
   .gradient-text {
-    @apply bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 bg-clip-text text-transparent font-extrabold;
-    background-size: 200% 200%;
-    animation: gradient-shift 3s ease-in-out infinite;
+    @apply bg-gradient-to-r from-cyan-400 via-blue-500 to-blue-600 bg-clip-text text-transparent font-extrabold;
+    /* Use a stable, non-animating gradient so text lighting remains consistent */
+    background-size: 100% 100%;
+    background-position: 0% 50%;
   }
   
   /* Red theme gradient text */
@@ -103,7 +104,7 @@
   
   /* Hero gradient background */
   .hero-gradient {
-    background: linear-gradient(-45deg, #0ea5e9, #3b82f6, #8b5cf6, #06b6d4);
+    background: linear-gradient(-45deg, #0ea5e9, #3b82f6, #06b6d4);
     background-size: 400% 400%;
     animation: gradientShift 15s ease infinite;
   }
@@ -113,7 +114,7 @@
   }
   
   .glass-effect { @apply backdrop-blur-md bg-white/10 dark:bg-zinc-900/10 border border-white/20 dark:border-cyan-700/20 rounded-2xl shadow-lg; }
-  .ai-badge { @apply inline-flex items-center gap-1 px-2.5 py-1 bg-gradient-to-r from-purple-600 to-pink-600 text-white text-xs font-medium rounded-full animate-pulse; }
+  .ai-badge { @apply inline-flex items-center gap-1 px-2.5 py-1 bg-gradient-to-r from-cyan-600 to-pink-600 text-white text-xs font-medium rounded-full animate-pulse; }
   
   /* Enhanced chip with better hover */
   .chip {
@@ -128,7 +129,7 @@
   /* Enhanced neo cards */
   .neo {
     @apply relative p-px rounded-2xl overflow-hidden shadow-xl transition-all duration-300;
-    background: linear-gradient(90deg, #0ea5e9 0%, #8b5cf6 100%);
+    background: linear-gradient(90deg, #0ea5e9 0%, #3b82f6 100%);
   }
   
   /* Red theme neo cards */
@@ -164,9 +165,10 @@
   
   /* Enhanced hr with animation */
   .hr {
-    @apply h-1 bg-gradient-to-r from-cyan-700 via-blue-500 to-purple-500 my-12 rounded-full;
-    background-size: 200% 200%;
-    animation: gradient-shift 3s ease-in-out infinite;
+    @apply h-1 bg-gradient-to-r from-cyan-700 via-blue-500 to-blue-600 my-12 rounded-full;
+    /* Static HR gradient (no animation) for visual stability */
+    background-size: 100% 100%;
+    background-position: 0% 50%;
   }
   
   /* Red theme hr */

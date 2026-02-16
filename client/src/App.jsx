@@ -71,7 +71,6 @@ export default function App() {
           <nav className="hidden md:flex items-center gap-4 text-sm">
             {[
               ['Home','/'],
-              ['About','/about'],
               ['Skills','/skills'],
               ['Projects','/projects'],
               ['Ventures','/ventures'],
@@ -106,7 +105,6 @@ export default function App() {
           <nav className="md:hidden bg-[#07090f] border-t border-zinc-800 px-4 py-4 flex flex-col gap-2 animate-fade-in">
             {[
               ['Home','/'],
-              ['About','/about'],
               ['Skills','/skills'],
               ['Projects','/projects'],
               ['Ventures','/ventures'],
@@ -168,7 +166,6 @@ export default function App() {
               <h3 className="text-lg font-semibold text-zinc-100 mb-4">Quick Links</h3>
               <ul className="space-y-2">
                 <li><Link to="/" className="text-zinc-400 hover:text-cyan-400 transition-colors">Home</Link></li>
-                <li><Link to="/about" className="text-zinc-400 hover:text-cyan-400 transition-colors">About</Link></li>
                 <li><Link to="/projects" className="text-zinc-400 hover:text-cyan-400 transition-colors">Projects</Link></li>
                 <li><Link to="/experience" className="text-zinc-400 hover:text-cyan-400 transition-colors">Experience</Link></li>
                 <li><Link to="/contact" className="text-zinc-400 hover:text-cyan-400 transition-colors">Contact</Link></li>

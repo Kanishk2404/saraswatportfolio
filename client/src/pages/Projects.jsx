@@ -55,77 +55,69 @@ export default function Projects() {
         {/* Featured Projects Section */}
         <section className="mb-16">
           <h2 className="section-title mb-10">Featured Projects</h2>
-          <div className="grid md:grid-cols-2 gap-10 max-w-5xl mx-auto">
-            {[projects['suitegenie'], projects['cloud-bouncer'], projects['anicafe']].map(project => (
-              <article key={project.title} className="card bg-gradient-to-br from-cyan-900/60 to-zinc-900/80 p-8 rounded-3xl shadow-2xl border-2 border-cyan-700 hover:scale-[1.03] transition-all duration-300 hover:shadow-cyan-500/20">
-                <div className="overflow-hidden rounded-2xl mb-7">
-                  <img
-                    src={project.images?.[0] || project.image}
-                    alt={project.title}
-                    className="object-cover w-full h-56 md:h-64 lg:h-72 shadow-lg"
-                  />
-                </div>
-                <h3 className="font-bold text-2xl mb-3 gradient-text">{project.title}</h3>
-                <p className="text-zinc-300 mb-5 text-lg leading-relaxed">{project.oneLiner || project.description}</p>
-                {/* Key Highlights */}
-                {/* Key Highlights Styled */}
-                {(project.highlights && project.highlights.length > 0 ? project.highlights :
-                  project.id === 'cloud-bouncer'
-                    ? [
-                        ...(projects['cloud-bouncer'].modules || []),
-                        ...(projects['cloud-bouncer'].functionality || []),
-                        `Team: ${projects['cloud-bouncer'].team?.join(', ')}`
-                      ]
-                    : []
-                ).length > 0 && (
-                  <div className="mb-6">
-                    <div className="font-semibold text-zinc-200 mb-2">Key Highlights:</div>
-                    <ul className="space-y-2">
-                      {(project.highlights && project.highlights.length > 0 ? project.highlights :
-                        project.id === 'cloud-bouncer'
-                          ? [
-                              ...(projects['cloud-bouncer'].modules || []),
-                              ...(projects['cloud-bouncer'].functionality || []),
-                              `Team: ${projects['cloud-bouncer'].team?.join(', ')}`
-                            ]
-                          : []
-                      ).map((highlight, idx) => (
-                        <li key={idx}>
-                          <div className="flex items-center bg-zinc-900 rounded-lg px-4 py-2">
-                            <span className="w-2 h-2 rounded-full bg-cyan-400 mr-3"></span>
-                            <span className="text-zinc-200 text-base">{highlight}</span>
-                          </div>
-                        </li>
+          <div className="grid md:grid-cols-2 gap-10 max-w-5xl mx-auto relative">
+              {['suitegenie','cloud-bouncer','anicafe'].map((key) => {
+                const project = projects[key]
+                return (
+                  <article key={key} className="card bg-gradient-to-br from-cyan-900/60 to-zinc-900/80 p-8 rounded-3xl shadow-2xl border-2 border-cyan-700 hover:scale-[1.03] transition-all duration-300 hover:shadow-cyan-500/20">
+                    <div className="overflow-hidden rounded-2xl mb-7">
+                      <img
+                        src={project.images?.[0] || project.image}
+                        alt={project.title}
+                        className="object-cover w-full h-56 md:h-64 lg:h-72 shadow-lg"
+                      />
+                    </div>
+                    <h3 className="font-bold text-2xl mb-3 gradient-text">{project.title}</h3>
+                    <p className="text-zinc-300 mb-5 text-lg leading-relaxed">{project.oneLiner || project.description}</p>
+
+                    {/* If this is SuiteGenie, show links to Tweet & LinkedIn Genie */}
+                    {key === 'suitegenie' && (
+                      <div className="mb-6 flex gap-3">
+                        <Link to="/projects/tweetgenie" className="btn-secondary px-4 py-2">Tweet Genie</Link>
+                        <Link to="/projects/linkedingenie" className="btn-secondary px-4 py-2">LinkedIn Genie</Link>
+                      </div>
+                    )}
+
+                    {(project.highlights && project.highlights.length > 0).valueOf() && (
+                      <div className="mb-6">
+                        <div className="font-semibold text-zinc-200 mb-2">Key Highlights:</div>
+                        <ul className="space-y-2">
+                          {project.highlights.map((highlight, idx) => (
+                            <li key={idx}>
+                              <div className="flex items-center bg-zinc-900 rounded-lg px-4 py-2">
+                                <span className="w-2 h-2 rounded-full bg-cyan-400 mr-3"></span>
+                                <span className="text-zinc-200 text-base">{highlight}</span>
+                              </div>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+
+                    <div className="flex flex-wrap gap-2 mb-6">
+                      {project.tech?.map(tech => (
+                        <span key={tech} className="chip text-xs bg-cyan-700/30 text-cyan-200 border-cyan-500/40 font-semibold shadow-sm">
+                          {tech}
+                        </span>
                       ))}
-                    </ul>
-                  </div>
-                )}
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {project.tech?.map(tech => (
-                    <span key={tech} className="chip text-xs bg-cyan-700/30 text-cyan-200 border-cyan-500/40 font-semibold shadow-sm">
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-                {/* Case Study Link and Add links if available */}
-                <div className="flex gap-3 mt-auto">
-                  <Link
-                    to={`/projects/${Object.keys(projects).find(k => projects[k].title === project.title) || 'projects'}`}
-                    className="btn-secondary flex items-center gap-2"
-                  >
-                    <ArrowRight size={16} />
-                    Read More
-                  </Link>
-                  {project.github && (
-                    <a href={project.github} target="_blank" rel="noopener noreferrer" className="btn-secondary flex items-center gap-2">
-                      <Github size={16} />
-                      Code
-                    </a>
-                  )}
-                </div>
-              </article>
-            ))}
-          </div>
+                    </div>
+
+                    <div className="flex gap-3 mt-auto">
+                      <Link to={`/projects/${key}`} className="btn-secondary flex items-center gap-2">
+                        <ArrowRight size={16} />
+                        Read More
+                      </Link>
+                      {project.live && (
+                        <a href={project.live} target="_blank" rel="noopener noreferrer" className="btn-secondary flex items-center gap-2">
+                          <ExternalLink size={16} />
+                          Live
+                        </a>
+                      )}
+                    </div>
+                  </article>
+                )
+              })}
+            </div>
         </section>
 
         {/* Filter Tags */}
