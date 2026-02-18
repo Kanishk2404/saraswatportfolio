@@ -9,7 +9,7 @@ export default function Ventures(){
 
       <div className="grid md:grid-cols-2 gap-10 mt-10">
         {venturesData.map(v => (
-          <div key={v.id} className="card p-8 shadow-xl bg-gradient-to-br from-zinc-950 via-zinc-900 to-zinc-800 rounded-2xl flex flex-col">
+          <div key={v.id} className="card p-8 shadow-xl rounded-2xl flex flex-col">
             <div className="flex items-center justify-between mb-6">
               <div className="text-2xl md:text-3xl font-bold gradient-text">{v.title}</div>
               <span className="chip bg-cyan-600 text-white border-none text-base px-4 py-2">{v.status}</span>
@@ -34,8 +34,13 @@ export default function Ventures(){
                 </div>
               )}
             </div>
-            <div className="mt-auto flex justify-end">
-              <a href={v.ctaLink || '/contact'} className="btn-primary" target={v.ctaLink && v.ctaLink.startsWith('http') ? '_blank' : '_self'} rel="noreferrer">{v.cta} →</a>
+            <div className="mt-auto flex justify-end gap-3">
+              {/* If this venture has an internal project page (SuiteGenie), link to it */}
+              {((v.id && v.id.toLowerCase() === 'suitegenie') || v.title?.toLowerCase().includes('suitegenie')) ? (
+                <Link to="/projects/suitegenie" className="btn-primary">View SuiteGenie →</Link>
+              ) : (
+                <a href={v.ctaLink || '/contact'} className="btn-primary" target={v.ctaLink && v.ctaLink.startsWith('http') ? '_blank' : '_self'} rel="noreferrer">{v.cta} →</a>
+              )}
             </div>
           </div>
         ))}

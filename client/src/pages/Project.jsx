@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { ArrowLeft, ExternalLink, Github, Calendar, User, Target, Code, BookOpen, Lightbulb, CheckCircle, ArrowUpRight, Shield, Globe, Server, Users, Search, Clock, Zap, Database, BarChart } from 'lucide-react'
 import { projects } from '@/data/projects.js'
+import { blogPosts } from '@/data/blog.js'
 import ImageGallery from '@/components/ImageGallery.jsx'
 
 const containerVariants = {
@@ -484,6 +485,24 @@ export default function Project() {
             ← View All Projects
           </Link>
         </motion.div>
+        {/* Related Blog Posts (for SuiteGenie) */}
+        {p && p.id === 'suitegenie' && (
+          <motion.div variants={itemVariants} className="mt-12">
+            <div className="neo">
+              <div className="inner p-6">
+                <h2 className="text-2xl font-bold mb-4">Related Articles</h2>
+                <div className="grid md:grid-cols-2 gap-4">
+                  {blogPosts.filter(post => (post.tags || []).includes('SuiteGenie') || (post.title || '').toLowerCase().includes('suitegenie')).map(post => (
+                    <Link key={post.id} to={`/blog/${post.id}`} className="p-4 bg-zinc-800/50 rounded-lg hover:bg-zinc-800 transition">
+                      <h3 className="font-semibold text-cyan-300 mb-2">{post.title}</h3>
+                      <p className="text-zinc-300 text-sm">{post.summary}</p>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        )}
       </motion.section>
     </div>
   )

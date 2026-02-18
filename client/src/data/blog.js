@@ -11,6 +11,551 @@ export const blogCategories = [
 
 export const blogPosts = [
   {
+    id: 'linkedin-cross-posting-2026',
+    title: 'How We Built LinkedIn Cross-Posting Into Tweet Genie — Kanishk Saraswat',
+    category: 'Projects',
+    date: '2026-02-18',
+    author: 'Kanishk Saraswat',
+    readTime: '12 min read',
+    summary: 'A deep engineering post about adding LinkedIn cross-posting to Tweet Genie: architecture, bugs, and fixes.',
+    tags: ['Node.js', 'React', 'LinkedIn API', 'Vercel', 'PostgreSQL', 'Microservices'],
+    content: `
+      <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+          --bg: #0c0c0e;
+          --surface: #141416;
+          --surface2: #1c1c1f;
+          --border: #2a2a2f;
+          --text: #e8e8f0;
+          --muted: #6b6b7b;
+          --accent: #4f7fff;
+          --accent2: #0A66C2;
+          --green: #22c55e;
+          --red: #ef4444;
+          --yellow: #f59e0b;
+          --code-bg: #111115;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+          background: var(--bg);
+          color: var(--text);
+          font-family: 'Geist', sans-serif;
+          font-size: 17px;
+          line-height: 1.75;
+          -webkit-font-smoothing: antialiased;
+        }
+
+        /* ── NOISE TEXTURE OVERLAY ── */
+        body::before {
+          content: '';
+          position: fixed;
+          inset: 0;
+          background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+          pointer-events: none;
+          z-index: 0;
+          opacity: 0.4;
+        }
+
+        /* ── HERO ── */
+        .hero {
+          position: relative;
+          min-height: 60vh;
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-end;
+          padding: 80px 40px 60px;
+          border-bottom: 1px solid var(--border);
+          overflow: hidden;
+        }
+
+        .hero::after {
+          content: '';
+          position: absolute;
+          top: -200px;
+          right: -200px;
+          width: 600px;
+          height: 600px;
+          background: radial-gradient(circle, rgba(79,127,255,0.12) 0%, transparent 70%);
+          pointer-events: none;
+        }
+
+        .hero-eyebrow {
+          font-family: 'DM Mono', monospace;
+          font-size: 11px;
+          letter-spacing: 0.15em;
+          text-transform: uppercase;
+          color: var(--accent);
+          margin-bottom: 20px;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+        }
+
+        .hero-eyebrow::before {
+          content: '';
+          width: 32px;
+          height: 1px;
+          background: var(--accent);
+        }
+
+        .hero h1 {
+          font-family: 'Instrument Serif', serif;
+          font-size: clamp(36px, 6vw, 72px);
+          line-height: 1.1;
+          font-weight: 400;
+          max-width: 800px;
+          margin-bottom: 28px;
+        }
+
+        .hero h1 em { font-style: italic; color: var(--accent); }
+
+        .hero-meta { display: flex; gap: 24px; font-size: 13px; color: var(--muted); font-family: 'DM Mono', monospace; }
+        .hero-meta span { display: flex; align-items: center; gap: 6px; }
+
+        /* ── LAYOUT ── */
+        .container { max-width: 740px; margin: 0 auto; padding: 0 24px; }
+        .content { padding: 72px 0 120px; }
+
+        /* ── TYPOGRAPHY ── */
+        h2 { font-family: 'Instrument Serif', serif; font-size: 32px; font-weight: 400; margin: 64px 0 20px; line-height: 1.2; }
+        h3 { font-size: 16px; font-weight: 600; letter-spacing: 0.02em; margin: 40px 0 12px; color: var(--text); }
+        p { margin-bottom: 20px; color: #c8c8d8; }
+        a { color: var(--accent); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        strong { color: var(--text); font-weight: 600; }
+
+        /* ── CODE ── */
+        code { font-family: 'DM Mono', monospace; font-size: 13px; background: var(--code-bg); border: 1px solid var(--border); border-radius: 4px; padding: 2px 6px; color: #a8c4ff; }
+        pre { background: var(--code-bg); border: 1px solid var(--border); border-radius: 10px; padding: 24px; overflow-x: auto; margin: 24px 0; position: relative; }
+        pre code { background: none; border: none; padding: 0; font-size: 13px; line-height: 1.7; color: #c8d8ff; }
+
+        .code-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+
+        /* ── CALLOUT BOXES ── */
+        .callout { border-radius: 10px; padding: 20px 24px; margin: 28px 0; border-left: 3px solid; font-size: 15px; }
+        .callout.error { background: rgba(239,68,68,0.08); border-color: var(--red); color: #fca5a5; }
+        .callout.success { background: rgba(34,197,94,0.08); border-color: var(--green); color: #86efac; }
+        .callout.info { background: rgba(79,127,255,0.08); border-color: var(--accent); color: #93b4ff; }
+        .callout-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 6px; opacity: 0.7; }
+
+        /* ── TIMELINE ── */
+        .timeline { position: relative; margin: 40px 0; padding-left: 28px; }
+        .timeline::before { content: ''; position: absolute; left: 0; top: 8px; bottom: 8px; width: 1px; background: linear-gradient(to bottom, var(--accent), var(--border)); }
+        .timeline-item { position: relative; margin-bottom: 32px; }
+        .timeline-item::before { content: ''; position: absolute; left: -32px; top: 8px; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); border: 2px solid var(--bg); }
+        .timeline-item.error::before { background: var(--red); }
+        .timeline-item.success::before { background: var(--green); }
+        .timeline-label { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); margin-bottom: 4px; }
+        .timeline-title { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+        .timeline-desc { font-size: 14px; color: #8888a0; line-height: 1.6; }
+
+        /* ── ARCH DIAGRAM ── */
+        .arch { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 32px; margin: 32px 0; font-family: 'DM Mono', monospace; font-size: 13px; }
+        .arch-row { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+        .arch-box { background: var(--surface2); border: 1px solid var(--border); border-radius: 7px; padding: 8px 14px; color: var(--text); white-space: nowrap; }
+        .arch-box.blue { border-color: var(--accent); color: #93b4ff; }
+        .arch-box.green { border-color: var(--green); color: #86efac; }
+        .arch-box.linkedin { border-color: var(--accent2); color: #7ab8f5; }
+
+        /* ── DIFF ── */
+        .diff { background: var(--code-bg); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin: 24px 0; font-family: 'DM Mono', monospace; font-size: 13px; }
+        .diff-header { padding: 10px 16px; background: var(--surface2); border-bottom: 1px solid var(--border); font-size: 11px; color: var(--muted); letter-spacing: 0.08em; }
+        .diff-line { padding: 2px 16px; line-height: 1.8; }
+        .diff-line.removed { background: rgba(239,68,68,0.1); color: #fca5a5; }
+        .diff-line.added { background: rgba(34,197,94,0.1); color: #86efac; }
+        .diff-line.neutral { color: #6b6b7b; }
+
+        /* ── SECTION DIVIDER ── */
+        .divider { display: flex; align-items: center; gap: 16px; margin: 56px 0 0; color: var(--muted); font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.1em; }
+        .divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+        /* ── TAG CHIPS ── */
+        .tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 20px 0; }
+        .tag { font-family: 'DM Mono', monospace; font-size: 11px; padding: 4px 10px; border-radius: 999px; border: 1px solid var(--border); color: var(--muted); }
+
+        /* ── LOG LINE ── */
+        .log { font-family: 'DM Mono', monospace; font-size: 12px; padding: 16px 20px; background: var(--code-bg); border: 1px solid var(--border); border-radius: 8px; margin: 16px 0; line-height: 1.8; }
+        .log .ts { color: var(--muted); }
+        .log .level-info { color: var(--accent); }
+        .log .level-error { color: var(--red); }
+        .log .level-warn { color: var(--yellow); }
+        .log .level-success { color: var(--green); }
+        .log .msg { color: var(--text); }
+
+        /* ── FOOTER ── */
+        .footer { border-top: 1px solid var(--border); padding: 48px 40px; display: flex; justify-content: space-between; align-items: center; font-family: 'DM Mono', monospace; font-size: 12px; color: var(--muted); }
+        .footer-sig { font-family: 'Instrument Serif', serif; font-size: 20px; color: var(--text); }
+
+        @media (max-width: 640px) {
+          .hero { padding: 60px 24px 48px; }
+          .footer { flex-direction: column; gap: 16px; text-align: center; }
+          .arch-row { flex-wrap: wrap; }
+        }
+      </style>
+
+      <!-- HERO -->
+      <div class="hero">
+        <div class="container">
+          <div class="hero-eyebrow">Engineering Deep Dive</div>
+          <h1>How We Built <em>LinkedIn Cross-Posting</em> Into Tweet Genie</h1>
+          <div class="hero-meta">
+            <span>📅 February 2026</span>
+            <span>⏱ 12 min read</span>
+            <span>🛠 Full-stack, Node.js, Vercel</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- CONTENT -->
+      <div class="container">
+      <div class="content">
+
+        <div class="tags">
+          <span class="tag">Node.js</span>
+          <span class="tag">React</span>
+          <span class="tag">LinkedIn API</span>
+          <span class="tag">Vercel</span>
+          <span class="tag">PostgreSQL</span>
+          <span class="tag">Microservices</span>
+        </div>
+
+        <p>
+          <strong>SuiteGenie</strong> is a multi-product SaaS I'm building, Tweet Genie handles Twitter/X scheduling and composing, LinkedIn Genie handles LinkedIn posts. They're separate apps, separate backends, shared database. This post is the full story of how I wired them together so a single toggle in Tweet Genie can cross-post to LinkedIn, every bug, every wrong assumption, and the final elegant solution.
+        </p>
+
+        <h2>The Big Picture</h2>
+
+        <p>You have two separate apps. Tweet Genie and LinkedIn Genie. They don't know about each other by default. Your job was to make them talk to each other securely when a user wants to post to both platforms at once. Think of it like two separate restaurants in the same building sharing one kitchen. How do you coordinate orders between them?</p>
+
+        <h3>The Status Check, "Is LinkedIn Connected?"</h3>
+
+        <p>When the compose page loads, the frontend needs to know if the user has LinkedIn connected so it can show the toggle as enabled or disabled. The naive approach would be to ask LinkedIn Genie directly from the browser. But the browser said no, CORS. It's like a rule that says "you can only talk to the same building you came from." So instead Tweet Genie's backend acts as a middleman. The browser asks Tweet Genie's backend, and Tweet Genie's backend checks the shared database directly. Same database, same answer, no CORS problem. The browser never leaves its own building.</p>
+
+        <h3>The Cross-Post , "Post to Both"</h3>
+
+        <p>When you hit Post Tweet with the toggle on, here's what happens in order:</p>
+        <ol>
+          <li>Browser sends the tweet content to Tweet Genie's backend, with a flag saying "also post to LinkedIn"</li>
+          <li>Tweet Genie posts to Twitter  done</li>
+          <li>Tweet Genie then calls LinkedIn Genie's backend directly, server to server, with the same content</li>
+          <li>LinkedIn Genie looks up the user's LinkedIn token in the database and posts on their behalf</li>
+          <li>Only after all that, Tweet Genie tells the browser "done, posted to both"</li>
+        </ol>
+
+        <p>The key insight — steps 3 and 4 happen between servers, not browsers. No CORS. No user involved. Just two backends talking to each other privately.</p>
+
+        <h3>The Secret Handshake</h3>
+
+        <p>But how does LinkedIn Genie know the request is really coming from Tweet Genie and not some random person trying to post on someone else's behalf? A shared secret. Both services have the same <code>INTERNAL_API_KEY</code> in their environment variables. Tweet Genie sends it in every request header. LinkedIn Genie checks it before doing anything. If it doesn't match, rejected immediately. It's like a password between two colleagues. Only they know it, the outside world doesn't.</p>
+
+        <h3>The Vercel Problem, Why Fire-and-Forget Failed?</h3>
+
+        <p>In regular Node.js (running on a VPS), the server is always on. You can start a task, send a response, and the task keeps running in the background. Vercel is different. It's serverless — the function only lives as long as the request is being handled. The moment you send a response, Vercel says "job done" and shuts the function down. Anything running in the background gets killed instantly. So our original code that said "send the tweet response immediately, post to LinkedIn in the background" — the background part never happened on Vercel. The fix was simple: wait for LinkedIn to finish before sending the response. The user waits an extra second or two, but everything actually happens.</p>
+
+        <h3>The Full Journey in One Sentence</h3>
+
+        <p>Browser asks backend → backend checks DB → toggle lights up → user posts → backend tweets → backend secretly calls LinkedIn Genie with a password → LinkedIn Genie posts → backend tells browser "done." That's the whole thing. Every bug we hit was just one of those arrows not working correctly — wrong URL, wrong file, Vercel killing things too early, CORS blocking direct calls.</p>
+
+        <h2>The Idea</h2>
+
+        <p>Simple enough on paper: add a "Post to LinkedIn" toggle in Tweet Genie's composer. When enabled and you hit Post Tweet, it also posts the same content to LinkedIn. One button, two platforms.</p>
+
+        <div class="arch">
+          <div style="font-size:11px;color:var(--muted);margin-bottom:20px;letter-spacing:0.08em;text-transform:uppercase;">Architecture</div>
+          <div class="arch-row">
+            <div class="arch-box blue">Tweet Genie Frontend<br><span style="font-size:10px;color:var(--muted)">tweet.suitegenie.in</span></div>
+            <div class="arch-arrow">→</div>
+            <div class="arch-box blue">Tweet Genie Backend<br><span style="font-size:10px;color:var(--muted)">tweetapi.suitegenie.in</span></div>
+            <div class="arch-arrow">→</div>
+            <div class="arch-box linkedin">LinkedIn Genie Backend<br><span style="font-size:10px;color:var(--muted)">apilinkedin.suitegenie.in</span></div>
+          </div>
+          <div class="arch-row" style="margin-top:16px;">
+            <div class="arch-box green" style="font-size:11px;">Shared Postgres DB (Supabase)<br><span style="color:var(--muted)">linkedin_auth table</span></div>
+          </div>
+          <div style="margin-top:16px;font-size:11px;color:var(--muted);">
+            Service-to-service auth via x-internal-api-key header
+          </div>
+        </div>
+
+        <h2>Phase 1 — The LinkedIn Status Check</h2>
+
+        <p>Before the toggle can do anything useful, it needs to know if the current user has a LinkedIn account connected. My first instinct was to call LinkedIn Genie's API directly from the frontend.</p>
+
+        <div class="callout error">
+          <div class="callout-label">❌ First Attempt</div>
+          The frontend (localhost:5174) calling LinkedIn Genie (localhost:3004) directly → instant CORS error. Different ports = different origins = browser blocks it.
+        </div>
+
+        <p>The fix: instead of the frontend calling LinkedIn Genie, <strong>Tweet Genie's own backend</strong> does a direct database query. Same Postgres instance, zero CORS, instant result.</p>
+
+        <div class="code-label">routes/linkedinStatus.js — Tweet Genie backend</div>
+        <pre><code>router.get('/status', async (req, res) => {
+  const userId = req.user?.id || req.user?.userId;
+  if (!userId) return res.status(401).json({ connected: false });
+
+  const { rows } = await pool.query(
+    'SELECT linkedin_user_id, linkedin_display_name 
+     FROM linkedin_auth WHERE user_id = $1 LIMIT 1',
+    [userId]
+  );
+
+  res.json({
+    connected: rows.length > 0,
+    account: rows[0] || null,
+  });
+});</code></pre>
+
+        <p>Frontend calls <code>/api/linkedin/status</code> (same origin, no CORS), gets back <code>{connected: true}</code> or <code>{connected: false}</code>. Toggle renders accordingly.</p>
+
+        <h2>Phase 2 — Bug Hunt: Route Not Found</h2>
+
+        <p>Even with the route written, the frontend was getting HTML back instead of JSON. Classic <code>SyntaxError: Unexpected token '&lt;'</code>. The browser console test confirmed it:</p>
+
+        <div class="log">
+          <span class="level-error">ERROR</span> <span class="msg">SyntaxError: Unexpected token '&lt;', "&lt;!DOCTYPE "... is not valid JSON</span>
+        </div>
+
+        <p>Three separate bugs caused this, found one by one:</p>
+
+        <div class="timeline">
+          <div class="timeline-item error">
+            <div class="timeline-label">Bug #1</div>
+            <div class="timeline-title">Wrong file being imported</div>
+            <div class="timeline-desc">index.js was importing <code>linkedinStatus.js</code> but I created <code>linkedin.js</code>. The old proxy-heavy file was still running.</div>
+          </div>
+          <div class="timeline-item error">
+            <div class="timeline-label">Bug #2</div>
+            <div class="timeline-title">SSO catch-all swallowing the route</div>
+            <div class="timeline-desc"><code>app.use('/', ssoRoutes)</code> was registered before the LinkedIn route and had a wildcard that caught everything, returning the React SPA's index.html.</div>
+          </div>
+          <div class="timeline-item error">
+            <div class="timeline-label">Bug #3</div>
+            <div class="timeline-title">No Vite proxy configured</div>
+            <div class="timeline-desc">In development, <code>fetch('/api/linkedin/status')</code> resolves to <code>localhost:5174/api/...</code> (Vite) not <code>localhost:3002/api/...</code> (backend). Vite serves index.html for unknown routes.</div>
+          </div>
+          <div class="timeline-item success">
+            <div class="timeline-label">Fix</div>
+            <div class="timeline-title">Three targeted fixes</div>
+            <div class="timeline-desc">Renamed file correctly. Moved LinkedIn route above SSO registration. Added Vite proxy config to forward <code>/api/*</code> to <code>localhost:3002</code>.</div>
+          </div>
+        </div>
+
+        <div class="code-label">vite.config.js — proxy added</div>
+        <pre><code>server: {
+  port: 5174,
+  proxy: {
+    '/api': {
+      target: 'http://localhost:3002',
+      changeOrigin: true,
+      secure: false,
+    },
+  },
+},</code></pre>
+
+        <p>After all three fixes, the DB query confirmed what we expected — the user IDs matched perfectly between <code>users</code> and <code>linkedin_auth</code> tables. Toggle now shows "Connected" correctly.</p>
+
+        <h2>Phase 3 — The Cross-Post Architecture</h2>
+
+        <p>Now the interesting part. When a tweet posts successfully, Tweet Genie needs to tell LinkedIn Genie to post the same content. Service-to-service communication, no user browser involved.</p>
+
+        <p>The design: a shared secret key (<code>INTERNAL_API_KEY</code>) in both services' environment variables. Tweet Genie sends it in the <code>x-internal-api-key</code> header. LinkedIn Genie validates it using timing-safe comparison before processing.</p>
+
+        <div class="code-label">middleware/internalAuth.js — LinkedIn Genie</div>
+        <pre><code>const match = a.length === b.length && 
+              crypto.timingSafeEqual(a, b);
+
+if (!match) return res.status(401).json({ error: 'Invalid internal API key' });
+
+req.isInternal = true;
+req.internalCaller = req.headers['x-internal-caller'];
+next();</code></pre>
+
+        <p>The cross-post route sits between <code>internalAuth</code> and <code>requirePlatformLogin</code> in LinkedIn Genie's server — so it's authenticated internally but doesn't need a user session:</p>
+
+        <div class="code-label">server.js — LinkedIn Genie route order</div>
+        <pre><code>app.use(internalAuth);
+app.use('/api/internal', crossPostRoutes); // ← internal only
+app.use(requirePlatformLogin);
+app.use('/api', apiRoutes);               // ← user sessions required</code></pre>
+
+        <div class="code-label">routes/crossPost.js — LinkedIn Genie</div>
+        <pre><code>router.post('/cross-post', async (req, res) => {
+  if (!req.isInternal) return res.status(403).json({ error: 'Forbidden' });
+
+  const { content } = req.body;
+  const platformUserId = req.headers['x-platform-user-id'];
+
+  // Look up their LinkedIn account
+  const { rows } = await pool.query(
+    'SELECT * FROM linkedin_auth WHERE user_id = $1 LIMIT 1',
+    [platformUserId]
+  );
+
+  if (!rows.length) {
+    return res.status(404).json({ code: 'LINKEDIN_NOT_CONNECTED' });
+  }
+
+  const authorUrn = &#96;urn:li:person:\${rows[0].linkedin_user_id}&#96;;
+  await createLinkedInPost(rows[0].access_token, authorUrn, content, [], 'single_post');
+  
+  res.json({ success: true });
+});</code></pre>
+
+        <h2>Phase 4 — Production Breaks Everything</h2>
+
+        <p>Development: works perfectly. Production: complete silence. No LinkedIn cross-post logs at all. Three more bugs to track down.</p>
+
+        <div class="divider">Production Bug Hunt</div>
+
+        <h3>Bug #4 — Vercel Frontend Had No API Proxy</h3>
+
+        <p>The Vite proxy only exists in development. In production, Tweet Genie's frontend is a static build on Vercel. <code>fetch('/api/tweets')</code> hit Vercel, which served <code>index.html</code> — again.</p>
+
+        <p>Fix: add a proper proxy rewrite to <code>vercel.json</code>:</p>
+
+        <div class="code-label">vercel.json — Tweet Genie frontend</div>
+        <pre><code>{
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "https://tweetapi.suitegenie.in/api/$1"
+    },
+    {
+      "source": "/((?!api/).*)",
+      "destination": "/index.html"
+    }
+  ]
+}</code></pre>
+
+        <h3>Bug #5 — Duplicate Content (LinkedIn API 422)</h3>
+
+        <p>After fixing routing, we got this from LinkedIn:</p>
+
+        <div class="callout error">
+          <div class="callout-label">LinkedIn API 422</div>
+          "Content is a duplicate of urn:li:share:7429862475279511552" — DUPLICATE_POST
+        </div>
+
+        <p>Not a bug in our code at all. We'd been testing with the same content string repeatedly, and LinkedIn's API blocks duplicate posts within a short time window. Posted with unique content — worked immediately.</p>
+
+        <h3>Bug #6 — Vercel Kills Background Tasks</h3>
+
+        <p>This was the subtle one. After the tweet posted to Twitter, the LinkedIn cross-post was running as fire-and-forget:</p>
+
+        <div class="diff">
+          <div class="diff-header">tweets.js — fire-and-forget pattern (BROKEN on Vercel)</div>
+          <div class="diff-line removed">- (async () => {</div>
+          <div class="diff-line removed">-   const status = await crossPostToLinkedIn({...});</div>
+          <div class="diff-line removed">-   logger.info('Background cross-post', { status });</div>
+          <div class="diff-line removed">- })(); // fires but nobody waits</div>
+          <div class="diff-line removed">- linkedinStatus = 'pending';</div>
+          <div class="diff-line removed">- res.json({...}); // response sent, Vercel freezes function</div>
+          <div class="diff-line neutral">  </div>
+          <div class="diff-line added">+ linkedinStatus = await crossPostToLinkedIn({...});</div>
+          <div class="diff-line added">+ logger.info('Cross-post completed', { status: linkedinStatus });</div>
+          <div class="diff-line added">+ res.json({ linkedin: linkedinStatus }); // sent AFTER LinkedIn responds</div>
+        </div>
+
+        <p>
+          <strong>Why this breaks on Vercel:</strong> Vercel runs serverless functions. The moment <code>res.json()</code> is called, Vercel considers the function done and freezes the process. Any async work queued after that never executes. Fire-and-forget is a pattern that only works on long-running servers (like a VPS running Node.js with <code>pm2</code>).
+        </p>
+
+        <p>
+          The fix adds ~1-2 seconds to the post response time since we now wait for LinkedIn before responding. Totally acceptable — the tweet is already saved to the DB at this point, so nothing is lost either way.
+        </p>
+
+        <div class="callout success">
+          <div class="callout-label">✓ Final Result</div>
+          After awaiting the cross-post, prod logs started showing exactly what we needed.
+        </div>
+
+        <div class="log">
+          <div><span class="ts">12:26:35Z</span> <span class="level-info">INFO</span> <span class="msg">Single tweet posted</span> tweetId=2024098220415082776</div>
+          <div><span class="ts">12:26:35Z</span> <span class="level-info">INFO</span> <span class="msg">[LinkedIn Cross-post] Config check</span> url=https://apilinkedin.suitegenie.in hasKey=true</div>
+          <div><span class="ts">12:26:35Z</span> <span class="level-info">INFO</span> <span class="msg">[LinkedIn Cross-post] Sending request</span> userId=eeb49aab...</div>
+          <div><span class="ts">12:26:37Z</span> <span class="level-success">INFO</span> <span class="msg">[LinkedIn Cross-post] Success ✓</span> userId=eeb49aab...</div>
+          <div><span class="ts">12:26:37Z</span> <span class="level-success">INFO</span> <span class="msg">LinkedIn cross-post completed</span> status=posted</div>
+        </div>
+
+        <h2>The Complete Mental Model</h2>
+
+        <p>Here's every layer of the system working together in the final version:</p>
+
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-label">Step 1</div>
+            <div class="timeline-title">Page Load — Status Check</div>
+            <div class="timeline-desc">Frontend calls <code>/api/linkedin/status</code>. Tweet Genie backend queries <code>linkedin_auth</code> table directly. Toggle shows Connected/Not Connected.</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-label">Step 2</div>
+            <div class="timeline-title">User Toggles On and Posts</div>
+            <div class="timeline-desc">Frontend sends <code>POST /api/tweets</code> with <code>postToLinkedin: true</code> in the body.</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-label">Step 3</div>
+            <div class="timeline-title">Tweet Posts to Twitter</div>
+            <div class="timeline-desc">Tweet Genie backend posts to Twitter API, saves tweet to DB, gets back the tweet ID.</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-label">Step 4</div>
+            <div class="timeline-title">Cross-Post to LinkedIn Genie</div>
+            <div class="timeline-desc">Tweet Genie calls LinkedIn Genie's internal endpoint with the content + tweet URL. Awaited — not fire-and-forget.</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-label">Step 5</div>
+            <div class="timeline-title">LinkedIn Genie Posts</div>
+            <div class="timeline-desc">LinkedIn Genie validates the internal key, looks up the user's LinkedIn token, calls LinkedIn's UGC Posts API, returns success.</div>
+          </div>
+          <div class="timeline-item success">
+            <div class="timeline-label">Step 6</div>
+            <div class="timeline-title">Response Back to User</div>
+            <div class="timeline-desc">Tweet Genie returns <code>{linkedin: "posted"}</code>. Frontend shows the right toast: "Posted to Twitter & LinkedIn ✓".</div>
+          </div>
+        </div>
+
+        <h2>Key Lessons</h2>
+
+        <h3>1. Fire-and-Forget Doesn't Work on Serverless</h3>
+        <p>If you're on Vercel, Netlify, AWS Lambda, or any FaaS platform — background async tasks launched after <code>res.json()</code> will be killed. Either await everything before responding, or use a proper background job queue (Bull, Inngest, etc.).</p>
+
+        <h3>2. Share the Database, Skip the Proxy</h3>
+        <p>When two microservices share the same Postgres instance, a direct DB query is almost always better than an HTTP proxy for status checks. Fewer moving parts, no CORS, lower latency.</p>
+
+        <h3>3. Vite Proxy ≠ Production Proxy</h3>
+        <p>The Vite dev server proxy is development-only magic. In production you need to configure your actual reverse proxy (Vercel <code>rewrites</code>, nginx <code>proxy_pass</code>, etc.) to do the same job.</p>
+
+        <h3>4. Duplicate Content Is a LinkedIn API Feature</h3>
+        <p>LinkedIn's API returns 422 if you post identical content twice in a short window. Always test with unique strings — not <code>"test"</code> sent ten times in a row.</p>
+
+        <h3>5. Timing-Safe Comparison for Shared Secrets</h3>
+        <p>Always use <code>crypto.timingSafeEqual()</code> when comparing API keys, not <code>===</code>. Regular string comparison leaks timing information that can be used to brute-force secrets character by character.</p>
+
+        <h2>What's Next</h2>
+
+        <p>The cross-posting foundation is solid. Next up: LinkedIn carousels (PDFs uploaded as documents), scheduled cross-posts, and per-platform content customization so you can write a thread for Twitter and a longer-form version for LinkedIn — all from one composer.</p>
+
+        <div class="callout info">
+          <div class="callout-label">Try It</div>
+          SuiteGenie is live at <a href="https://suitegenie.in">suitegenie.in</a>. Tweet Genie and LinkedIn Genie are both available — connect both and the toggle just works.
+        </div>
+
+      </div>
+      </div>
+
+      <!-- FOOTER -->
+      <div class="footer">
+        <div class="footer-sig">Kanishk Saraswat</div>
+        <div>kanishksaraswat.me · February 2026</div>
+      </div>
+
+    `
+  },
+  {
     id: 'seo-pillar-2025',
     title: 'The Ultimate Guide to SEO in 2025: Complete Playbook',
     category: 'SEO Daily',

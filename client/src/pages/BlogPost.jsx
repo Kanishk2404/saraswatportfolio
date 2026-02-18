@@ -54,7 +54,7 @@ export default function BlogPost() {
   };
 
   return (
-    <section className={`container py-16 ${isSuiteGenie ? 'max-w-5xl' : 'max-w-3xl'} mx-auto`}>
+    <section className={`py-16 px-4 sm:px-6 lg:px-8 mx-auto max-w-6xl`}>
       {isSuiteGenie ? (
         <div className="relative bg-zinc-900/80 rounded-2xl shadow-2xl p-0 md:p-0 border border-zinc-800 overflow-hidden flex flex-col md:flex-row">
           {/* Timeline bar */}
