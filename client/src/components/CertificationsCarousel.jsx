@@ -93,7 +93,7 @@ export default function CertificationsCarousel() {
                   ) : c.image && (
                     <img src={c.image} alt={c.title} loading="lazy" width="340" height="224" className="mb-6 rounded-xl border-2 border-cyan-600 object-cover max-h-56 w-full" style={{maxWidth:'340px'}} />
                   )}
-                  <div className="text-2xl md:text-3xl font-bold text-center mb-2 gradient-text">{c.title}</div>
+                  <div className="text-2xl md:text-3xl font-bold text-center mb-2 text-cyan-400">{c.title}</div>
                   <div className="text-cyan-400 mt-1 text-center text-lg font-semibold">{c.issuer}</div>
                   <div className="text-zinc-400 text-base text-center mt-1 font-mono">{c.year}</div>
                 </div>

@@ -11,7 +11,7 @@ export default function Ventures(){
         {venturesData.map(v => (
           <div key={v.id} className="card p-8 shadow-xl rounded-2xl flex flex-col">
             <div className="flex items-center justify-between mb-6">
-              <div className="text-2xl md:text-3xl font-bold gradient-text">{v.title}</div>
+              <div className="text-2xl md:text-3xl font-bold text-cyan-400">{v.title}</div>
               <span className="chip bg-cyan-600 text-white border-none text-base px-4 py-2">{v.status}</span>
             </div>
             <div className="flex flex-col md:flex-row gap-6 items-center mb-6">

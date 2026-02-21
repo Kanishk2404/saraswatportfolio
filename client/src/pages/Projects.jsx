@@ -1,27 +1,9 @@
 import { projects } from '@/data/projects.js';
-import { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { ExternalLink, Github, ArrowRight } from 'lucide-react';
 import SEO from '@/components/SEO.jsx';
 
 export default function Projects() {
-  const [activeFilter, setActiveFilter] = useState('All');
-
-  const allTechnologies = useMemo(() => {
-    const techSet = new Set();
-    Object.values(projects).forEach(project => {
-      project.tech.forEach(tech => techSet.add(tech));
-    });
-    return Array.from(techSet).sort();
-  }, []);
-
-  const filteredProjects = useMemo(() => {
-    if (activeFilter === 'All') return Object.values(projects);
-    return Object.values(projects).filter(project => 
-      project.tech.includes(activeFilter)
-    );
-  }, [activeFilter]);
-
   return (
     <>
       <SEO
@@ -43,7 +25,7 @@ export default function Projects() {
       <section className="container py-16">
         {/* Header */}
         <header className="mb-16 text-center">
-          <h1 className="text-4xl md:text-6xl font-extrabold mb-6 gradient-text">
+          <h1 className="text-4xl md:text-6xl font-extrabold mb-6 text-cyan-400">
             Projects
           </h1>
           <p className="text-xl text-zinc-300 max-w-3xl mx-auto leading-relaxed">
@@ -67,7 +49,7 @@ export default function Projects() {
                         className="object-cover w-full h-56 md:h-64 lg:h-72 shadow-lg"
                       />
                     </div>
-                    <h3 className="font-bold text-2xl mb-3 gradient-text">{project.title}</h3>
+                    <h3 className="font-bold text-2xl mb-3 text-cyan-400">{project.title}</h3>
                     <p className="text-zinc-300 mb-5 text-lg leading-relaxed">{project.oneLiner || project.description}</p>
 
                     {/* If this is SuiteGenie, show links to Tweet & LinkedIn Genie */}
@@ -120,29 +102,10 @@ export default function Projects() {
             </div>
         </section>
 
-        {/* Filter Tags */}
-        <div className="flex flex-wrap gap-2 justify-center mb-10">
-          <button
-            className={`chip text-sm px-4 py-2 ${activeFilter === 'All' ? 'bg-cyan-600 text-white' : 'bg-zinc-800 text-cyan-300'}`}
-            onClick={() => setActiveFilter('All')}
-          >
-            All
-          </button>
-          {allTechnologies.map(tech => (
-            <button
-              key={tech}
-              className={`chip text-sm px-4 py-2 ${activeFilter === tech ? 'bg-cyan-600 text-white' : 'bg-zinc-800 text-cyan-300'}`}
-              onClick={() => setActiveFilter(tech)}
-            >
-              {tech}
-            </button>
-          ))}
-        </div>
-
         {/* Projects Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {Object.entries(projects)
-            .filter(([key, project]) => filteredProjects.includes(project) && !['cloud-bouncer', 'anicafe', 'suitegenie'].includes(key))
+            .filter(([key]) => !['cloud-bouncer', 'anicafe', 'suitegenie'].includes(key))
             .map(([key, project]) => (
               <div key={key} className="card p-6 flex flex-col group hover:scale-105 transition-transform duration-300">
                 {/* Project Image */}
@@ -155,7 +118,7 @@ export default function Projects() {
                 </div>
 
                 {/* Project Title */}
-                <h3 className="text-xl font-bold mb-3 gradient-text group-hover:text-cyan-300 transition-colors">
+                <h3 className="text-xl font-bold mb-3 text-cyan-400 group-hover:text-cyan-300 transition-colors">
                   {project.title}
                 </h3>
 
@@ -197,21 +160,6 @@ export default function Projects() {
               </div>
             ))}
         </div>
-
-        {/* No Projects Message */}
-        {filteredProjects.filter(project => !['cloud-bouncer', 'anicafe'].includes(project.id)).length === 0 && (
-          <div className="text-center py-16">
-            <p className="text-zinc-400 text-lg mb-4">
-              No projects found with the selected filter.
-            </p>
-            <button
-              onClick={() => setActiveFilter('All')}
-              className="btn-secondary"
-            >
-              View All Projects
-            </button>
-          </div>
-        )}
 
         {/* CTA Section */}
         <div className="mt-16 text-center">

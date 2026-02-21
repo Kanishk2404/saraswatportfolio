@@ -257,7 +257,7 @@ export const projects = {
     description: `Tweet Genie automates bulk Twitter workflows missing from Hootsuite and Buffer â€” reducing 3 hours of manual work to 5 minutes.`,
     features: [
       'Bulk AI generation: 30-50 tweets',
-      'Custom scheduling: daily, 3Ã—/week, 4Ã—/week, custom',
+      'Custom scheduling: daily, 3Ã-/week, 4Ã-/week, custom',
       'Redis cost reduction via custom PostgreSQL scheduler',
       'Rule-based analytics and historical trends',
       'Team approval workflows and RBAC',

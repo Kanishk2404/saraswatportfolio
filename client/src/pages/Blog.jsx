@@ -56,7 +56,7 @@ export default function Blog() {
         <header className="mb-16 text-center">
           <div className="flex items-center justify-center gap-3 mb-6">
             <BookOpen className="w-8 h-8 text-cyan-400" />
-            <h1 className="text-4xl md:text-6xl font-extrabold gradient-text">
+            <h1 className="text-4xl md:text-6xl font-extrabold text-cyan-400">
               Blog
             </h1>
           </div>
@@ -188,8 +188,8 @@ export default function Blog() {
                   </div>
 
                   {/* Enhanced Title */}
-                  <h2 className={`font-bold text-cyan-400 group-hover:text-cyan-300 transition-colors duration-300 leading-tight mb-4 ${
-                    viewMode === 'list' ? 'text-xl md:text-2xl' : 'text-xl'
+                  <h2 className={`font-bold text-cyan-400 group-hover:text-cyan-300 transition-colors duration-300 leading-tight mb-4 break-words ${
+                    viewMode === 'list' ? 'text-xl md:text-2xl' : 'text-lg md:text-xl'
                   }`}>
                     {post.title}
                   </h2>

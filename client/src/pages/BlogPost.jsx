@@ -95,7 +95,7 @@ export default function BlogPost() {
             </nav>
           )}
           <div className="relative z-10 px-4 md:px-16 py-10 w-full md:w-[calc(100%-16rem)]" ref={contentRef}>
-            <h1 className="text-4xl font-extrabold mb-8 gradient-text text-center drop-shadow-lg font-serif tracking-wide">{post.title}</h1>
+            <h1 className="text-4xl font-extrabold mb-8 text-cyan-400 text-center drop-shadow-lg font-serif tracking-wide">{post.title}</h1>
             <div
               className="prose prose-lg max-w-none mx-auto mb-8 prose-img:rounded-xl prose-img:shadow-lg prose-img:border prose-img:border-zinc-800 prose-h2:mt-16 prose-h2:mb-6 prose-h2:pl-8 prose-h2:relative prose-h2:font-extrabold prose-h2:text-cyan-300 prose-h2:font-serif prose-h2:tracking-wide prose-h2:before:content-[''] prose-h2:before:absolute prose-h2:before:-left-8 prose-h2:before:top-1/2 prose-h2:before:-translate-y-1/2 prose-h2:before:w-6 prose-h2:before:h-6 prose-h2:before:bg-cyan-400 prose-h2:before:rounded-full prose-h2:before:shadow-lg prose-h2:before:ring-2 prose-h2:before:ring-cyan-700 prose-h2:before:opacity-80 prose-h3:mt-8 prose-h3:mb-2 prose-h3:text-cyan-400 prose-p:leading-relaxed prose-blockquote:bg-cyan-900/10 prose-blockquote:border-cyan-500 prose-blockquote:rounded-lg prose-blockquote:p-4 prose-blockquote:my-6 prose-strong:text-cyan-300 prose-strong:font-semibold prose-hr:my-10 prose-hr:border-cyan-700"
               dangerouslySetInnerHTML={{ __html: post.content }}
@@ -107,7 +107,7 @@ export default function BlogPost() {
         </div>
       ) : (
         <div className="bg-zinc-900/80 rounded-2xl shadow-2xl p-8 md:p-12 border border-zinc-800">
-          <h1 className="text-4xl font-extrabold mb-8 gradient-text text-center drop-shadow-lg">{post.title}</h1>
+          <h1 className="text-4xl font-extrabold mb-8 text-cyan-400 text-center drop-shadow-lg">{post.title}</h1>
           <div
             className="prose prose-lg max-w-none mx-auto mb-8 prose-img:rounded-xl prose-img:shadow-lg prose-img:border prose-img:border-zinc-800 prose-h2:mt-12 prose-h2:mb-4 prose-h2:border-l-4 prose-h2:border-cyan-500 prose-h2:pl-4 prose-h2:bg-zinc-800/60 prose-h2:py-2 prose-h2:font-bold prose-h2:text-cyan-300 prose-h3:mt-8 prose-h3:mb-2 prose-h3:text-cyan-400 prose-p:leading-relaxed prose-blockquote:bg-cyan-900/10 prose-blockquote:border-cyan-500 prose-blockquote:rounded-lg prose-blockquote:p-4 prose-blockquote:my-6"
             dangerouslySetInnerHTML={{ __html: post.content }}

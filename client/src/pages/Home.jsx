@@ -91,7 +91,7 @@ export default function Home() {
               variants={itemVariants}
               className="text-4xl md:text-6xl font-extrabold leading-tight tracking-tight"
             >
-              From <span className="gradient-text">athlete</span> to <span className="gradient-text">developer</span>
+              From <span className="text-cyan-400">athlete</span> to <span className="text-cyan-400">developer</span>
             </motion.h1>
             
             <motion.p 
@@ -323,7 +323,7 @@ export default function Home() {
               {/* Header Section */}
               <div className="mb-6 flex-shrink-0">
                 <div className="flex items-center justify-between mb-3">
-                  <h3 className="text-3xl font-extrabold text-cyan-300 gradient-text drop-shadow-lg tracking-tight">{card.title}</h3>
+                  <h3 className="text-3xl font-extrabold text-cyan-400 drop-shadow-lg tracking-tight">{card.title}</h3>
                   <span className="chip font-medium bg-cyan-500/30 text-cyan-100 border-cyan-400/40 shadow-md animate-pulse">{card.badge}</span>
               {/* Glowing border effect */}
               <div className="absolute inset-0 pointer-events-none rounded-3xl border-4 border-cyan-400/30 shadow-[0_0_40px_10px_rgba(14,165,233,0.15)]"></div>
@@ -470,7 +470,7 @@ export default function Home() {
             className="text-center"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-zinc-100 mb-4">
-              Ready to Build Something <span className="gradient-text">Amazing</span>?
+              Ready to Build Something <span className="text-cyan-400">Amazing</span>?
             </h2>
             <p className="text-zinc-300 text-lg mb-8 max-w-2xl mx-auto leading-relaxed">
               Let's discuss your next project and bring your ideas to life. Whether it's a web app, 
