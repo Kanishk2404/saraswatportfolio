@@ -11,6 +11,244 @@ export const blogCategories = [
 
 export const blogPosts = [
   {
+    id: 'fixing-linkedin-analytics-udyam-meta-verification',
+    title: 'Fixing LinkedIn Analytics, Udyam Registration & Meta Verification',
+    category: 'Projects',
+    date: '2026-02-21',
+    author: 'Kanishk Saraswat',
+    readTime: '10 min read',
+    summary: 'The day I fixed fake analytics data, registered a business, and applied to three different platforms simultaneously.',
+    tags: ['LinkedIn API', 'OAuth', 'Business Registration', 'Meta', 'SuiteGenie'],
+    content: `
+      <article class="prose prose-lg max-w-3xl mx-auto">
+        <header class="mb-8">
+          <h1 class="text-3xl font-bold mb-4">Fixing LinkedIn Analytics, Udyam Registration & Meta Verification</h1>
+          <div class="flex items-center gap-4 text-zinc-400 mb-4">
+            <span>By Kanishk Saraswat</span>
+            <span>•</span>
+            <span>February 21, 2026</span>
+            <span>•</span>
+            <span>10 min read</span>
+          </div>
+          <div class="flex gap-2 flex-wrap">
+            <span class="chip text-xs">LinkedIn API</span>
+            <span class="chip text-xs">OAuth</span>
+            <span class="chip text-xs">Business Registration</span>
+            <span class="chip text-xs">Meta</span>
+            <span class="chip text-xs">SuiteGenie</span>
+          </div>
+        </header>
+
+        <div class="mb-8 p-6 bg-cyan-500/10 border border-cyan-500/20 rounded-xl">
+          <p class="text-lg font-semibold text-cyan-300 mb-2">The day I fixed fake analytics data, registered a business, and applied to three different platforms simultaneously</p>
+          <p class="text-zinc-200 leading-relaxed">
+            Some days you sit down to fix one small thing and end up going down five rabbit holes. This was one of those days.
+          </p>
+        </div>
+
+        <h2 class="text-xl font-semibold mt-6 mb-2">LinkedIn Analytics Was Showing Fake Data</h2>
+        <p class="mb-4">I'd built an analytics page for LinkedInGenie months ago. Beautiful charts, engagement breakdowns, top performing posts. One problem — the numbers were completely made up.</p>
+        <p class="mb-4">Three bugs stacked on top of each other.</p>
+
+        <h3 class="text-lg font-medium mt-4 mb-2">Bug 1 — Wrong OAuth scopes</h3>
+        <p class="mb-4">My OAuth flow was only requesting:</p>
+        <pre class="bg-zinc-900 p-4 rounded-lg mb-4"><code>openid profile email w_member_social</code></pre>
+        <p class="mb-4">The analytics scopes — <code>r_organization_social</code> and <code>r_organization_admin</code> — were approved on my LinkedIn Developer app but never being requested during login. Users connected their LinkedIn but their token never had analytics permission.</p>
+        <p class="mb-4"><strong>Fix:</strong></p>
+        <pre class="bg-zinc-900 p-4 rounded-lg mb-4"><code class="language-javascript">const LINKEDIN_SCOPES = 'openid profile email w_member_social r_organization_social r_organization_admin w_organization_social';</code></pre>
+
+        <h3 class="text-lg font-medium mt-4 mb-2">Bug 2 — Wrong API endpoint</h3>
+        <p class="mb-4">Posts were stored as <code>urn:li:share:7425273073433636864</code>. My sync code was doing:</p>
+        <pre class="bg-zinc-900 p-4 rounded-lg mb-4"><code class="language-javascript">shareId = postUrn.replace('urn:li:share:', '');
+const url = \`/v2/ugcPosts/\${shareId}\`;</code></pre>
+        <p class="mb-4">LinkedIn returned "Key parameter value is invalid" on all 9 posts. Every single one falling back to mock data.</p>
+        <p class="mb-4">The correct endpoint URL-encodes the full URN:</p>
+        <pre class="bg-zinc-900 p-4 rounded-lg mb-4"><code class="language-javascript">const encodedUrn = encodeURIComponent(postUrn);
+const url = \`https://api.linkedin.com/v2/socialActions/\${encodedUrn}\`;</code></pre>
+        <p class="mb-4"><code>urn:li:share:7425273073433636864</code> becomes <code>urn%3Ali%3Ashare%3A7425273073433636864</code>. That's what LinkedIn actually expects.</p>
+
+        <h3 class="text-lg font-medium mt-4 mb-2">Bug 3 — Frontend bailing out early</h3>
+        <p class="mb-4">Even after fixing the backend, dashboard showed zeros. Found this in LinkedInAnalytics.jsx:</p>
+        <pre class="bg-zinc-900 p-4 rounded-lg mb-4"><code class="language-javascript">if (!selectedAccount?.id || !selectedAccount?.account_type) {
+  setAnalyticsData({ overview: {}, daily: [], topPosts: [] });
+  return; // never fetches anything
+}</code></pre>
+        <p class="mb-4">selectedAccount was always null on load because it came from window.AccountContext. Fixed by making it an optional filter:</p>
+        <pre class="bg-zinc-900 p-4 rounded-lg mb-4"><code class="language-javascript">const params = { days: timeframe };
+if (selectedAccount?.id && selectedAccount?.account_type) {
+  params.account_id = selectedAccount.id;
+  params.account_type = selectedAccount.account_type;
+}
+const response = await analytics.getOverview(params);</code></pre>
+        <p class="mb-4">After all three fixes — real data. First sync: 5 out of 9 posts updated with real likes, comments, shares. The other 4 returned 404 — those posts had been deleted from LinkedIn. Added logic to automatically mark them as <code>status = 'deleted'</code> so they disappear from analytics permanently.</p>
+        <p class="mb-4">Views still show zero because LinkedIn locks view counts behind their Marketing Developer Platform. Everything else is real.</p>
+
+        <h2 class="text-xl font-semibold mt-6 mb-2">The Udyam Registration Adventure</h2>
+        <p class="mb-4">To get Meta business verification I needed a legitimate business document. Sole proprietorship in India requires almost nothing — no GST needed under ₹20 lakh turnover. Just go to <strong>udyamregistration.gov.in</strong> and register with PAN and Aadhaar. Free, same day.</p>
+        <p class="mb-4">The reality: the website is genuinely terrible.</p>
+        <ul class="mb-4 list-disc list-inside space-y-2">
+          <li>Attempt 1 — incognito mode. Submit button did nothing.</li>
+          <li>Attempt 2 — normal Chrome. OTP never arrived.</li>
+          <li>Attempt 3 — normal Chrome, different network. Finally worked.</li>
+        </ul>
+        <p class="mb-4">What I filled:</p>
+        <ul class="mb-4 list-disc list-inside space-y-1">
+          <li>Organisation type: Proprietary</li>
+          <li>Business: SuiteGenie</li>
+          <li>Activity: Services</li>
+          <li>NIC Code: 62010 (Computer programming)</li>
+          <li>Employees: 1</li>
+          <li>Turnover: 0</li>
+        </ul>
+        <p class="mb-4">Got the certificate. One hour of fighting a broken government website for one PDF that unlocks everything.</p>
+
+        <h2 class="text-xl font-semibold mt-6 mb-2">Meta Business Verification Submitted</h2>
+        <p class="mb-4">Went to <strong>business.facebook.com → Settings → Security Centre → Business Verification</strong>. Entered the Udyam registration number, business name exactly as on certificate, SuiteGenie as trade name.</p>
+        <p class="mb-4">Status: In Review. 2 working days. Once approved, Social Genie goes Live for public users.</p>
+
+        <h2 class="text-xl font-semibold mt-6 mb-2">LinkedIn Community Management API Reapplication</h2>
+        <p class="mb-4">Community Management API lets you post to LinkedIn company pages — essential for agency clients. Applied months ago, got rejected. Reapplied via LinkedIn's Zendesk support with a proper use case this time.</p>
+        <p class="mb-4"><strong>Subject:</strong></p>
+        <blockquote class="border-l-4 border-cyan-500 pl-4 italic text-zinc-300 mb-4">
+          <p>Community Management API Access Request — SuiteGenie (Registered MSME, India)</p>
+        </blockquote>
+        <p class="mb-4"><strong>Attachments:</strong> Udyam certificate, GoDaddy domain invoice, PAN card, Aadhaar (middle digits masked)</p>
+        <p class="mb-4">Having an actual business registration makes it look legitimate. Waiting to hear back.</p>
+
+        <h2 class="text-xl font-semibold mt-6 mb-2">What's Next</h2>
+        <p class="mb-4">Waiting on:</p>
+        <ul class="mb-4 list-disc list-inside space-y-1">
+          <li>Meta business verification — 2 working days</li>
+          <li>LinkedIn Community Management API — unknown</li>
+        </ul>
+        <p class="mb-4">Building in parallel:</p>
+        <ul class="mb-4 list-disc list-inside space-y-1">
+          <li>Enterprise workspace architecture for agency clients</li>
+          <li>Analytics paywall UI</li>
+          <li>Instagram App Review once Meta verification clears</li>
+        </ul>
+        <p class="mb-4">One day, a lot of debugging, one government website, three platform submissions. This is what building in public actually looks like.</p>
+        <p class="mb-4">Follow the SuiteGenie build at <a href="https://kanishksaraswat.me" class="text-cyan-300">kanishksaraswat.me</a></p>
+      </article>
+    `
+  },
+  {
+    id: 'threads-app-review-submission',
+    title: 'Getting Threads App Review Submitted: Container IDs vs Published Post IDs',
+    category: 'Projects',
+    date: '2026-02-21',
+    author: 'Kanishk Saraswat',
+    readTime: '8 min read',
+    summary: 'The day I learned the difference between a container ID and a published post ID the hard way while submitting Threads App Review.',
+    tags: ['Threads API', 'Meta', 'Graph API', 'App Review', 'SuiteGenie'],
+    content: `
+      <article class="prose prose-lg max-w-3xl mx-auto">
+        <header class="mb-8">
+          <h1 class="text-3xl font-bold mb-4">Getting Threads App Review Submitted: Container IDs vs Published Post IDs</h1>
+          <div class="flex items-center gap-4 text-zinc-400 mb-4">
+            <span>By Kanishk Saraswat</span>
+            <span>•</span>
+            <span>February 21, 2026</span>
+            <span>•</span>
+            <span>8 min read</span>
+          </div>
+          <div class="flex gap-2 flex-wrap">
+            <span class="chip text-xs">Threads API</span>
+            <span class="chip text-xs">Meta</span>
+            <span class="chip text-xs">Graph API</span>
+            <span class="chip text-xs">App Review</span>
+            <span class="chip text-xs">SuiteGenie</span>
+          </div>
+        </header>
+
+        <div class="mb-8 p-6 bg-cyan-500/10 border border-cyan-500/20 rounded-xl">
+          <p class="text-lg font-semibold text-cyan-300 mb-2">The day I learned the difference between a container ID and a published post ID the hard way</p>
+          <p class="text-zinc-200 leading-relaxed">
+            Meta requires you to prove your app actually works before approving it for public access. All testing happens in <strong>Graph API Explorer</strong> at developers.facebook.com/tools/explorer.
+          </p>
+        </div>
+
+        <h2 class="text-xl font-semibold mt-6 mb-2">Setting Up</h2>
+        <p class="mb-4">First — switch the domain dropdown from <code>graph.facebook.com</code> to <code>graph.threads.net</code>. Then click <strong>Generate Threads Access Token</strong> and log in with the Threads test account. Without this you get permission errors on every call.</p>
+
+        <h2 class="text-xl font-semibold mt-6 mb-2">The 4 Required Test Calls</h2>
+
+        <h3 class="text-lg font-medium mt-4 mb-2">Test Call 1 — Profile fetch</h3>
+        <p class="mb-4"><strong>Method:</strong> GET</p>
+        <pre class="bg-zinc-900 p-4 rounded-lg mb-4"><code>me?fields=id,name</code></pre>
+        <p class="mb-4"><strong>Response:</strong></p>
+        <pre class="bg-zinc-900 p-4 rounded-lg mb-4"><code class="language-json">{
+  "id": "26264170089882298",
+  "name": "Kanishk Saraswat"
+}</code></pre>
+        <p class="mb-4">✅ <code>threads_basic</code> — Completed</p>
+
+        <h3 class="text-lg font-medium mt-4 mb-2">Test Call 2 — Create post container</h3>
+        <p class="mb-4"><strong>Method:</strong> POST</p>
+        <pre class="bg-zinc-900 p-4 rounded-lg mb-4"><code>me/threads?media_type=TEXT&text=Testing SuiteGenie API</code></pre>
+        <p class="mb-4"><strong>Response:</strong></p>
+        <pre class="bg-zinc-900 p-4 rounded-lg mb-4"><code class="language-json">{
+  "id": "17942868513116160"
+}</code></pre>
+        <p class="mb-4">This creates a container but doesn't publish yet. Save this ID — call it <strong>ID_A</strong>.</p>
+
+        <h3 class="text-lg font-medium mt-4 mb-2">Test Call 3 — Publish the post</h3>
+        <p class="mb-4"><strong>Method:</strong> POST</p>
+        <pre class="bg-zinc-900 p-4 rounded-lg mb-4"><code>me/threads_publish?creation_id=17942868513116160</code></pre>
+        <p class="mb-4"><strong>Response:</strong></p>
+        <pre class="bg-zinc-900 p-4 rounded-lg mb-4"><code class="language-json">{
+  "id": "18182286562367432"
+}</code></pre>
+        <p class="mb-4">Post is now live on Threads. Save this second ID — call it <strong>ID_B</strong>. It's completely different from ID_A and this distinction matters for the next step.</p>
+        <p class="mb-4">✅ <code>threads_content_publish</code> — Completed</p>
+
+        <h3 class="text-lg font-medium mt-4 mb-2">Test Call 4 — Delete the post</h3>
+        <p class="mb-4">The mistake I made first time: tried deleting with <strong>ID_A</strong> (the container ID). Got:</p>
+        <pre class="bg-zinc-900 p-4 rounded-lg mb-4"><code class="language-json">{
+  "error": {
+    "message": "Object does not exist or missing permissions",
+    "code": 100
+  }
+}</code></pre>
+        <p class="mb-4">You need <strong>ID_B</strong> — the <strong>published post ID</strong>, not the container ID. They're different. Classic two-step API trap.</p>
+        <p class="mb-4"><strong>Method:</strong> DELETE</p>
+        <pre class="bg-zinc-900 p-4 rounded-lg mb-4"><code>18182286562367432</code></pre>
+        <p class="mb-4"><strong>Response:</strong></p>
+        <pre class="bg-zinc-900 p-4 rounded-lg mb-4"><code class="language-json">{
+  "success": true
+}</code></pre>
+        <p class="mb-4">✅ <code>threads_delete</code> — Completed</p>
+
+        <h2 class="text-xl font-semibold mt-6 mb-2">Submitted</h2>
+        <p class="mb-4">All 4 test calls complete. Submitted App Review with just:</p>
+        <ul class="mb-4 list-disc list-inside space-y-1">
+          <li>✅ threads_basic</li>
+          <li>✅ threads_content_publish</li>
+          <li>✅ threads_delete</li>
+          <li>✅ public_profile</li>
+        </ul>
+        <p class="mb-4">Removed all Instagram permissions from the submission — keeping it clean, will do Instagram separately after business verification clears.</p>
+        <p class="mb-4"><strong>Meta review:</strong> 3-7 business days.</p>
+
+        <h2 class="text-xl font-semibold mt-6 mb-2">What's Next</h2>
+        <p class="mb-4">Waiting on:</p>
+        <ul class="mb-4 list-disc list-inside space-y-1">
+          <li>Meta business verification — 2 working days</li>
+          <li>Threads App Review — 3-7 business days</li>
+          <li>LinkedIn Community Management API — unknown</li>
+        </ul>
+        <p class="mb-4">Building in parallel:</p>
+        <ul class="mb-4 list-disc list-inside space-y-1">
+          <li>Enterprise workspace architecture for agency clients</li>
+          <li>Analytics paywall UI</li>
+          <li>Instagram App Review once Meta verification clears</li>
+        </ul>
+        <p class="mb-4">Two days, a lot of debugging, one government website, three platform submissions. This is what building in public actually looks like.</p>
+        <p class="mb-4">Follow the SuiteGenie build at <a href="https://kanishksaraswat.me" class="text-cyan-300">kanishksaraswat.me</a></p>
+      </article>
+    `
+  },
+  {
     id: 'linkedin-cross-posting-2026',
     title: 'How We Built LinkedIn Cross-Posting Into Tweet Genie — Kanishk Saraswat',
     category: 'Projects',

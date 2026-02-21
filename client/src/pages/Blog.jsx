@@ -188,7 +188,7 @@ export default function Blog() {
                   </div>
 
                   {/* Enhanced Title */}
-                  <h2 className={`font-bold gradient-text group-hover:text-cyan-300 transition-colors duration-300 leading-tight mb-4 ${
+                  <h2 className={`font-bold text-cyan-400 group-hover:text-cyan-300 transition-colors duration-300 leading-tight mb-4 ${
                     viewMode === 'list' ? 'text-xl md:text-2xl' : 'text-xl'
                   }`}>
                     {post.title}
