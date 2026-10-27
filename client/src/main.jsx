@@ -14,6 +14,7 @@ import Skills from './pages/Skills.jsx'
 import Contact from './pages/Contact.jsx'
 import Blog from './pages/Blog.jsx'
 import BlogPost from './pages/BlogPost.jsx'
+import BungouArchiveCaseStudy from './pages/BungouArchiveCaseStudy.jsx'
 
 const router = createBrowserRouter([
   {
@@ -21,6 +22,7 @@ const router = createBrowserRouter([
     children: [
       { path: '/', element: <Home /> },
       { path: '/projects', element: <Projects /> },
+      { path: '/projects/bungouarchive', element: <BungouArchiveCaseStudy /> },
       { path: '/projects/:slug', element: <Project /> },
       { path: '/ventures', element: <Ventures /> },
       { path: '/ventures/:slug', element: <Venture /> },

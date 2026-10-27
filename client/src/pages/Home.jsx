@@ -279,6 +279,21 @@ export default function Home() {
         <div className="grid lg:grid-cols-2 gap-8">
           {[
             {
+              title: 'BungouArchive',
+              to: '/projects/bungouarchive',
+              badge: 'Featured',
+              desc: 'A curated fan platform for Bungo Stray Dogs with faction wars, 1v1 duels, behavior-based character assignment, and in-world moderation.',
+              chips: ['Next.js 14','TypeScript','Supabase','Redis','Gemini API','Vercel','Node 20'],
+              highlights: [
+                'Identity is earned from player behavior, not chosen at signup',
+                'Round-based duel system with server-side resolution and progression impact',
+                'Faction war model with guard and integrity mechanics tied to district control',
+                'Guide Terminal personalizes answers from live profile context',
+                'Ango-led moderation is integrated into in-world narrative and live ops',
+              ],
+              images: ['/images/home_bsd.png']
+            },
+            {
               title: 'Anicafe',
               to: '/projects/anicafe',
               badge: 'Exit',

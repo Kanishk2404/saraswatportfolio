@@ -1,4 +1,5 @@
 export const projectsIndexOrder = [
+  'bungouarchive',
   'anicafe',
   'suitegenie',
   'tweetgenie',
@@ -12,6 +13,33 @@ export const projectsIndexOrder = [
 ]
 
 export const projects = {
+  'bungouarchive': {
+    title: 'BungouArchive',
+    role: 'Full-Stack Builder and Live Ops',
+    oneLiner: 'A curated fan platform for Bungo Stray Dogs with faction wars, 1v1 duels, AI-driven character assignment and an in-world moderation system.',
+    description: 'Identity is earned through behavior signals, with lore, archive reads, duels, faction war state, and moderation all connected to one progression model.',
+    status: 'Development paused due to infrastructure scaling limits.',
+    live: 'https://bungou-stray-dogs.vercel.app',
+    github: 'https://github.com/animecalssroom/bungoustraydogs',
+    tech: ['Next.js 14 (App Router)', 'TypeScript', 'Supabase (Postgres, RLS, Realtime, RPC)', 'Redis', 'Gemini API', 'Vercel', 'Node 20'],
+    image: '/images/home_bsd.png',
+    images: [
+      '/images/home_bsd.png',
+      '/images/entracebsd.png',
+      '/images/TODO-bungou-home-theme-switch.png',
+      '/images/TODO-bungou-profile-character-reveal.png',
+      '/images/TODO-bungou-duel-screen.png',
+      '/images/TODO-bungou-guide-terminal.png',
+      '/images/TODO-bungou-faction-room.png'
+    ],
+    highlights: [
+      'Behavior-based character assignment with Gemini and rule-based fallback',
+      'Round-based 1v1 duels with server-side move resolution and progression hooks',
+      'Rules-driven faction war engine with guard and integrity mechanics',
+      'Yokohama territory control map tied to live war outcomes',
+      'In-world moderation model through Ango and separate owner operations'
+    ]
+  },
   'anicafe': {
   title: 'Anicafe',
     dates: 'Built and scaled; exited; brand revival ongoing',
