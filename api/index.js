@@ -15,8 +15,7 @@ app.use(compression());
 const allowedOrigins = [
   'http://localhost:3000',
   'http://localhost:5173',
-  'https://kanishksaraswat.me',
-  'https://www.kanishksaraswat.me'
+  'https://kanishksaraswat.vercel.app'
 ];
 
 app.use((req, res, next) => {
@@ -78,7 +77,7 @@ app.post('/api/contact', async (req, res) => {
     console.log('RESEND_API_KEY:', process.env.RESEND_API_KEY);
     const resend = new Resend(process.env.RESEND_API_KEY);
     const { data, error } = await resend.emails.send({
-      from: `Portfolio Contact <noreply@kanishksaraswat.me>`,
+      from: process.env.EMAIL_FROM || 'Portfolio Contact <onboarding@resend.dev>',
       to: process.env.EMAIL_USER,
       subject: `Portfolio Contact Form!: ${subject}`,
       text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,

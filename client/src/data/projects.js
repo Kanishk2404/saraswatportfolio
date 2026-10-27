@@ -184,10 +184,10 @@ export const projects = {
   },
   'ec2-nginx-https': {
     title: 'EC2 + Route53 + Nginx + HTTPS Production Deployment (2025)',
-    oneLiner: 'Full production deployment of SuiteGenie platform from localhost to https://kanishksaraswat.me with complete DevOps infrastructure.',
+    oneLiner: 'Full production deployment of SuiteGenie platform from localhost to https://kanishksaraswat.vercel.app with complete DevOps infrastructure.',
     infrastructure: [
       'AWS EC2 (Ubuntu) with proper security groups (ports 22, 80, 443)',
-      'Route 53 DNS management with A records for kanishksaraswat.me',
+      'Route 53 DNS management with A records for kanishksaraswat.vercel.app',
       'Nginx reverse proxy configuration for static frontend and /api/* routing',
       'PM2 process management with systemd integration for auto-restart'
     ],
@@ -257,7 +257,7 @@ export const projects = {
     description: `Tweet Genie automates bulk Twitter workflows missing from Hootsuite and Buffer â€” reducing 3 hours of manual work to 5 minutes.`,
     features: [
       'Bulk AI generation: 30-50 tweets',
-      'Custom scheduling: daily, 3Ã-/week, 4Ã-/week, custom',
+      'Custom scheduling: daily, 3ï¿½-/week, 4ï¿½-/week, custom',
       'Redis cost reduction via custom PostgreSQL scheduler',
       'Rule-based analytics and historical trends',
       'Team approval workflows and RBAC',
