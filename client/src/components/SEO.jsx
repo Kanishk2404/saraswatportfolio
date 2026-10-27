@@ -1,6 +1,25 @@
 import { Helmet } from 'react-helmet-async';
 
 const siteName = 'Kanishk Saraswat | Full-Stack Developer | SuiteGenie Founder';
+const defaultSiteUrl = 'https://saraswatportfolio.vercel.app';
+
+function getSiteUrl() {
+  const envUrl = import.meta.env.VITE_SITE_URL?.trim();
+  if (envUrl) {
+    const normalizedEnv = /^https?:\/\//i.test(envUrl) ? envUrl : `https://${envUrl}`;
+    try {
+      return new URL(normalizedEnv).origin;
+    } catch {
+      return defaultSiteUrl;
+    }
+  }
+
+  if (typeof window !== 'undefined' && window.location?.origin) {
+    return window.location.origin;
+  }
+
+  return defaultSiteUrl;
+}
 
 export default function SEO({ 
   title, 
@@ -16,7 +35,9 @@ export default function SEO({
   tags = []
 }) {
   const fullTitle = title ? `${title} | ${siteName}` : siteName;
-  const fullUrl = `https://kanishksaraswat.vercel.app${url}`;
+  const siteUrl = getSiteUrl();
+  const normalizedPath = url || '/';
+  const fullUrl = `${siteUrl}${normalizedPath}`;
 
   const defaultKeywords = [
     'Anicafe',
@@ -30,8 +51,8 @@ export default function SEO({
       "@context": "https://schema.org",
       "@type": "Person",
       "name": "Kanishk Saraswat",
-      "url": "https://kanishksaraswat.vercel.app",
-      "image": "https://kanishksaraswat.vercel.app/images/profile.jpg",
+      "url": siteUrl,
+      "image": `${siteUrl}/images/profile.jpg`,
       "sameAs": [
         "https://github.com/kanishksaraswat",
         "https://linkedin.com/in/kanishksaraswat"
@@ -51,18 +72,18 @@ export default function SEO({
         "@type": "Article",
         "headline": title,
         "description": description,
-        "image": ogImage.startsWith('http') ? ogImage : `https://kanishksaraswat.vercel.app${ogImage}`,
+        "image": ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`,
         "author": {
           "@type": "Person",
           "name": author,
-          "url": "https://kanishksaraswat.vercel.app"
+          "url": siteUrl
         },
         "publisher": {
           "@type": "Organization",
           "name": siteName,
           "logo": {
             "@type": "ImageObject",
-            "url": "https://kanishksaraswat.vercel.app/images/profile.jpg"
+            "url": `${siteUrl}/images/profile.jpg`
           }
         },
         "datePublished": publishedTime,
@@ -157,8 +178,8 @@ export default function SEO({
         "mainEntity": {
           "@type": "Person",
           "name": "Kanishk Saraswat",
-          "email": "contact@kanishksaraswat.vercel.app",
-          "url": "https://kanishksaraswat.vercel.app"
+          "email": "saraswatkanishk24@gmail.com",
+          "url": siteUrl
         }
       };
     }
@@ -174,14 +195,14 @@ export default function SEO({
         "author": {
           "@type": "Person",
           "name": author,
-          "url": "https://kanishksaraswat.vercel.app"
+          "url": siteUrl
         },
         "publisher": {
           "@type": "Organization",
           "name": siteName,
           "logo": {
             "@type": "ImageObject",
-            "url": "https://kanishksaraswat.vercel.app/images/profile.jpg"
+            "url": `${siteUrl}/images/profile.jpg`
           }
         }
       };
@@ -206,7 +227,7 @@ export default function SEO({
       <meta property="og:url" content={fullUrl} />
       <meta property="og:title" content={title ? `${title} | ${siteName}` : `${siteName}`} />
       <meta property="og:description" content={description} />
-      <meta property="og:image" content={ogImage.startsWith('http') ? ogImage : `https://kanishksaraswat.vercel.app${ogImage}`} />
+      <meta property="og:image" content={ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`} />
       <meta property="og:site_name" content={siteName} />
       <meta property="og:locale" content="en_US" />
 
@@ -215,7 +236,7 @@ export default function SEO({
       <meta name="twitter:url" content={fullUrl} />
       <meta name="twitter:title" content={title ? `${title} | ${siteName}` : `${siteName}`} />
       <meta name="twitter:description" content={description} />
-      <meta name="twitter:image" content={ogImage.startsWith('http') ? ogImage : `https://kanishksaraswat.vercel.app${ogImage}`} />
+      <meta name="twitter:image" content={ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`} />
       <meta name="twitter:creator" content="@kanishksaraswat" />
 
       {/* Additional Meta Tags for Articles */}

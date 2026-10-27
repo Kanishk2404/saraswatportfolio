@@ -154,7 +154,7 @@ Add your new blog post URL to `public/sitemap.xml`:
 
 ```xml
 <url>
-  <loc>https://kanishksaraswat.vercel.app/blog/your-blog-post-id</loc>
+  <loc>https://saraswatportfolio.vercel.app/blog/your-blog-post-id</loc>
   <lastmod>2025-01-27</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.7</priority>

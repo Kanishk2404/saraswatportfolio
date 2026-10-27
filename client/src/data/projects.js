@@ -184,10 +184,10 @@ export const projects = {
   },
   'ec2-nginx-https': {
     title: 'EC2 + Route53 + Nginx + HTTPS Production Deployment (2025)',
-    oneLiner: 'Full production deployment of SuiteGenie platform from localhost to https://kanishksaraswat.vercel.app with complete DevOps infrastructure.',
+    oneLiner: 'Full production deployment of SuiteGenie platform from localhost to https://saraswatportfolio.vercel.app with complete DevOps infrastructure.',
     infrastructure: [
       'AWS EC2 (Ubuntu) with proper security groups (ports 22, 80, 443)',
-      'Route 53 DNS management with A records for kanishksaraswat.vercel.app',
+      'Route 53 DNS management with A records for saraswatportfolio.vercel.app',
       'Nginx reverse proxy configuration for static frontend and /api/* routing',
       'PM2 process management with systemd integration for auto-restart'
     ],

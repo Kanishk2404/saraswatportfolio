@@ -1,9 +1,9 @@
 User-agent: *
 Allow: /
-Sitemap: https://kanishksaraswat.vercel.app/sitemap.xml
+Sitemap: https://saraswatportfolio.vercel.app/sitemap.xml
 
 # Sitemap
-Sitemap: https://kanishksaraswat.vercel.app/sitemap.xml
+Sitemap: https://saraswatportfolio.vercel.app/sitemap.xml
 
 # Disallow admin or private areas (if any)
 Disallow: /admin/

@@ -128,7 +128,7 @@ const response = await analytics.getOverview(params);</code></pre>
           <li>Instagram App Review once Meta verification clears</li>
         </ul>
         <p class="mb-4">One day, a lot of debugging, one government website, three platform submissions. This is what building in public actually looks like.</p>
-        <p class="mb-4">Follow the SuiteGenie build at <a href="https://kanishksaraswat.vercel.app" class="text-cyan-300">kanishksaraswat.vercel.app</a></p>
+        <p class="mb-4">Follow the SuiteGenie build at <a href="https://saraswatportfolio.vercel.app" class="text-cyan-300">saraswatportfolio.vercel.app</a></p>
       </article>
     `
   },
@@ -244,7 +244,7 @@ const response = await analytics.getOverview(params);</code></pre>
           <li>Instagram App Review once Meta verification clears</li>
         </ul>
         <p class="mb-4">Two days, a lot of debugging, one government website, three platform submissions. This is what building in public actually looks like.</p>
-        <p class="mb-4">Follow the SuiteGenie build at <a href="https://kanishksaraswat.vercel.app" class="text-cyan-300">kanishksaraswat.vercel.app</a></p>
+        <p class="mb-4">Follow the SuiteGenie build at <a href="https://saraswatportfolio.vercel.app" class="text-cyan-300">saraswatportfolio.vercel.app</a></p>
       </article>
     `
   },
@@ -788,7 +788,7 @@ app.use('/api', apiRoutes);               // ← user sessions required</code></
       <!-- FOOTER -->
       <div class="footer">
         <div class="footer-sig">Kanishk Saraswat</div>
-        <div>kanishksaraswat.vercel.app · February 2026</div>
+        <div>saraswatportfolio.vercel.app · February 2026</div>
       </div>
 
     `
