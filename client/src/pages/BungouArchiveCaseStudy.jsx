@@ -164,6 +164,26 @@ const processNotes = [
   'All architecture, implementation, and system design decisions were mine, and I ran live game operations through the Ango account.'
 ];
 
+const keyFeatureHighlights = [
+  'Behavior-based character assignment with Gemini and fallback logic',
+  'Round-based 1v1 duel resolver tied to progression signals',
+  'Faction war engine with guards, integrity direction, and strike approaches',
+  'Yokohama districts map linked to live game-state control',
+  'Guide Terminal grounded in live player profile context',
+  'Ango in-world moderation model with separate owner operations',
+  'AP progression economy with fixed thresholds and rank floor',
+  'Archive, lore, registry, flags, and support-ticket content layer'
+];
+
+const engineeringWorkHighlights = [
+  'Surgical realtime filters in faction room and duel matchmaker to reduce redundant broadcasts (~80%).',
+  'Database indexing plus get_faction_space_data RPC and multi-event count function to cut repeated scans.',
+  'Session-hint cookie optimization to skip mandatory DB auth checks on non-sensitive navigation paths.',
+  'Auth callback hardening for Vercel proxy protocol mismatch (oauth_failed production fix).',
+  'Core war-logic rewrite to correct guard blocking, integrity direction, and stat-resolution fallback tiers.',
+  'Security sanitization on public write surfaces with RLS-protected per-user data boundaries.'
+];
+
 export default function BungouArchiveCaseStudy() {
   return (
     <>
@@ -258,7 +278,7 @@ export default function BungouArchiveCaseStudy() {
         <section className="container pb-8">
           <div className="neo">
             <div className="inner p-8">
-              <h2 className="section-title mb-4">Overview</h2>
+              <h2 className="text-2xl md:text-3xl font-bold text-zinc-100 mb-4">Overview</h2>
               <p className="text-zinc-300 leading-relaxed">
                 BungouArchive is a full-stack community platform designed to feel like an official Yokohama ability-user record, not a generic forum. Players take a role exam, join a faction, write lore, read archive case files, duel each other, chat, and earn rank through real activity. Identity is earned, not selected at signup: character assignment is behavior-based. The platform supports three full visual themes (Dawn, Twilight, Midnight), with faction-aware default presentation.
               </p>
@@ -267,7 +287,39 @@ export default function BungouArchiveCaseStudy() {
         </section>
 
         <section className="container py-8">
-          <h2 className="section-title mb-6">Feature Sections</h2>
+          <div className="grid lg:grid-cols-2 gap-6">
+            <div className="neo">
+              <div className="inner p-8 h-full">
+                <h2 className="text-2xl md:text-3xl font-bold text-zinc-100 mb-4">Feature Highlights</h2>
+                <ul className="space-y-2 text-zinc-300">
+                  {keyFeatureHighlights.map((item) => (
+                    <li key={item} className="flex items-start gap-3">
+                      <span className="w-2 h-2 rounded-full bg-cyan-400 mt-2 flex-shrink-0" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            <div className="neo">
+              <div className="inner p-8 h-full">
+                <h2 className="text-2xl md:text-3xl font-bold text-zinc-100 mb-4">Engineering Work Highlights</h2>
+                <ul className="space-y-2 text-zinc-300">
+                  {engineeringWorkHighlights.map((item) => (
+                    <li key={item} className="flex items-start gap-3">
+                      <span className="w-2 h-2 rounded-full bg-cyan-400 mt-2 flex-shrink-0" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="container py-8">
+          <h2 className="text-2xl md:text-3xl font-bold text-zinc-100 mb-6">Feature Sections</h2>
           <div className="grid gap-6">
             {featureSections.map((feature, index) => (
               (() => {
@@ -313,7 +365,7 @@ export default function BungouArchiveCaseStudy() {
         <section className="container py-8">
           <div className="neo">
             <div className="inner p-8">
-              <h2 className="section-title mb-6">Game Design At A Glance</h2>
+              <h2 className="text-2xl md:text-3xl font-bold text-zinc-100 mb-6">Game Design At A Glance</h2>
               <div className="overflow-x-auto">
                 <table className="w-full text-sm text-left border-collapse">
                   <thead>
@@ -354,7 +406,7 @@ export default function BungouArchiveCaseStudy() {
         <section className="container py-8">
           <div className="neo">
             <div className="inner p-8">
-              <h2 className="section-title mb-4">Architecture And Engineering Challenges</h2>
+              <h2 className="text-2xl md:text-3xl font-bold text-zinc-100 mb-4">Architecture And Engineering Challenges</h2>
               <ul className="space-y-3 text-zinc-300">
                 {engineeringChallenges.map((item) => (
                   <li key={item} className="flex items-start gap-3">
@@ -370,7 +422,7 @@ export default function BungouArchiveCaseStudy() {
         <section className="container py-8">
           <div className="neo">
             <div className="inner p-8">
-              <h2 className="section-title mb-4">Challenges And Limitations</h2>
+              <h2 className="text-2xl md:text-3xl font-bold text-zinc-100 mb-4">Challenges And Limitations</h2>
               <ul className="space-y-3 text-zinc-300">
                 {limitations.map((item) => (
                   <li key={item} className="flex items-start gap-3">
@@ -386,7 +438,7 @@ export default function BungouArchiveCaseStudy() {
         <section className="container py-8">
           <div className="neo">
             <div className="inner p-8">
-              <h2 className="section-title mb-4">If I Rebuilt It</h2>
+              <h2 className="text-2xl md:text-3xl font-bold text-zinc-100 mb-4">If I Rebuilt It</h2>
               <ul className="space-y-3 text-zinc-300">
                 {rebuildPlan.map((item) => (
                   <li key={item} className="flex items-start gap-3">
@@ -402,7 +454,7 @@ export default function BungouArchiveCaseStudy() {
         <section className="container py-8">
           <div className="neo">
             <div className="inner p-8">
-              <h2 className="section-title mb-4">Process And Transparency</h2>
+              <h2 className="text-2xl md:text-3xl font-bold text-zinc-100 mb-4">Process And Transparency</h2>
               <ul className="space-y-3 text-zinc-300">
                 {processNotes.map((item) => (
                   <li key={item} className="flex items-start gap-3">
@@ -418,7 +470,7 @@ export default function BungouArchiveCaseStudy() {
         <section className="container pt-8 pb-16">
           <div className="neo">
             <div className="inner p-8">
-              <h2 className="section-title mb-4">Disclaimers And Credits</h2>
+              <h2 className="text-2xl md:text-3xl font-bold text-zinc-100 mb-4">Disclaimers And Credits</h2>
               <p className="text-zinc-300 leading-relaxed">
                 Fan project. Based on Bungo Stray Dogs by Kafka Asagiri and Sango Harukawa. Not affiliated with or endorsed by the creators or publishers. Character data referenced from the Bungo Stray Dogs Wiki (Fandom), CC BY-SA.
               </p>
