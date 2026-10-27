@@ -3,6 +3,25 @@ import { Link } from 'react-router-dom';
 import { ArrowLeft, ExternalLink, Github } from 'lucide-react';
 import SEO from '@/components/SEO.jsx';
 
+function createFallbackSvg(label) {
+  const safeLabel = String(label || 'Screenshot TODO');
+  const svg = `
+    <svg xmlns="http://www.w3.org/2000/svg" width="1400" height="700" viewBox="0 0 1400 700">
+      <defs>
+        <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#0f172a"/>
+          <stop offset="100%" stop-color="#1f2937"/>
+        </linearGradient>
+      </defs>
+      <rect width="1400" height="700" fill="url(#g)"/>
+      <rect x="90" y="90" width="1220" height="520" rx="20" fill="none" stroke="#22d3ee" stroke-opacity="0.45" stroke-dasharray="10 10"/>
+      <text x="700" y="332" font-family="Arial, sans-serif" font-size="42" fill="#e5e7eb" text-anchor="middle">${safeLabel}</text>
+      <text x="700" y="386" font-family="Arial, sans-serif" font-size="24" fill="#94a3b8" text-anchor="middle">Asset pending</text>
+    </svg>
+  `;
+  return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
+}
+
 const stack = [
   'Next.js 14 (App Router)',
   'TypeScript',
@@ -217,14 +236,23 @@ export default function BungouArchiveCaseStudy() {
                   src="/images/home_bsd.png"
                   alt="BungouArchive hero screenshot showing the Yokohama districts territory map"
                   className="w-full h-[260px] md:h-[420px] object-cover"
+                  loading="eager"
                   onError={(e) => {
-                    e.currentTarget.src = 'https://via.placeholder.com/1400x700/0f172a/ffffff?text=BungouArchive+Hero+Image+TODO';
+                    e.currentTarget.src = createFallbackSvg('BungouArchive Hero Image TODO');
                   }}
                 />
               </div>
               <p className="text-xs text-zinc-400 mt-3">Hero image: using current available screenshot (replace with districts map when ready).</p>
             </div>
           </motion.div>
+        </section>
+
+        <section className="container pb-8">
+          <div className="card p-4 border border-cyan-800/40 bg-cyan-950/20">
+            <p className="text-sm text-cyan-200">
+              Media status: 2 live screenshots integrated; remaining slots intentionally kept as TODO placeholders.
+            </p>
+          </div>
         </section>
 
         <section className="container pb-8">
@@ -242,6 +270,9 @@ export default function BungouArchiveCaseStudy() {
           <h2 className="section-title mb-6">Feature Sections</h2>
           <div className="grid gap-6">
             {featureSections.map((feature, index) => (
+              (() => {
+                const isTodoShot = feature.screenshot.src.includes('TODO-');
+                return (
               <motion.article
                 key={feature.title}
                 initial={{ opacity: 0, y: 16 }}
@@ -251,16 +282,20 @@ export default function BungouArchiveCaseStudy() {
                 className="neo"
               >
                 <div className="inner p-7">
-                  <h3 className="text-xl font-bold text-zinc-100 mb-3">{feature.title}</h3>
+                  <div className="flex flex-wrap items-center gap-2 mb-3">
+                    <h3 className="text-xl font-bold text-zinc-100">{feature.title}</h3>
+                    {isTodoShot && <span className="chip text-[11px]">TODO image</span>}
+                  </div>
                   <p className="text-zinc-300 leading-relaxed mb-5">{feature.description}</p>
 
-                  <figure className="rounded-xl overflow-hidden border border-zinc-700 bg-zinc-900/50">
+                  <figure className={`rounded-xl overflow-hidden border ${isTodoShot ? 'border-dashed border-cyan-700/70 bg-cyan-950/10' : 'border-zinc-700 bg-zinc-900/50'}`}>
                     <img
                       src={feature.screenshot.src}
                       alt={feature.screenshot.alt}
                       className="w-full h-[220px] md:h-[360px] object-cover"
+                      loading="lazy"
                       onError={(e) => {
-                        e.currentTarget.src = 'https://via.placeholder.com/1200x650/0b1220/e5e7eb?text=Screenshot+TODO';
+                        e.currentTarget.src = createFallbackSvg('Screenshot TODO');
                       }}
                     />
                     <figcaption className="text-xs text-zinc-400 px-3 py-2">
@@ -269,6 +304,8 @@ export default function BungouArchiveCaseStudy() {
                   </figure>
                 </div>
               </motion.article>
+                );
+              })()
             ))}
           </div>
         </section>
