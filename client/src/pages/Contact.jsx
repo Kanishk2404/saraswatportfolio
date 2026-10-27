@@ -1,8 +1,28 @@
-import { motion } from 'framer-motion';
+  import { motion } from 'framer-motion';
 import ProfileCard from './ProfileCard';
 import { Mail, Github, Linkedin, MessageCircle, Download, Loader2, CheckCircle, AlertCircle } from 'lucide-react';
 import { useState } from 'react';
 import SEO from '@/components/SEO.jsx';
+
+function buildContactEndpoint() {
+  const rawBase = import.meta.env.VITE_API_URL?.trim();
+  if (!rawBase) return '/api/contact';
+
+  // Allow relative API base paths like "/api".
+  if (rawBase.startsWith('/')) {
+    return `${rawBase.replace(/\/+$/, '')}/contact`;
+  }
+
+  // Accept values with or without protocol and normalize to a valid origin.
+  const withProtocol = /^https?:\/\//i.test(rawBase) ? rawBase : `https://${rawBase}`;
+  try {
+    const normalized = new URL(withProtocol);
+    return `${normalized.origin}/api/contact`;
+  } catch {
+    console.warn('Invalid VITE_API_URL, falling back to same-origin /api/contact:', rawBase);
+    return '/api/contact';
+  }
+}
 
 export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -22,25 +42,38 @@ export default function Contact() {
     const subject = `Portfolio Contact - ${name}`;
     
     try {
-      // Always use VITE_API_URL if set, otherwise same-origin
-      const rawBase = import.meta.env.VITE_API_URL;
-      const endpoint = rawBase
-        ? rawBase.replace(/\/+$/, '') + '/api/contact'
-        : '/api/contact';
-      console.log('Contact endpoint:', endpoint);
+      const endpoint = buildContactEndpoint();
+      const fallbackEndpoint = '/api/contact';
+      const endpointsToTry = endpoint === fallbackEndpoint ? [endpoint] : [endpoint, fallbackEndpoint];
 
-      const res = await fetch(endpoint, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ 
-          name, 
-          email, 
-          linkedin, 
-          company, 
-          subject, 
-          message 
-        })
-      });
+      let res = null;
+      let lastNetworkError = null;
+
+      for (const currentEndpoint of endpointsToTry) {
+        try {
+          console.log('Contact endpoint:', currentEndpoint);
+          res = await fetch(currentEndpoint, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              name,
+              email,
+              linkedin,
+              company,
+              subject,
+              message
+            })
+          });
+          break;
+        } catch (networkError) {
+          lastNetworkError = networkError;
+          console.error('Network error while posting contact form:', networkError);
+        }
+      }
+
+      if (!res) {
+        throw lastNetworkError || new Error('Contact request failed before a response was received');
+      }
 
       if (res.ok) {
         setSubmitStatus('success');
