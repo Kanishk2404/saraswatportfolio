@@ -85,7 +85,7 @@
                 <p className="text-zinc-300 mb-4">Download my latest resume to learn more about my experience and skills.</p>
                 <a
                   className="btn-secondary inline-flex items-center gap-2"
-                  href="https://drive.google.com/file/d/1ZDZpCayTf8h0uAaK3ZKqNk8XcWN2xY3G/view?usp=drive_link"
+                  href="https://drive.google.com/file/d/1gvruR_aD84icRbkk9pdf14-aUmERP7xg/view?usp=drive_link"
                   target="_blank"
                   rel="noopener noreferrer"
                   download
