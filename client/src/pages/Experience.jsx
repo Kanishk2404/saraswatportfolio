@@ -53,24 +53,25 @@ export default function Experience(){
         {/* Experience Timeline */}
         <div className="space-y-8">
           <Exp
-            company="Bluez"
-            role="Website Development/SEO"
-            date="Jan 2026 – Present"
+            company="4 Bluez"
+            role="Software & Web Engineering Intern"
+            date="Oct 2025 – Feb 2026"
             location="Remote"
             achievements={[
-              'Working on website development and optimization',
-              'Implementing comprehensive SEO strategies',
-              'Improving site performance and user experience',
-              'Optimizing content for search engine visibility'
+              'Rebuilt the company web platform with optimized assets and an SEO-focused architecture',
+              'Improved page responsiveness and search visibility through performance and content structure work',
+              'Engineered an internal REST API portal to manage client records and spare-part availability',
+              'Built automated low-stock triggers to flag inventory before parts ran out unnoticed',
+              'Deployed the internal tool behind private network boundaries so company and client data was not publicly exposed'
             ]}
-            tech={['Web Development', 'SEO', 'Content Optimization', 'Analytics']}
+            tech={['REST APIs', 'SEO', 'Asset Optimization', 'Inventory Automation', 'Private Network Deployment']}
             icon={TrendingUp}
           />
 
           <Exp
             company="Sparklehood"
             role="DevOps/SEO/Full‑Stack"
-            date="Jul 2025 – Present"
+            date="Jul 2025 – Sep 2026"
             location="Remote"
             achievements={[
               'Hosting and DevOps for internal tools (n8n) and a Node.js AI app on AWS (VPC, EC2, RDS)',
@@ -179,4 +180,3 @@ function Exp({company, role, date, location, achievements, tech, icon}){
     </motion.div>
   )
 }
-

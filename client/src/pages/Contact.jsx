@@ -1,99 +1,10 @@
   import { motion } from 'framer-motion';
-import ProfileCard from './ProfileCard';
-import { Mail, Github, Linkedin, MessageCircle, Download, Loader2, CheckCircle, AlertCircle } from 'lucide-react';
-import { useState } from 'react';
-import SEO from '@/components/SEO.jsx';
+  import ProfileCard from './ProfileCard';
+  import { Mail, Github, Linkedin, Download } from 'lucide-react';
+  import SEO from '@/components/SEO.jsx';
 
-function buildContactEndpoint() {
-  const rawBase = import.meta.env.VITE_API_URL?.trim();
-  if (!rawBase) return '/api/contact';
-
-  // Allow relative API base paths like "/api".
-  if (rawBase.startsWith('/')) {
-    return `${rawBase.replace(/\/+$/, '')}/contact`;
-  }
-
-  // Accept values with or without protocol and normalize to a valid origin.
-  const withProtocol = /^https?:\/\//i.test(rawBase) ? rawBase : `https://${rawBase}`;
-  try {
-    const normalized = new URL(withProtocol);
-    return `${normalized.origin}/api/contact`;
-  } catch {
-    console.warn('Invalid VITE_API_URL, falling back to same-origin /api/contact:', rawBase);
-    return '/api/contact';
-  }
-}
-
-export default function Contact() {
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState(null); // 'success' | 'error' | null
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-    setSubmitStatus(null);
-    
-    const formData = new FormData(e.target);
-    const name = formData.get('name');
-    const email = formData.get('email');
-    const linkedin = formData.get('linkedin');
-    const company = formData.get('company');
-    const message = formData.get('message');
-    const subject = `Portfolio Contact - ${name}`;
-    
-    try {
-      const endpoint = buildContactEndpoint();
-      const fallbackEndpoint = '/api/contact';
-      const endpointsToTry = endpoint === fallbackEndpoint ? [endpoint] : [endpoint, fallbackEndpoint];
-
-      let res = null;
-      let lastNetworkError = null;
-
-      for (const currentEndpoint of endpointsToTry) {
-        try {
-          console.log('Contact endpoint:', currentEndpoint);
-          res = await fetch(currentEndpoint, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              name,
-              email,
-              linkedin,
-              company,
-              subject,
-              message
-            })
-          });
-          break;
-        } catch (networkError) {
-          lastNetworkError = networkError;
-          console.error('Network error while posting contact form:', networkError);
-        }
-      }
-
-      if (!res) {
-        throw lastNetworkError || new Error('Contact request failed before a response was received');
-      }
-
-      if (res.ok) {
-        setSubmitStatus('success');
-        e.target.reset();
-      } else {
-        const text = await res.text().catch(() => null);
-        console.error('Contact submit failed:', res.status, text);
-        setSubmitStatus('error');
-      }
-    } catch (err) {
-      console.error('Contact submit error:', err);
-      setSubmitStatus('error');
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
-
-
-  return (
+  export default function Contact() {
+    return (
     <>
       <SEO 
         title="Contact"
@@ -105,7 +16,7 @@ export default function Contact() {
           'Project Collaboration',
           'Web Development Services',
           'Freelance Developer',
-          'Contact Form'
+          'Professional Contact Details'
         ]}
         url="/contact"
       />
@@ -133,110 +44,11 @@ export default function Contact() {
           >
             <div>
               <h2 className="text-2xl font-bold mb-6 text-zinc-100">Get In Touch</h2>
-              
-              {/* Contact Form */}
-              <div className="bg-zinc-800/50 p-6 rounded-lg mb-8">
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-zinc-300 mb-2">
-                      Name
-                    </label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      required
-                      className="w-full px-4 py-3 bg-zinc-900 border border-zinc-700 rounded-lg text-zinc-100 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
-                      placeholder="Your name"
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-zinc-300 mb-2">
-                      Email
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      required
-                      className="w-full px-4 py-3 bg-zinc-900 border border-zinc-700 rounded-lg text-zinc-100 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
-                      placeholder="your.email@example.com"
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="linkedin" className="block text-sm font-medium text-zinc-300 mb-2">
-                      LinkedIn Profile (required)
-                    </label>
-                    <input
-                      type="url"
-                      id="linkedin"
-                      name="linkedin"
-                      required
-                      className="w-full px-4 py-3 bg-zinc-900 border border-zinc-700 rounded-lg text-zinc-100 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
-                      placeholder="https://linkedin.com/in/your-profile"
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="company" className="block text-sm font-medium text-zinc-300 mb-2">
-                      Company Name (optional)
-                    </label>
-                    <input
-                      type="text"
-                      id="company"
-                      name="company"
-                      className="w-full px-4 py-3 bg-zinc-900 border border-zinc-700 rounded-lg text-zinc-100 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
-                      placeholder="Your company name (optional)"
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="message" className="block text-sm font-medium text-zinc-300 mb-2">
-                      Message
-                    </label>
-                    <textarea
-                      id="message"
-                      name="message"
-                      rows="4"
-                      required
-                      className="w-full px-4 py-3 bg-zinc-900 border border-zinc-700 rounded-lg text-zinc-100 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
-                      placeholder="Tell me about your project or opportunity..."
-                    ></textarea>
-                  </div>
-                  <button
-                    type="submit"
-                    className="w-full btn-primary flex items-center justify-center gap-2"
-                    disabled={isSubmitting}
-                  >
-                    {isSubmitting ? (
-                      <>
-                        <Loader2 className="h-4 w-4 animate-spin" />
-                        Sending...
-                      </>
-                    ) : submitStatus === 'success' ? (
-                      <>
-                        <CheckCircle className="h-4 w-4" />
-                        Message Sent!
-                      </>
-                    ) : (
-                      <>
-                        <Mail className="h-4 w-4" />
-                        Send Message
-                      </>
-                    )}
-                  </button>
-                </form>
-                {submitStatus && (
-                  <div className={`mt-4 p-3 rounded-lg text-center ${
-                    submitStatus === 'success' ? 'bg-green-500/20 text-green-200' : 'bg-red-500/20 text-red-200'
-                  }`}>
-                    {submitStatus === 'success' ? 'Message sent! I will get back to you soon.' : 'Failed to send message. Please try again later.'}
-                  </div>
-                )}
-              </div>        
 
               {/* Social Links */}
               <div className="bg-zinc-800/50 p-6 rounded-lg">
                 <h3 className="text-lg font-semibold text-zinc-200 mb-4">Connect & Follow</h3>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid sm:grid-cols-3 gap-4">
                   <a
                     href="https://github.com/Kanishk2404"
                     target="_blank"
@@ -258,23 +70,11 @@ export default function Contact() {
                   </a>
                   
                   <a
-                    href="https://hub.docker.com/u/kanishk2404"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    href="mailto:saraswatkanishk24@gmail.com"
                     className="flex items-center gap-3 p-3 bg-zinc-900/50 rounded-lg hover:bg-zinc-700/50 transition-colors group"
                   >
-                    <MessageCircle size={20} className="text-zinc-400 group-hover:text-zinc-200" />
-                    <span className="text-zinc-300 group-hover:text-zinc-100">Docker Hub</span>
-                  </a>
-                  
-                  <a
-                    href="https://play.picoctf.org/users/kanishk2404"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-3 p-3 bg-zinc-900/50 rounded-lg hover:bg-zinc-700/50 transition-colors group"
-                  >
-                    <MessageCircle size={20} className="text-zinc-400 group-hover:text-zinc-200" />
-                    <span className="text-zinc-300 group-hover:text-zinc-100">picoCTF</span>
+                    <Mail size={20} className="text-zinc-400 group-hover:text-zinc-200" />
+                    <span className="text-zinc-300 group-hover:text-zinc-100">Gmail</span>
                   </a>
                 </div>
               </div>

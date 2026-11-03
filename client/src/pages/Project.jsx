@@ -96,6 +96,34 @@ export default function Project() {
           </motion.div>
         )}
 
+        {p.ecosystemModules && (
+          <motion.div variants={itemVariants} className="mb-12">
+            <div className="neo">
+              <div className="inner p-6">
+                <h2 className="text-2xl font-bold text-zinc-100 mb-5">SuiteGenie ecosystem</h2>
+                <div className="grid md:grid-cols-3 gap-4">
+                  {p.ecosystemModules.map((module) => (
+                    <div key={module.name} className="p-4 bg-zinc-800/50 rounded-lg">
+                      <h3 className="font-semibold text-cyan-300 mb-2">{module.name}</h3>
+                      <p className="text-sm text-zinc-300 mb-3">{module.description}</p>
+                      <div className="flex flex-wrap gap-2">
+                        {module.platforms.map((platform) => (
+                          <span key={platform} className="chip text-xs">{platform}</span>
+                        ))}
+                      </div>
+                      {module.projectId && (
+                        <Link to={`/projects/${module.projectId}`} className="inline-block mt-4 text-sm text-cyan-400 hover:text-cyan-300">
+                          View module
+                        </Link>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        )}
+
         {/* Key Information Grid */}
         <motion.div variants={itemVariants} className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
           {p.tech && (
@@ -144,7 +172,7 @@ export default function Project() {
                   {p.live && (
                     <a href={p.live} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-cyan-400 hover:text-cyan-300">
                       <ExternalLink size={16} />
-                      Live Demo
+                      {p.liveLabel || 'Live Demo'}
                       <ArrowUpRight size={14} />
                     </a>
                   )}

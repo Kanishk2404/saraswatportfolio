@@ -156,7 +156,14 @@
   }
   
   .section-title {
-    @apply text-4xl font-extrabold text-center mb-8 tracking-tight gradient-text;
+    @apply text-4xl font-extrabold text-center mb-8 tracking-tight;
+    color: #67e8f9;
+    background: none;
+    -webkit-text-fill-color: currentColor;
+  }
+
+  [data-theme="red"] .section-title {
+    color: #fca5a5;
   }
   .subtle { @apply text-zinc-400; }
   

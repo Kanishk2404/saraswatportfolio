@@ -38,7 +38,7 @@ export default function Projects() {
         <section className="mb-16">
           <h2 className="section-title mb-10">Featured Projects</h2>
           <div className="grid md:grid-cols-2 gap-10 max-w-5xl mx-auto relative">
-              {['bungouarchive','suitegenie','cloud-bouncer','anicafe'].map((key) => {
+              {['suitegenie','anicafe','cloud-bouncer','bungouarchive'].map((key) => {
                 const project = projects[key]
                 return (
                   <article key={key} className="card bg-gradient-to-br from-cyan-900/60 to-zinc-900/80 p-8 rounded-3xl shadow-2xl border-2 border-cyan-700 hover:scale-[1.03] transition-all duration-300 hover:shadow-cyan-500/20">
@@ -52,11 +52,22 @@ export default function Projects() {
                     <h3 className="font-bold text-2xl mb-3 text-cyan-400">{project.title}</h3>
                     <p className="text-zinc-300 mb-5 text-lg leading-relaxed">{project.oneLiner || project.description}</p>
 
-                    {/* If this is SuiteGenie, show links to Tweet & LinkedIn Genie */}
-                    {key === 'suitegenie' && (
-                      <div className="mb-6 flex gap-3">
-                        <Link to="/projects/tweetgenie" className="btn-secondary px-4 py-2">Tweet Genie</Link>
-                        <Link to="/projects/linkedingenie" className="btn-secondary px-4 py-2">LinkedIn Genie</Link>
+                    {key === 'suitegenie' && project.ecosystemModules && (
+                      <div className="mb-6">
+                        <div className="font-semibold text-zinc-200 mb-2">SuiteGenie ecosystem:</div>
+                        <div className="flex flex-wrap gap-2">
+                          {project.ecosystemModules.map((module) => (
+                            module.projectId ? (
+                              <Link key={module.name} to={`/projects/${module.projectId}`} className="btn-secondary px-4 py-2">
+                                {module.name}
+                              </Link>
+                            ) : (
+                              <span key={module.name} className="btn-secondary px-4 py-2">
+                                {module.name}
+                              </span>
+                            )
+                          ))}
+                        </div>
                       </div>
                     )}
 
@@ -105,7 +116,7 @@ export default function Projects() {
         {/* Projects Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {Object.entries(projects)
-            .filter(([key]) => !['bungouarchive', 'cloud-bouncer', 'anicafe', 'suitegenie'].includes(key))
+            .filter(([key]) => !['bungouarchive', 'cloud-bouncer', 'anicafe', 'suitegenie', 'tweetgenie', 'linkedingenie', 'metagenie'].includes(key))
             .map(([key, project]) => (
               <div key={key} className="card p-6 flex flex-col group hover:scale-105 transition-transform duration-300">
                 {/* Project Image */}

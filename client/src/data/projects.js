@@ -2,8 +2,6 @@ export const projectsIndexOrder = [
   'bungouarchive',
   'anicafe',
   'suitegenie',
-  'tweetgenie',
-  'linkedingenie',
   'cloud-bouncer',
   'dockerized-fullstack',
   'serverless-forms',
@@ -42,41 +40,59 @@ export const projects = {
   },
   'anicafe': {
   title: 'Anicafe',
-    dates: 'Built and scaled; exited; brand revival ongoing',
-    oneLiner: 'Started as an anime/movies streaming site; pivoted to legal blogging due to copyright concerns; scaled to 100,000 users in 8 months; built 15,000+ community; managed 15 admins and 7 core admins; sold the property.',
-    highlights: [
-      '100,000 users in 8 months; 15,000+ community; 15 admins and 7 core admins',
-      'Successfully pivoted from streaming to legal blogging format',
-      'Achieved high SEO rankings for key terms like "anicafe," "anime cafe," "anime news"',
-      'Built vibrant Telegram and Instagram communities',
-      'Sold the property after significant growth',
-    ],
-  role: 'Founder',
-    notes: 'Reviving brand as an anime merch store (see Ventures). Learned valuable lessons in compliance, team management, and business pivoting.',
-    tech: ['React', 'Node.js', 'MongoDB', 'WordPress', 'SEO', 'Google Analytics', 'AdSense', 'Community Management'],
-    images: ['/images/anicafe1.jpeg', '/images/anicafe2.jpeg', '/images/anicafe3.jpeg'],
+  status: 'Sold',
+  role: 'Founder, developer, content and community lead',
+  dates: 'Built, scaled, and exited; exact start, pivot, and exit years not recorded',
+  oneLiner: 'An anime community platform grown to 100k+ monthly organic visits, with AdSense revenue, a merch line that sold 800+ t-shirts, a 20k+ Telegram community, and a profitable exit.',
+  description: 'Anicafe began as an anime streaming, downloading, and blogging site before pivoting to original and user-generated content. The rebuilt community platform focused on fan theories, anime news, recommendations, blogs, comments, and chat.',
+  highlights: [
+    '100k+ monthly organic visits driven by SEO, content, and community',
+    '20k+ Telegram community that drove repeat visits and supported the merch launch',
+    'Google AdSense approved after the platform pivoted to sustainable original content',
+    'Anicafe merchandise line sold 800+ t-shirts',
+    'Website and merch business sold in a profitable exit',
+  ],
+  metrics: [
+    { id: 'visits', label: 'Monthly organic visits', value: '100k+', detail: 'SEO, content, and community-led growth' },
+    { id: 'telegram', label: 'Telegram community', value: '20k+', detail: 'Repeat visits and merch launch audience' },
+    { id: 'merch', label: 'Merch sold', value: '800+', detail: 'Anicafe t-shirts' },
+  ],
+  tech: ['React', 'Node.js', 'MongoDB', 'WordPress', 'SEO', 'Google Analytics', 'AdSense', 'Content Strategy', 'Community Management'],
+  images: ['/images/anicafe1.jpeg', '/images/anicafe2.jpeg', '/images/anicafe3.jpeg'],
   github: null,
   live: null,
-    journey: [
-      'Launched as anime/movies streaming site gaining quick traction',
-      'Pivoted to legal blogging due to copyright concerns and Indian government policies',
-      'Transitioned to anime news, reviews, recommendations, and fan theories',
-      'Implemented user profiles, post submissions, and discussion features',
-      'Optimized for SEO using Google Analytics to track performance',
-      'Faced AdSense challenges including strikes and temporary freezes',
-      'Managed vibrant Telegram and Instagram communities',
-      'Coordinated team of 15 admins and 7 core admins',
-      'Achieved high rankings for key search terms',
-      'Successfully sold the property after significant growth'
+  tabs: {
+    'Overview': 'Anicafe stayed a passion project from start to finish, but it was built and operated like a real product. Users could submit theories, read anime news, discover recommendations, publish blogs, and comment or chat with other fans.',
+    'Growth & Monetisation': [
+      'Reached 100k+ monthly organic visits through SEO, content, and community rather than paid acquisition.',
+      'Ranked for terms including “anicafe”, “anime cafe”, anime news, and anime theory topics.',
+      'Built a 20k+ Telegram community that drove repeat visits and supported the merch launch.',
+      'Received Google AdSense approval after the content-model pivot.',
+      'Designed and launched Anicafe t-shirts; 800+ units were sold. The exact production model and sales channel are not recorded here.',
     ],
-    learnings: [
-      'Blogging Techniques and Content Strategy',
-      'Website Optimization and Performance',
-      'Google Analytics and AdSense Management',
-      'Policy Compliance and Legal Considerations',
-      'Team Management and Coordination',
-      'SEO Strategy and WordPress Development'
-    ]
+    'Challenges & Impact': [
+      'Compliance concerns required a complete business-model change instead of continuing the original streaming model.',
+      'Handled content, community, SEO, development, and merchandising independently.',
+      'The website and merch business were sold together in a profitable exit.',
+    ],
+  },
+  journey: [
+    'Launched as an anime streaming, downloading, and blogging site',
+    'Pivoted to original and user-generated content after compliance concerns',
+    'Built features for theories, news, recommendations, blogs, comments, and chat',
+    'Grew organic traffic through SEO and content around anime topics',
+    'Built and managed a 20k+ Telegram community',
+    'Launched an Anicafe t-shirt line and sold 800+ units',
+    'Sold the website and merch business in a profitable exit',
+  ],
+  learnings: [
+    'Pivoting quickly when the original business model is no longer sustainable',
+    'Growing traffic organically through content, SEO, and community',
+    'Turning an audience into revenue through advertising and products',
+    'Running a small e-commerce line end to end',
+    'Building a product and audience to a point where someone else wanted to buy it',
+  ],
+  notes: 'Live/archive link: sold and no longer operated by me. The original start, pivot, and exit years, exact hosting/database architecture, merch production model, and AdSense earnings are not recorded in the portfolio. Screenshots can be added to the image gallery when available; earnings should be redacted before publishing.',
   },
   'cloud-bouncer': {
     title: 'Cloud Bouncer (2024) - SIH (MoD) DDoS/DoS Protection Tool',
@@ -260,86 +276,159 @@ export const projects = {
   },
   'tweetgenie': {
     title: 'Tweet Genie',
-    oneLiner: 'AI Twitter Automation & Bulk Scheduling',
+    oneLiner: 'An X-native workflow for writing, scheduling, and auto-publishing posts and threads in the user’s own style.',
     role: 'Module — SuiteGenie Ecosystem',
     live: 'https://tweet.suitegenie.in',
-    tech: ['React.js','Node.js','Express.js','PostgreSQL','Redis','Twitter OAuth 2.0','Quill.js'],
-    status: 'Live',
+    tech: ['React.js','Node.js','Express.js','PostgreSQL','Redis','Twitter OAuth 2.0','X / Twitter API','OAuth 2.0 (Twitter/X, LinkedIn)','Quill.js','BullMQ','AI content generation'],
+    status: 'SuiteGenie module',
     ecosystem: true,
     image: '/images/tweetgenie.png',
     images: ['/images/tweetgenie.png','/images/tweetgenieanaltics.png','/images/tweetgeniehistory.png'],
-    accent: '#1DA1F2',
-    stats: [
-      { label: '80% cost reduction' },
-      { label: '87.5% faster latency' },
-      { label: '30-50 bulk posts' }
-    ],
     highlights: [
-      'Bulk AI generation: 30-50 tweets from strategy prompts in one click',
-      'Custom scheduling with frequency rules',
-      '80% Redis cost reduction by moving from BullMQ to PostgreSQL scheduler',
-      'Rule-based analytics and engagement tracking',
-      'Team workflows: approval, account toggling, role-based permissions',
-      'Progressive streaming: first result in <2s'
+      'AI learns tone, structure, length, recurring themes, niche, and engagement signals from past posts',
+      'Thread composer, calendar, publishing history, queue, and scheduled auto-publishing',
+      'Optimal timing recommendations based on likes, replies, reposts, and other interactions',
+      'Team and client approvals before anything goes live',
+      'Analytics feed future timing, ideas, and content suggestions',
+      'Recurring generation through credits or BYOK'
     ],
-    description: `Tweet Genie automates bulk Twitter workflows missing from Hootsuite and Buffer — reducing 3 hours of manual work to 5 minutes.`,
-    features: [
-      'Bulk AI generation: 30-50 tweets',
-      'Custom scheduling: daily, 3�-/week, 4�-/week, custom',
-      'Redis cost reduction via custom PostgreSQL scheduler',
-      'Rule-based analytics and historical trends',
-      'Team approval workflows and RBAC',
-      'Progressive streaming for low latency'
-    ]
+    description: 'Tweet Genie automates X/Twitter workflows with AI drafting, thread composition, scheduling, approvals, analytics, and queue-based publishing.',
+    tabs: {
+      'What It Does': 'Users connect their X account without sharing passwords, analyze their publishing patterns, generate drafts in their own voice, approve them, and schedule posts or threads for automatic publishing.',
+      'Key Features': [
+        'OAuth account connection; exact PKCE, token encryption, and refresh-token implementation details are not recorded here',
+        'Account analysis for voice, niche, recurring themes, and posts that earned interactions',
+        'AI tweet and thread drafting with a thread composer',
+        'Optimal timing suggestions from engagement history',
+        'Queue-based auto-posting, scheduling calendar, and publishing history',
+        'Post performance analytics that feed the next round of suggestions',
+        'Approvals for teams and clients',
+        'Bulk generation and recurring automation through credits or BYOK'
+      ],
+      'What I Learned': [
+        'OAuth flows and token lifecycle management',
+        'Working within X API permissions and rate limits',
+        'Reliable scheduling and queue-based publishing',
+        'Turning engagement data into timing and content recommendations'
+      ]
+    }
   },
   'linkedingenie': {
     title: 'LinkedIn Genie',
-    oneLiner: 'B2B Content Automation for Professionals',
+    oneLiner: 'A professional publishing workflow for thought leadership, strategy, and consistent B2B posting.',
     role: 'Module — SuiteGenie Ecosystem',
     live: 'https://linkedin.suitegenie.in',
-    tech: ['React.js','Node.js','Express.js','PostgreSQL','Redis','LinkedIn OAuth 2.0','Quill.js'],
-    status: 'Live',
+    tech: ['React.js','Node.js','Express.js','PostgreSQL','Redis','LinkedIn OAuth 2.0','LinkedIn API','OAuth 2.0 (Twitter/X, LinkedIn)','Quill.js','AI content generation'],
+    status: 'SuiteGenie module',
     ecosystem: true,
     image: '/images/linkedingeniecompose.png',
     images: ['/images/linkedingeniecompose.png'],
-    accent: '#0A66C2',
-    stats: [
-      { label: '30-50 bulk posts' },
-      { label: '15s polling' },
-      { label: 'B2B optimized' }
-    ],
     highlights: [
-      'AI professional content generation optimized for B2B',
-      'Bulk scheduling: 30-50 LinkedIn posts with custom frequencies',
-      'Rich text editor with LinkedIn formatting and hashtag suggestions',
-      'Team collaboration: up to 15 members, 25 accounts',
-      'LinkedIn OAuth 2.0 multi-profile management',
-      'Analytics with 15s cache TTL'
+      'Strategy Builder with prompt packs and content plans',
+      'Account analysis for niche, audience, positioning, and real profile context',
+      'Professional-tone drafting with LinkedIn-specific formatting and hooks',
+      'Optimal timing, scheduled auto-publishing, and analytics feedback loops',
+      'Idea Bank, bulk generation, approvals, and team workflows',
+      'Agency-ready publishing for internal teams and client work'
     ],
-    description: `LinkedIn Genie helps agencies bulk-generate and schedule B2B content across client profiles with approval workflows.`,
-    features: [
-      'B2B-optimized AI content generation',
-      'Bulk scheduling & custom frequencies',
-      'LinkedIn-specific rich text editor',
-      'Team workflows and role-based access',
-      'Multi-profile OAuth and account toggling',
-      'Analytics with short TTL for freshness'
-    ]
+    description: 'LinkedIn Genie helps professionals and agencies plan, draft, approve, schedule, and improve B2B content through analytics feedback loops.',
+    tabs: {
+      'What It Does': 'LinkedIn Genie turns professional publishing into a repeatable workflow: analyze the account, build a strategy, draft in context, approve content, schedule it, and use performance data to improve the next cycle.',
+      'Key Features': [
+        'OAuth connection to LinkedIn profiles; company-page support is not confirmed in this case study',
+        'Strategy Builder with prompt packs and content plans',
+        'Account analysis for niche, audience, positioning, and past-post context',
+        'Professional-tone AI drafting with LinkedIn formatting and hooks',
+        'Optimal timing suggestions and scheduled auto-publishing',
+        'Idea Bank and bulk generation for weeks of planned content',
+        'Analytics loops that feed performance back into strategy',
+        'Approvals for individuals, internal teams, and agency clients'
+      ],
+      'What I Learned': [
+        'LinkedIn API permissions and approval requirements',
+        'Content strategy for B2B and professional audiences',
+        'Connecting analytics feedback to content generation',
+        'Designing workflows for individuals, teams, and client work'
+      ]
+    }
+  },
+  'metagenie': {
+    title: 'Meta Genie (Social Genie)',
+    oneLiner: 'A shared social workflow for Threads, Instagram, and YouTube, with Threads live and the other platforms staged for rollout.',
+    role: 'Module — SuiteGenie Ecosystem',
+    live: 'https://suitegenie.vercel.app/blogs',
+    liveLabel: 'Hosted Frontend / Blog Archive',
+    status: 'SuiteGenie module — staged rollout',
+    ecosystem: true,
+    image: '/images/suitegeniefeatures.png',
+    images: ['/images/suitegeniefeatures.png','/images/suitegenie_frontedn.png','/images/suitegenieresults.png'],
+    tech: ['Threads', 'Instagram (staged)', 'Instagram', 'YouTube (staged)', 'YouTube', 'Meta OAuth', 'Google OAuth', 'Node.js', 'Redis', 'AI', 'AI content generation'],
+    highlights: [
+      'Threads drafting, scheduling, and auto-posting workflow',
+      'Instagram and YouTube prepared as staged rollout paths rather than claimed fully live',
+      'Shared brand context keeps content consistent across platforms',
+      'Niche and style learning applied to each platform format',
+      'Engagement-based timing suggestions and performance tracking',
+      'Agency workspace context flows into posts automatically'
+    ],
+    description: 'Meta Genie, also called Social Genie, extends SuiteGenie’s shared content engine to Threads, Instagram, and YouTube while keeping platform readiness explicit.',
+    tabs: {
+      'What It Does': 'Social Genie provides one workspace for platform-aware content workflows. Threads was the live path; Instagram and YouTube were staged rollout paths and are not represented here as fully shipped features.',
+      'Key Features': [
+        'Meta and Google OAuth flows prepared for Threads, Instagram, and YouTube',
+        'Threads drafting, scheduling, and auto-posting',
+        'One workspace carrying brand context across platforms',
+        'Niche and style learning adapted to each platform format',
+        'Optimal timing suggestions from past interactions',
+        'Idea Bank, bulk generation, and scheduling shared with the other Genies',
+        'Agency-aware launch context so workspace data flows into each post',
+        'Instagram capabilities and cross-platform analytics are not claimed beyond the documented rollout stage'
+      ],
+      'What I Learned': [
+        'Meta’s permission and app-review model',
+        'Token handling for Meta APIs',
+        'Gradual publishing and platform-safe rollout',
+        'How to stage integrations safely when only some platforms are approved or fully available'
+      ]
+    }
   },
   'suitegenie': {
     title: 'SuiteGenie - AI Social Media Management Platform',
-    role: 'Full-Stack Developer and marketing',
-    dates: '[Sept2025] – Present',
-    oneLiner: 'From 3 hours to 5 minutes: Bulk AI content generation and scheduling for creators and agencies',
-    description: 'Built AI-powered social media management platform solving critical gaps in Hootsuite, Sprout Social, and Buffer by adding bulk AI content generation and bulk scheduling features.',
-    live: 'https://suitegenie.in',
+    status: 'Closed (wrapped up)',
+    role: 'Solo founder, full-stack developer, product and growth',
+    dates: 'July 2025 – September 2026',
+    oneLiner: 'An AI social media operating system for creators, teams, and agencies, with INR-first pricing.',
+    description: 'Built the platform I wanted while running Anicafe: an affordable system for planning, writing, approving, scheduling, and publishing social content across multiple channel modules.',
+    live: 'https://suitegenie.vercel.app/blogs',
     links: {
       main: 'https://suitegenie.in',
+      hostedFrontend: 'https://suitegenie.vercel.app/blogs',
       tweet: 'https://tweet.suitegenie.in',
       linkedin: 'https://linkedin.suitegenie.in'
     },
-    tech: ['React.js', 'Node.js', 'Express.js', 'PostgreSQL (Supabase)', 'Redis (Upstash)', 'OAuth 2.0', 'Razorpay'],
-    status: 'Live',
+    liveLabel: 'Hosted Frontend / Blog Archive',
+    tech: ['Node.js', 'Express.js', 'PostgreSQL (Supabase)', 'Redis (Upstash)', 'JWT Authentication', 'Razorpay', 'Resend', 'Microservices', 'OpenAI', 'Gemini', 'Perplexity', 'AI content generation', 'BullMQ', 'API keys between services', 'Encrypted tokens and keys', 'Multi-subdomain hosting'],
+    notes: 'SuiteGenie.in was sold. The frontend is currently hosted at https://suitegenie.vercel.app/blogs as an archive/demo location and is not presented as the active sold product. The exact GitHub repository, closure date, and acquisition details are not recorded in the portfolio.',
+    ecosystemModules: [
+      {
+        name: 'Tweet Genie',
+        description: 'Twitter/X content generation, scheduling, analytics, and team workflows.',
+        platforms: ['Twitter/X'],
+        projectId: 'tweetgenie'
+      },
+      {
+        name: 'LinkedIn Genie',
+        description: 'B2B content generation, scheduling, analytics, and multi-profile workflows.',
+        platforms: ['LinkedIn'],
+        projectId: 'linkedingenie'
+      },
+      {
+        name: 'Meta Genie',
+        description: 'Social content workflows for video and community platforms in the SuiteGenie ecosystem.',
+        platforms: ['YouTube', 'Threads', 'Instagram'],
+        projectId: 'metagenie'
+      }
+    ],
       images: [
         '/images/suitegenie-heropage.png',
         '/images/suitegeniefeatures.png',
@@ -352,67 +441,94 @@ export const projects = {
         '/images/teams2suitegenie.png',
         '/images/teamssuitegenie.png',
         '/images/apikeysubmission.png',
-        '/images/bulkgenpage.png'
+        '/images/bulkgenpage.png',
+        '/images/suitegenieresults.png'
       ],
     metrics: [
-      { id: 'users', label: 'Active Users', value: '30', detail: '30 active users in 2 months', icon: 'Users' },
-      { id: 'impressions', label: 'Google Impressions', value: '100', detail: '100 impressions, 30 clicks', icon: 'Search' },
+      { id: 'visitors', label: 'Website Visitors', value: '2.1k', detail: 'Unique visitors who reached the website', icon: 'Users' },
+      { id: 'accounts', label: 'Accounts Created', value: '100–110', detail: 'Visitors who converted into registered accounts', icon: 'Users' },
+      { id: 'impressions', label: 'Total Impressions', value: '19k', detail: 'Search and website impressions', icon: 'Search' },
       { id: 'time_save', label: 'Workflow Time', value: '3h → 5m', detail: 'Manual workflow automated from 3 hours to 5 minutes', icon: 'Clock' },
         { id: 'cost', label: 'Redis Cost', value: 'Reduced', detail: 'Significant Redis cost reduction after removing BullMQ', icon: 'Zap' },
         { id: 'api_calls', label: 'API Calls', value: 'Reduced', detail: 'Substantially fewer API calls after credit refresh optimization', icon: 'Zap' },
         { id: 'db_writes', label: 'DB Writes', value: 'Reduced', detail: 'Fewer database writes due to Redis batching and periodic sync', icon: 'Database' }
     ],
     highlights: [
-      '30 active users acquired in 2 months',
-      '100 Google Search impressions; 30 clicks',
-      '3 hours → 5 minutes workflow automation',
-        'Significant Redis infrastructure cost reduction',
-        'Substantially fewer API calls after credit refresh optimization',
-        'Fewer database writes due to Redis batching'
+      'Built and shipped solo across development, product, deployment, outreach, and growth',
+      'Three channel modules: Tweet Genie, LinkedIn Genie, and Social Genie',
+      'Agency Mode with client workspaces, roles, pooled credits, calendars, and analytics',
+      'No-login client approval portal and client onboarding links',
+      'Brand-aware AI with BYOK keys and automatic multi-provider fallback',
+      '2.1k website visitors, 100–110 accounts created, and 19k total impressions',
+      'University capstone project and completed codebase hardening sprint',
     ],
     tabs: {
       'Overview': {
-        summary: `Within 2 months, we acquired 30 active users and reduced manual social media workflows from 3 hours to 5 minutes.`,
+        summary: `SuiteGenie was an AI social media operating system for creators, teams, and agencies. It was shipped to production at suitegenie.in, reached 2.1k website visitors, converted 100–110 visitors into accounts, and recorded 19k total impressions before the project was wrapped up.`,
         problem: `During my time at Anicafe, I spent hours manually creating and scheduling social media posts. Existing tools like Hootsuite ($99/mo), Sprout Social ($249/mo), and Buffer lack bulk AI content generation (30-50 posts at once) and bulk scheduling with custom frequencies.`,
-        solution: `SuiteGenie automates the entire workflow with AI-powered bulk generation, intelligent scheduling, and BYOK (Bring Your Own Keys) pricing.`,
+        solution: `SuiteGenie combined AI-powered bulk generation, intelligent scheduling, approvals, agency workspaces, and BYOK pricing in one modular platform.`,
         results: [
-          '30 active users (2 months)',
-          '100 Google Search impressions',
-          '30 clicks from organic search',
-          'Significant infrastructure cost reduction'
+          '2.1k website visitors',
+          '100–110 accounts created',
+          '19k total impressions',
+          'Production deployment at suitegenie.in',
+          'University capstone project (CSE 435)',
+          'Closed after the solo product cycle was wrapped up'
         ]
       },
       'Features': {
-        mainPlatform: [
-          '4-role RBAC (owner/admin/editor/member)',
-          'Team collaboration: up to 15 members, 25 social accounts',
-          'BYOK mode: Perplexity, OpenAI, Gemini support',
-          'Razorpay payment integration',
-          'HTTP-only cookie authentication across subdomains'
+        tweetGenie: [
+          'X-native OAuth account connection without sharing passwords; exact PKCE, encryption, and refresh-token details are not recorded here',
+          'Analyses past posts to learn tone, structure, length, recurring themes, niche, and engagement signals',
+          'AI drafts tweets and threads in the user’s style, with composer, calendar, queue, and publishing history',
+          'Optimal timing recommendations based on likes, replies, reposts, and other interactions',
+          'Approved drafts move into an automated publishing queue',
+          'Analytics feed future timing, ideas, and content suggestions',
+          'Team and client approvals before anything goes live',
+          'Recurring generation through credits or BYOK'
         ],
-        tweetGen: [
-          'OAuth 2.0 Twitter/X integration',
-          'AI tweet & thread generation',
-          'Bulk scheduling (30-50 posts, custom frequencies)',
-          'Rule-based analytics (likes, retweets, engagement timing)',
-          'Rich text editor with formatting',
-          'Account toggling in Teams mode'
+        linkedinGenie: [
+          'OAuth connection to LinkedIn profiles; company-page support is not confirmed in this case study',
+          'Strategy Builder with prompt packs and content plans',
+          'Account analysis for niche, audience, positioning, and real profile context',
+          'Professional-tone drafting with LinkedIn-specific formatting and hooks',
+          'Optimal timing, scheduled auto-publishing, and analytics feedback loops',
+          'Idea Bank, bulk generation, approvals, and workflows for individuals, teams, and agency clients'
         ],
-        linkedinGen: [
-          'OAuth 2.0 LinkedIn integration',
-          'Professional content generation',
-          'LinkedIn-specific rich text editor',
-          'Same bulk capabilities as Tweet Genie',
-          'Industry insights and hashtag suggestions'
+        metaGenie: [
+          'Shared Social Genie workflow for Threads, Instagram, and YouTube',
+          'Threads publishing was live; Instagram and YouTube were staged rollout paths rather than fully claimed live features',
+          'Meta and Google OAuth flows were prepared for the staged platform rollout',
+          'Niche and style learning, Idea Bank, bulk generation, scheduling, and engagement-based timing',
+          'Agency workspace context flows into posts automatically',
+          'Platform-specific analytics and Instagram capabilities are not claimed beyond the documented rollout stage'
         ],
-        strategyBuilder: [
-          'AI generates 30-50 content prompts per strategy',
-          '~5 min end-to-end flow',
-          '<500ms API response targets',
-          '<2s page load targets'
+        agencyMode: [
+          'Individual Free mode: a couple of connected accounts, manual publishing, and starter AI drafting',
+          'Pro mode: up to 8 accounts, cross-posting, bulk generation, advanced analytics, and internal teams of up to 5 members',
+          'Agency mode: separate client workspaces with connected accounts, approvals, shared calendar, and pooled credits',
+          'Client workspaces with brand, logo, timezone, pause, and archive controls',
+          'Admin, Editor, and Viewer roles with per-workspace analytics',
+          'Cross-product handoff to Tweet Genie, LinkedIn Genie, or Social Genie'
+        ],
+        sharedEngine: [
+          'Brand context stores tone, themes, competitors, and account signals once and reuses them in every draft',
+          'BYOK encrypted OpenAI, Gemini, and Perplexity keys with automatic multi-AI fallback',
+          'Credit metering applies to AI-heavy actions while publishing and approvals remain operational',
+          'Idea Bank stores AI-generated ideas for user review and approval before drafting',
+          'Pro bulk generation creates many prompts and generates content one by one for the queue',
+          'Documentation, onboarding, customer support, and mobile-friendly UI were built for people beyond the founder'
         ]
       },
       'Technical Highlights': [
+        'Microservices architecture with each Genie running as its own service',
+        'Internal API-key header pattern for service-to-service communication',
+        'JWT authentication and a central login requirement across product subdomains',
+        'Users authenticated on the main SuiteGenie website before accessing another Genie, keeping identity and account records consistent in the database',
+        'Redis (Upstash) used for fast token handling and credit tracking; the exact distinction between OAuth tokens and rate-limit tokens is not recorded here',
+        'BullMQ jobs backed by Redis were used for delayed scheduling, retries, and reliable queue-based publishing before the scheduler was optimized',
+        'Gradual publishing included a documented 10-second gap between Threads posts to respect platform limits; X and LinkedIn limit handling varied by API permissions',
+        'Niche and style learning combined engagement signals with AI analysis; the exact scoring split is not recorded here',
         'Migrated from BullMQ after identifying high Redis command usage during constant polling',
         'Built custom PostgreSQL scheduler, reducing reliance on Redis and lowering costs',
         'Polling every 10-15s with retry controls (up to 5 attempts)',
@@ -429,10 +545,37 @@ export const projects = {
         'Slow bulk generation → Redis streaming with progressive results (much faster initial feedback)',
         'Credit system latency → Redis instant deduction + batch PostgreSQL sync (<50ms UI feedback)',
         'PostgreSQL INTEGER overflow for Twitter IDs → migrated columns to BIGINT (zero downtime)',
-        'Editor approval bypass → 3-state approval workflow (approved/pending/rejected)'
+        'Editor approval bypass → 3-state approval workflow (approved/pending/rejected)',
+        'Fragmented subdomain identity → central authentication flow so module access maps to one database user'
+      ],
+      'Business Model': [
+        'INR-first pricing: Free, Pro (Rs 499/month), and Agency (Rs 2,499/month)',
+        'Credit-based metering for AI-heavy actions while publishing, approvals, and scheduling remained operational',
+        'Automation add-ons (Rs 799 and Rs 2,999 per 30 days) and one-time Agency packs',
+        'Razorpay for payments and Resend for transactional email',
+        'Positioned against Hootsuite, Buffer, Later, and Sprout Social'
+      ],
+      'Platform Architecture': [
+        'Common engine: niche detection from post history and interactions, style learning, timing recommendations, and feedback from analytics',
+        'Idea Bank keeps AI in a suggest-and-user-approves role instead of posting blindly',
+        'Approved content moves through queue-based scheduling and auto-posting',
+        'Separate Genie services communicate through an internal API-key header pattern',
+        'Encrypted keys and tokens, JWT authentication, and central login protect the shared account model'
+      ],
+      'Impact & Learning': [
+        'Built entirely solo: development, product design, deployment, outreach, and growth',
+        'Received an acquisition inquiry; details are intentionally not specified',
+        'Became a university capstone project documented in a full report',
+        'Learned multi-tenant product design, billing, credit metering, and third-party API integrations',
+        'Learned to require login on the main website before users access other Genie subdomains, maintaining consistent identity and cleaner database relationships',
+        'Completed a codebase audit and hardening sprint before scaling'
+      ],
+      'Roadmap Not Shipped': [
+        'WordPress module was listed on the roadmap but was never built',
+        'A proprietary LLM was listed on the roadmap but was never built'
       ],
       'Metrics & Impact': {
-        users: ['30 active users in 2 months', '100 Google Search impressions', '30 organic clicks'],
+        users: ['2.1k website visitors', '100–110 accounts created', '19k total impressions'],
         performance: ['Substantially fewer API calls (credit refresh optimization)', 'Fewer DB writes (Redis batching)', 'Significant Redis cost reduction (BullMQ removal)', 'Improved initial response times (from ~15–20s to around 2s for progressive results)'],
         productivity: ['3 hours → 5 minutes (manual workflow automation)', '30-50 posts bulk scheduled at once', '~5 min strategy generation flow']
       }
@@ -444,26 +587,33 @@ export const ventures = [
   {
     id: 'suitegenie',
     title: 'SuiteGenie',
-    description: 'Built an AI-powered social media management platform (SuiteGenie) providing bulk AI content generation, scheduling, and team workflows for creators and agencies.',
-    role: 'Full-Stack Developer and marketing',
-    dates: '[Sept2025] – Present',
-    status: 'Live',
+    description: 'An AI social media operating system for creators, teams, and agencies with INR-first pricing, channel modules, agency workflows, and BYOK multi-LLM support.',
+    role: 'Solo founder, full-stack developer, product and growth',
+    dates: 'July 2025 – September 2026',
+    status: 'Closed (wrapped up)',
     image: '/images/suitegenie-heropage.png',
-    cta: 'Visit SuiteGenie',
-    ctaLink: 'https://suitegenie.in',
+    cta: 'View Hosted Frontend / Blog Archive',
+    ctaLink: 'https://suitegenie.vercel.app/blogs',
     metrics: [
-      { label: 'Active Users', value: '30', sub: 'in 2 months' },
-      { label: 'Google Impressions', value: '100', sub: '30 clicks' },
-      { label: 'Workflow Time', value: '3h → 5m', sub: 'automation' }
+      { label: 'Website visitors', value: '2.1k', sub: 'reached the site' },
+      { label: 'Accounts created', value: '100–110', sub: 'visitor conversions' },
+      { label: 'Total impressions', value: '19k', sub: 'search and website visibility' }
     ]
   },
   {
-    id: 'anicafe-merch',
-    title: 'Anicafe - Merch',
-    description: 'Anicafe merch store (anicafe.store) — currently in build.',
-    status: 'In build',
+    id: 'anicafe',
+    title: 'Anicafe',
+    description: 'Founder-led anime community platform that pivoted to original content, reached 100k+ monthly organic visits, launched a merch line selling 800+ t-shirts, and exited profitably.',
+    status: 'Sold',
+    role: 'Founder, developer, content and community lead',
+    dates: 'Built, scaled, and exited; exact dates not recorded',
     image: '/images/anicafe2.jpeg',
-    cta: 'Visit Store',
-    ctaLink: 'https://anicafe.store',
+    cta: 'View Anicafe Case Study',
+    projectId: 'anicafe',
+    metrics: [
+      { label: 'Organic visits', value: '100k+', sub: 'monthly' },
+      { label: 'Telegram community', value: '20k+', sub: 'members' },
+      { label: 'Merch sold', value: '800+', sub: 't-shirts' },
+    ],
   },
 ];

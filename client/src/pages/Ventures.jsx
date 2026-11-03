@@ -36,7 +36,9 @@ export default function Ventures(){
             </div>
             <div className="mt-auto flex justify-end gap-3">
               {/* If this venture has an internal project page (SuiteGenie), link to it */}
-              {((v.id && v.id.toLowerCase() === 'suitegenie') || v.title?.toLowerCase().includes('suitegenie')) ? (
+              {v.projectId ? (
+                <Link to={`/projects/${v.projectId}`} className="btn-primary">{v.cta} →</Link>
+              ) : ((v.id && v.id.toLowerCase() === 'suitegenie') || v.title?.toLowerCase().includes('suitegenie')) ? (
                 <Link to="/projects/suitegenie" className="btn-primary">View SuiteGenie →</Link>
               ) : (
                 <a href={v.ctaLink || '/contact'} className="btn-primary" target={v.ctaLink && v.ctaLink.startsWith('http') ? '_blank' : '_self'} rel="noreferrer">{v.cta} →</a>

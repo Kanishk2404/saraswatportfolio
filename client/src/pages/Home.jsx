@@ -14,22 +14,22 @@ const skills = [
 
 const currentWork = [
   {
-    title: "Anicafe - Merch Store",
-    description: "Reviving the Anicafe brand as an anime merchandise store with e-commerce functionality",
-    tech: ["WordPress", "WooCommerce"],
-    progress: 70,
+    title: "Anicafe Case Study",
+    description: "Documenting the sold anime community platform: 100k+ monthly organic visits, 20k+ Telegram members, and 800+ t-shirts sold.",
+    tech: ["SEO", "WordPress", "AdSense", "Community"],
+    progress: 100,
     icon: TrendingUp
   },
   {
-    title: "SuiteGenie",
-    description: "All-in-one AI suite for content creation and automation across Twitter, LinkedIn, and WordPress with analytics",
-    tech: ["React", "Node.js", "Express", "PostgreSQL", "OAuth", "AI APIs"],
-    progress: 90,
+    title: "SuiteGenie Archive",
+    description: "Preserving the wrapped-up AI social media platform and its results: 2.1k visitors, 100–110 accounts created, and 19k total impressions.",
+    tech: ["Node.js", "PostgreSQL", "Redis", "JWT", "Multi-LLM"],
+    progress: 100,
     icon: Code
   },
   {
     title: "Portfolio & Blog",
-    description: "Enhancing portfolio with interactive features and building a tech blog for sharing knowledge",
+    description: "Continuously improving the portfolio, documenting shipped products, and sharing technical learnings.",
     tech: ["React", "Tailwind", "Node.js", "Express"],
     progress: 85,
     icon: Zap
@@ -72,76 +72,71 @@ export default function Home() {
         ]}
         url="/"
       />
-      <div className="bg-grid">
-       
-      <section className="container py-16 md:py-20">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          <motion.div 
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-            className="space-y-6"
-          >
-            <motion.div variants={itemVariants} className="badge">
-              <Zap className="w-4 h-4" />
-              Web Developer • Cloud & DevOps • SEO • Cybersecurity
-            </motion.div>
-            
-            <motion.h1 
-              variants={itemVariants}
-              className="text-4xl md:text-6xl font-extrabold leading-tight tracking-tight"
-            >
-              From <span className="text-cyan-400">athlete</span> to <span className="text-cyan-400">developer</span>
-            </motion.h1>
-            
-            <motion.p 
-              variants={itemVariants}
-              className="text-lg subtle leading-relaxed"
-            >
-              Full-stack developer and DevOps enthusiast who builds scalable web applications. 
-              From <span className="text-cyan-300 font-semibold">100k+ user platforms</span> to <span className="text-cyan-300 font-semibold">security tools</span>, I solve real problems with modern tech.
-            </motion.p>
-            
-            <motion.div 
-              variants={itemVariants}
-              className="flex gap-3 flex-wrap"
-            >
-              <Link to="/projects" className="btn-primary">View Projects</Link>
-              <Link to="/skills" className="btn-secondary">View Skills</Link>
-              <Link to="/contact" className="btn-secondary">Contact</Link>
-            </motion.div>
-          </motion.div>
+    <div className="bg-grid">
+  <section className="container py-16 md:py-20">
+    <div className="grid lg:grid-cols-2 gap-12 items-center">
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+        className="space-y-6"
+      >
+        <motion.div variants={itemVariants} className="badge">
+          <Zap className="w-4 h-4" />
+          Web Developer • Cloud & DevOps • SEO • Cybersecurity
+        </motion.div>
 
-          <motion.div 
-            initial={{opacity:0,scale:0.9}} 
-            animate={{opacity:1,scale:1}} 
-            transition={{duration:0.8,delay:0.4}}
-            className="flex justify-center lg:justify-end"
-          >
-            <motion.div 
-              className="w-80 h-80 rounded-full overflow-hidden shadow-2xl"
-              animate={{ 
-                y: [0, -10, 0],
-                rotate: [0, 2, -2, 0]
-              }}
-              transition={{ 
-                duration: 6,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
-            >
-              <img 
-                src="/images/profile.jpg" 
-                alt="Kanishk Saraswat - Portfolio profile photo" 
-                loading="lazy" width="320" height="320"
-                className="w-full h-full object-cover rounded-full"
-                onError={(e) => {
-                  e.target.src = "https://via.placeholder.com/320x320/0ea5e9/FFFFFF?text=Kanishk+Saraswat"
-                }}
-              />
-            </motion.div>
-          </motion.div>
-        </div>
+        <motion.h1
+          variants={itemVariants}
+          className="text-4xl md:text-5xl font-extrabold leading-tight tracking-tight"
+        >
+          Full-stack developer who <span className="text-cyan-400">ships real products</span>
+        </motion.h1>
+
+        <motion.p
+          variants={itemVariants}
+          className="text-lg subtle leading-relaxed"
+        >
+          I build for the love of the game and to solve real problems. Grew a platform to{' '}
+          <span className="text-cyan-300 font-semibold">100k+ monthly visits</span>, shipped an AI SaaS (SuiteGenie) to real users, and ranked in the{' '}
+          <span className="text-cyan-300 font-semibold">top 500 of picoCTF</span>.
+        </motion.p>
+
+        <motion.div
+          variants={itemVariants}
+          className="flex gap-3 flex-wrap"
+        >
+          <Link to="/projects" className="btn-primary">View Projects</Link>
+          <Link to="/skills" className="btn-secondary">View Skills</Link>
+          <Link to="/contact" className="btn-secondary">Contact</Link>
+        </motion.div>
+      </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.8, delay: 0.4 }}
+        className="flex justify-center lg:justify-end"
+      >
+        <motion.div
+          className="w-80 h-80 rounded-full overflow-hidden shadow-2xl"
+          animate={{ y: [0, -10, 0], rotate: [0, 2, -2, 0] }}
+          transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+        >
+          <img
+            src="/images/profile.jpg"
+            alt="Kanishk Saraswat - Portfolio profile photo"
+            loading="eager"
+            width="320"
+            height="320"
+            className="w-full h-full object-cover rounded-full"
+            onError={(e) => {
+              e.target.src = 'https://via.placeholder.com/320x320/0ea5e9/FFFFFF?text=Kanishk+Saraswat';
+            }}
+          />
+        </motion.div>
+      </motion.div>
+    </div>
 
         {/* Quick Stats Section */}
         <motion.div

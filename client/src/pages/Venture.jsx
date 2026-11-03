@@ -14,11 +14,16 @@ const ventures = {
       'Trusted by creators and businesses worldwide, delivering meaningful savings on AI costs with support for BYOK (bring your own keys).'
     ]
   },
-  'anicafe-merch': {
-    title: 'Anicafe - Merch',
-    status: 'In progress',
+  'anicafe': {
+    title: 'Anicafe',
+    status: 'Sold',
     body: [
-      'Reviving the Anicafe brand as an anime merchandise store with a modern e‑commerce stack and CI/CD.'
+      'Founder-led anime community platform grown to 100k+ monthly organic visits through SEO, content, and community.',
+      'Pivoted from streaming and downloading to original and user-generated content after compliance concerns.',
+      'Built a 20k+ Telegram community and launched an Anicafe t-shirt line that sold 800+ units.',
+      'Google AdSense was approved after the content-model pivot, creating an advertising revenue stream.',
+      'Sold the website and merch business in a profitable exit.',
+      'This experience led to SuiteGenie: keeping Anicafe social channels active was the problem I wanted to solve next.'
     ]
   }
 }
@@ -44,6 +49,5 @@ export default function Venture(){
     </section>
   )
 }
-
 
 

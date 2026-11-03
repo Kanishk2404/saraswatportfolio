@@ -7,9 +7,10 @@ const skillCategories = [
   {
     title: 'Frontend',
     icon: Code,
-    description: 'Modern frontend stack for SuiteGenie',
+    description: 'Frontend systems used across portfolio, SuiteGenie, and client work',
     skills: [
       { name: 'React.js', badge: 'https://img.shields.io/badge/React-61DAFB?logo=react&logoColor=white&style=flat-square' },
+      { name: 'Next.js', badge: 'https://img.shields.io/badge/Next.js-000000?logo=next.js&logoColor=white&style=flat-square' },
       { name: 'Tailwind CSS', badge: 'https://img.shields.io/badge/Tailwind-06B6D4?logo=tailwind-css&logoColor=white&style=flat-square' },
       { name: 'React Helmet (SEO)', badge: 'https://img.shields.io/badge/React%20Helmet-000000?logo=react&logoColor=white&style=flat-square' },
       { name: 'Quill.js (Rich Text Editor)', badge: 'https://img.shields.io/badge/Quill.js-006AFF?logo=quill&logoColor=white&style=flat-square' }
@@ -18,21 +19,49 @@ const skillCategories = [
   {
     title: 'Backend',
     icon: Server,
-    description: 'API and authentication layer powering SuiteGenie',
+    description: 'API, service, and authentication systems',
     skills: [
       { name: 'Node.js', badge: 'https://img.shields.io/badge/Node.js-339933?logo=node.js&logoColor=white&style=flat-square' },
       { name: 'Express.js', badge: 'https://img.shields.io/badge/Express-000000?logo=express&logoColor=white&style=flat-square' },
       { name: 'JWT Authentication', badge: 'https://img.shields.io/badge/JWT-000000?logo=JSON%20web%20tokens&logoColor=white&style=flat-square' },
-      { name: 'HTTP-only Cookies', badge: null }
+      { name: 'HTTP-only Cookies', badge: null },
+      { name: 'REST APIs', badge: null, implementations: [{ type: 'experience', id: 'experience', title: '4 Bluez' }] },
+      { name: 'Microservices', badge: null }
     ]
   },
   {
     title: 'Database & Caching',
     icon: Database,
-    description: 'Persistent storage and fast caching',
+    description: 'Persistent storage, caching, and queue infrastructure',
     skills: [
       { name: 'PostgreSQL (Supabase)', badge: 'https://img.shields.io/badge/PostgreSQL-336791?logo=postgresql&logoColor=white&style=flat-square' },
-      { name: 'Redis (Upstash)', badge: 'https://img.shields.io/badge/Redis-DC382D?logo=redis&logoColor=white&style=flat-square' }
+      { name: 'Redis (Upstash)', badge: 'https://img.shields.io/badge/Redis-DC382D?logo=redis&logoColor=white&style=flat-square' },
+      { name: 'MongoDB', badge: 'https://img.shields.io/badge/MongoDB-47A248?logo=mongodb&logoColor=white&style=flat-square' },
+      { name: 'BullMQ', badge: null }
+    ]
+  },
+  {
+    title: 'AI & Automation',
+    icon: Zap,
+    description: 'AI-assisted content, analysis, and operational automation',
+    skills: [
+      { name: 'OpenAI', badge: null },
+      { name: 'Gemini', badge: null },
+      { name: 'Perplexity', badge: null },
+      { name: 'AI content generation', badge: null },
+      { name: 'Inventory automation', badge: null, implementations: [{ type: 'experience', id: 'experience', title: '4 Bluez' }] }
+    ]
+  },
+  {
+    title: 'SEO & Growth',
+    icon: LineChart,
+    description: 'Search visibility, analytics, content, and audience growth',
+    skills: [
+      { name: 'SEO', badge: null, implementations: [{ type: 'experience', id: 'experience', title: '4 Bluez' }] },
+      { name: 'Google Analytics', badge: null },
+      { name: 'AdSense', badge: null },
+      { name: 'Content Strategy', badge: null },
+      { name: 'Community Management', badge: null }
     ]
   },
   {
@@ -48,7 +77,9 @@ const skillCategories = [
     icon: Key,
     description: 'Third-party auth and OAuth flows',
     skills: [
-      { name: 'OAuth 2.0 (Twitter/X, LinkedIn)', badge: 'https://img.shields.io/badge/OAuth2-0A0A0A?logo=oauth&logoColor=white&style=flat-square' }
+      { name: 'OAuth 2.0 (Twitter/X, LinkedIn)', badge: 'https://img.shields.io/badge/OAuth2-0A0A0A?logo=oauth&logoColor=white&style=flat-square' },
+      { name: 'Meta OAuth', badge: null },
+      { name: 'Google OAuth', badge: null }
     ]
   },
   {
@@ -57,6 +88,10 @@ const skillCategories = [
     description: 'Hosting, sitemaps, and robots for SEO and scaling',
     skills: [
       { name: 'Multi-subdomain hosting', badge: null },
+      { name: 'AWS', badge: null },
+      { name: 'Vercel', badge: null },
+      { name: 'Private network deployment', badge: null, implementations: [{ type: 'experience', id: 'experience', title: '4 Bluez' }] },
+      { name: 'Asset optimization', badge: null, implementations: [{ type: 'experience', id: 'experience', title: '4 Bluez' }] },
       { name: 'XML Sitemaps', badge: null },
       { name: 'robots.txt', badge: null }
     ]
@@ -64,12 +99,28 @@ const skillCategories = [
   {
     title: 'Security',
     icon: Lock,
-    description: 'HTTP security headers and best practices',
+    description: 'Application, API, and platform security practices',
     skills: [
       { name: 'HSTS', badge: null },
       { name: 'CSP (Content Security Policy)', badge: null },
       { name: 'X-Frame-Options', badge: null },
-      { name: 'X-Content-Type-Options', badge: null }
+      { name: 'X-Content-Type-Options', badge: null },
+      { name: 'API keys between services', badge: null },
+      { name: 'Encrypted tokens and keys', badge: null }
+    ]
+  },
+  {
+    title: 'Platforms & Integrations',
+    icon: Layers,
+    description: 'Social publishing platforms and product integrations',
+    skills: [
+      { name: 'X / Twitter API', badge: null },
+      { name: 'LinkedIn API', badge: null },
+      { name: 'Threads', badge: null },
+      { name: 'Instagram', badge: null },
+      { name: 'YouTube', badge: null },
+      { name: 'Razorpay', badge: 'https://img.shields.io/badge/Razorpay-0E1B3C?logo=razorpay&logoColor=white&style=flat-square' },
+      { name: 'Resend', badge: null }
     ]
   },
   {
@@ -166,7 +217,7 @@ export default function Skills() {
                       {(() => {
                         const normalize = s => (s || '').toString().toLowerCase().replace(/[^a-z0-9]+/g, '');
                         const skillNorm = normalize(skill.name);
-                        const impls = [];
+                        const impls = [...(skill.implementations || [])];
 
                         // check projects
                         Object.entries(projects).forEach(([pid, proj]) => {
