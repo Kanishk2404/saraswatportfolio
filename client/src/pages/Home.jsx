@@ -83,7 +83,7 @@ export default function Home() {
       >
         <motion.div variants={itemVariants} className="badge">
           <Zap className="w-4 h-4" />
-          Web Developer • Cloud & DevOps • SEO • Cybersecurity
+          Web Developer • Cloud & DevOps • SEO 
         </motion.div>
 
         <motion.h1
